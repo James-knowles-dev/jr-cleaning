@@ -1,0 +1,537 @@
+// Blog Archive Styles
+// =============================================================================
+
+.page-template-index {
+    .content {
+        .blog-filter {
+            @include flex-center;
+            margin: rem-calc(50) auto;
+            
+            @media #{$tablet} {
+                margin: rem-calc(100) auto;
+            }
+        }
+    }
+
+    .post-container {
+        margin-bottom: rem-calc(20);
+        @include post-grid;
+
+        @media #{$tablet} {
+            margin-bottom: rem-calc(50);
+        }
+
+        .post {
+            @include post-card-base;
+            margin-bottom: rem-calc(15);
+
+            a {
+                color: $black;
+                text-decoration: underline;
+            }
+
+            img {
+                @include responsive-image(250, 16 16 0 0);
+            }
+
+            .title-button {
+                padding: rem-calc(20);
+                background-color: $white-base;
+                @include flex-center(column);
+                justify-content: space-between;
+                gap: rem-calc(30);
+                flex-grow: 1;
+                border-radius: 0 0 rem-calc(16) rem-calc(16);
+                width: 100%;
+
+                p {
+                    width: max-content;
+                    white-space: nowrap;
+                    box-shadow: none;
+                    @include primary-button;
+                }
+
+                h3 {
+                    transition: $ease;
+                    width: auto;
+                    margin-right: rem-calc(20);
+                    text-align: left;
+                    @include font-style(heading-4);
+                }
+            }
+
+            &:hover {
+                .title-button h3 {
+                    color: $primary-base;
+                }
+            }
+        }
+    }
+
+    .blog-filter {
+        @include flex-center(column);
+        flex-direction: column!important;
+        justify-content: space-between;
+        gap: rem-calc(50);
+        position: relative;
+        padding: rem-calc(0 24);
+
+        @media #{$mobile} {
+            flex-direction: row!important;
+            padding: 0;
+            gap: rem-calc(50);
+        }
+
+        @include dropdown-arrow(36, calc(83% - 7.5px));
+
+        @media #{$tablet} {
+            &::after {
+                top: calc(50% - 7.5px);
+                right: rem-calc(20);
+            }
+        }
+
+        .search {
+            @include filter-input-base;
+            width: 100%;
+
+            @media #{$mobile} {
+                width: rem-calc(300);
+            }
+        }
+
+        form {
+            width: 100%;
+
+            @media #{$mobile} {
+                width: max-content;
+            }
+
+            
+            .category-filter-dropdown {
+                @include filter-input-base;
+                appearance: none;
+                width: 100%;
+            }
+        }
+    }
+
+    .no-results {
+        display: none;
+
+        &.visible {
+            @include flex-center;
+        }
+
+        h3 {
+            text-align: center;
+            width: 100%;
+
+            span {
+                color: $primary-base;
+            }
+        }
+    }
+
+    .blog-author-next {
+        @include flex-between;
+    }
+}
+
+// Pagination Styles
+// =============================================================================
+
+.pagination {
+    @include flex-center;
+    gap: rem-calc(24);
+
+    .page-numbers {
+        @include flex-center(column);
+        padding: rem-calc(2 9);
+        gap: rem-calc(8);
+
+        &.next {
+            margin-left: rem-calc(32);
+        }
+
+        &.prev {
+            margin-right: rem-calc(32);
+        }
+
+        &:hover,
+        &.current {
+            background-color: $primary-30;
+            border-radius: rem-calc(8);
+        }
+    }
+}
+// Post Detail Content Styles
+// =============================================================================
+
+.post-detail-content {
+    margin: rem-calc(48 0 80);
+
+    @media #{$mobile} {
+        margin: rem-calc(80) 0;
+    }
+
+    @media #{$desktop} {
+        margin: rem-calc(80 0 240);
+    }
+
+    .single-content {
+        width: 100%;
+        margin: 0 auto;
+
+        @media #{$tablet} {
+            max-width: 83.33333333%;
+        }
+
+        > div {
+            margin: rem-calc(48) 0;
+            overflow: hidden;
+        }
+
+        @include post-content-base;
+
+        .page-main-content {
+            p:first-of-type {
+                color: $secondary-100;
+                line-height: 1.1;
+                @include font-style(body-large);
+
+                @media #{$tablet} {
+                    font-size: rem-calc(32);
+                }
+            }
+        }
+    }
+
+    .full-width-image-section {
+        .image-wrapper {
+            @include image-wrapper(8);
+
+            img {
+                vertical-align: bottom;
+            }
+        }
+    }
+
+    .full-width-video-block {
+        .video-block__videpo-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+            height: unset;
+            max-width: unset;
+            width: 100%;
+
+            iframe, 
+            video {
+                @include absolute-image-cover;
+            }
+        }
+    }
+
+    .image-and-text-block {
+        .content-wrapper {
+            @media (max-width: 539px) {
+                @include flex-center;
+                flex-wrap: wrap;
+            }
+        }
+
+        .image-wrapper {
+            width: 100%;
+
+            @media #{$s-mobile} {
+                width: 50%;
+            }
+
+            &.left {
+                margin-bottom: rem-calc(16);
+
+                @media #{$s-mobile} {
+                    float: left;
+                    margin-right: rem-calc(16);
+                }
+            }
+
+            &.right {
+                order: 1;
+                margin-top: rem-calc(16);
+                margin-bottom: 0;
+
+                @media #{$s-mobile} {
+                    float: right;
+                    margin-top: 0;
+                    margin-bottom: rem-calc(16);
+                    margin-left: rem-calc(16);
+                }
+            }
+
+            > div {
+                position: relative;
+                padding-top: 51%;
+                @include image-wrapper(8);
+            }
+        }
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+// Detail Inner Banner Styles
+// =============================================================================
+
+.detail-inner-banner {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    background-color: $primary-base;
+
+    @include content-overlay($white, 0.2);
+
+    .breadcrumb {
+        position: absolute;
+        padding: rem-calc(18);
+        background-color: $white;
+        top: 0;
+
+        p {
+            @include font-style(body-small);
+            font-weight: 600;
+            color: $black;
+        }
+
+        a {
+            @include font-style(body-small);
+            color: $primary-80;
+        }
+    }
+
+    .row-wrapper {
+        @include flex-center(column);
+        flex-wrap: wrap;
+        margin: 0 rem-calc(-8);
+        position: relative;
+        z-index: 2;
+
+        @media #{$mobile} {
+            min-height: rem-calc(350);
+            flex-direction: row;
+        }
+
+        .left-side {
+            width: 100%;
+            padding: 0 rem-calc(8);
+
+            @media #{$mobile} {
+                width: 41.66666667%;
+            }
+        }
+
+        .right-side {
+            width: 100%;
+            padding: 0 rem-calc(8);
+
+            @media #{$mobile} {
+                width: 58.33333333%;
+            }
+
+            @media #{$tablet} {
+                padding-left: rem-calc(35);
+            }
+        }
+
+        .banner-content-wrapper {
+            @include flex-center(column);
+            height: 100%;
+            justify-content: flex-end;
+            padding: rem-calc(120 0 84);
+
+            @media #{$mobile} {
+                padding: rem-calc(80 0 50);
+            }
+
+            .post-date {
+                color: $white;
+                margin-bottom: rem-calc(16);
+                @include font-style(body-large);
+                font-weight: 500;
+            }
+
+            .heading {
+                color: $white;
+                letter-spacing: -0.02em;
+                @include font-style(heading-3);
+
+                @media #{$tablet} {
+                    @include font-style(heading-2);
+                }
+            }
+
+            .written-by-text {
+                margin: rem-calc(16 0 0);
+                color: $white;
+                @include font-style(body-medium);
+                font-style: italic;
+            }
+
+            .job-role {
+                margin: rem-calc(24 0 0);
+                color: $white;
+                @include font-style(body-large);
+            }
+
+            .btn-wrapper {
+                margin-top: rem-calc(20);
+            }
+        }
+
+        .image-wrapper {
+            position: relative;
+            height: 100%;
+            padding-top: 56.726%;
+            margin: 0 rem-calc(-24);
+
+            @media #{$mobile} {
+                padding-top: unset;
+                margin: 0;
+            }
+
+            img {
+                @include absolute-image-cover;
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+// Related Post Section Styles
+// =============================================================================
+
+.related-post-section {
+    padding: 0;
+    margin: rem-calc(80) 0;
+
+    .section-heading {
+        margin-bottom: rem-calc(32);
+
+        @media #{$mobile} {
+            margin-bottom: rem-calc(48);
+        }
+
+        &.with-cta {
+            @include flex-between;
+            align-items: flex-end;
+        }
+
+        .h2 {
+            @media #{$mobile} {
+                max-width: calc(100% - 200px);
+            }
+        }
+
+        .button {
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+    }
+
+    .view-all-cta {
+        display: block;
+        margin-top: rem-calc(32);
+
+        @media #{$mobile} {
+            display: none;
+        }
+
+        .button {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .related-post-items-wrapper {
+        @include flex-center;
+        flex-wrap: wrap;
+        margin: 0 rem-calc(-10);
+
+        .related-item {
+            padding: 0 rem-calc(10);
+            width: 100%;
+
+            @media #{$s-mobile} {
+                width: 50%;
+            }
+
+            @media #{$tablet} {
+                width: 25%;
+            }
+
+            > a {
+                @include flex-center(column);
+                height: 100%;
+                row-gap: rem-calc(16);
+
+                @media #{$tablet} {
+                    row-gap: rem-calc(24);
+                }
+            }
+
+            .image-wrapper {
+                padding-top: 65%;
+                position: relative;
+                @include image-wrapper(16);
+
+                img {
+                    object-position: center;
+                }
+            }
+
+            .content-wrapper {
+                flex: 1;
+                @include flex-center(column);
+                align-items: flex-start;
+            }
+
+            .h5 {
+                @include font-style(body-large);
+                margin-bottom: rem-calc(16);
+                color: $secondary-100;
+            }
+
+            .short-decription {
+                @include font-style(body-medium);
+                color: $black;
+                @include text-clamp(3);
+                margin-bottom: rem-calc(6);
+                margin-top: auto;
+            }
+        }
+    }
+}
+
+// Single Post Styles
+// =============================================================================
+
+.single-post {
+    .page-main-content {
+        @include post-content-base;
+
+        ol,
+        ul {
+            padding-left: 1.2em;
+
+            li {
+                margin-bottom: rem-calc(4);
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

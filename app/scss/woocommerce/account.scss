@@ -1,0 +1,130 @@
+.woocommerce-account {
+
+    .woocommerce {
+        max-width: $max-width;
+        margin:0 auto;
+        padding: rem-calc(40 25);
+        display:flex;
+        flex-direction: column;
+        gap: rem-calc(50);
+
+         @media #{$tablet} {
+            padding: rem-calc(40 0);
+            flex-direction: row;
+            gap: rem-calc(100);
+         }
+
+         h2 {
+            text-align: center;
+            @include font-style(heading-1);
+            margin-bottom: rem-calc(20);
+         }
+
+        .woocommerce-form-login {
+
+            input {
+                @include gform-input-base;
+            }
+
+            .woocommerce-form-login__rememberme {
+                    display: flex;
+                    width: rem-calc(300);
+                    gap: rem-calc(10);
+                    margin-bottom: rem-calc(20);
+
+                    span {
+                        width: rem-calc(200);
+                    }
+
+                    input {
+                        width: rem-calc(20)!important;
+                    }
+            }
+        }
+
+       .woocommerce-MyAccount-navigation {
+
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: rem-calc(10);
+                
+                li {
+                    list-style-type: none;
+                    @include primary-button;
+                    width: rem-calc(175)!important;
+                }
+            }
+        }
+
+        .woocommerce-MyAccount-content {
+
+            input {
+                @include gform-input-base;
+            }
+
+            .woocommerce-address-fields__field-wrapper {
+                margin-bottom: rem-calc(40);
+            }
+
+            td.woocommerce-orders-table__cell {
+                padding:rem-calc(0 30);
+            }
+
+            .woocommerce-column {
+
+                &__title {
+                    text-align: left;
+                }
+            }
+
+            
+            .woocommerce-info {
+                display: flex;
+                flex-direction: column;
+                gap: rem-calc(20);
+            }
+
+            .woocommerce-order-details {
+
+                &__title {
+                    text-align:left;
+                }
+
+                th {
+                    text-align: left;
+                }
+
+                td {
+                    padding: rem-calc(15 30 15 0);
+                    text-align: left;
+                }
+            }
+
+            .addresses {
+                display: flex;
+                flex-direction: column;
+                gap: rem-calc(20);
+                padding-top: rem-calc(40);
+
+                @media #{$tablet} {
+                    flex-direction: row;
+                    gap: rem-calc(100);
+                }
+
+                .edit {
+                    @include primary-button;
+                    margin: rem-calc(15 0);
+                }
+            }
+ 
+            .edit-account {
+
+                fieldset {
+                    margin-bottom: rem-calc(40);
+                    padding: rem-calc(25);
+                }
+            }
+        }
+    }
+}

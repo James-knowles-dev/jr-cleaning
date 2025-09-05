@@ -1,0 +1,29 @@
+// Responsive Mixins
+// =============================================================================
+// Uses the standardized breakpoints from vars.scss
+
+// Import the breakpoint variables from vars.scss
+// These are defined as strings with media query syntax: "(min-width: 768px)"
+
+// Responsive Mixin - supports all breakpoints from vars.scss
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == s-mobile {
+    @media #{$s-mobile} { @content; }
+  } @else if $breakpoint == mobile {
+    @media #{$mobile} { @content; }
+  } @else if $breakpoint == s-tablet {
+    @media #{$s-tablet} { @content; }
+  } @else if $breakpoint == tablet {
+    @media #{$tablet} { @content; }
+  } @else if $breakpoint == desktop {
+    @media #{$desktop} { @content; }
+  } @else if $breakpoint == small {
+    // Legacy support - maps to mobile breakpoint
+    @media (max-width: 767px) { @content; }
+  } @else if $breakpoint == large {
+    // Legacy support - maps to mobile breakpoint  
+    @media #{$mobile} { @content; }
+  } @else {
+    @warn "Breakpoint not defined: #{$breakpoint}. Available: s-mobile, mobile, s-tablet, tablet, desktop";
+  }
+}

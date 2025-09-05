@@ -1,0 +1,19 @@
+.error404 {
+
+    .error-section {
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: rem-calc(24);
+
+            h1 {
+                max-width: rem-calc(600);
+            }
+
+            a {
+                @include primary-button;
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+/* jQuery animation; slide up assets on scroll
+* Add the class 'module' followed by either 'fadeUp', 'fadeLeft', 'fadeRight'
+* to elements that you wish to be animated on scroll. 
+*/
+
+.come-in {
+  opacity: 0;
+
+  &.fadeUp {
+    transform: translateY(150px);
+    opacity: 0;
+    animation: fadeUp 1.5s ease forwards;
+  }
+  &.fadeLeft {
+    opacity: 0;
+    animation: fadeUp 1.5s ease forwards;
+    transform: translateY(150px);
+
+    @media #{$tablet} {
+      transform: translateX(-150px);
+      animation: fadeLeft 1.5s ease forwards;
+    }
+  }
+  &.fadeRight {
+    opacity: 0;
+    animation: fadeUp 1.5s ease forwards;
+    transform: translateY(150px);
+
+    @media #{$tablet} {
+      transform: translateX(150px);
+      animation: fadeRight 1.5s ease forwards;
+    }
+  }
+}
+.already-visible {
+  transform: translate(0, 0) !important;
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+@keyframes fadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeRight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// On Load
+.on-load {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+}

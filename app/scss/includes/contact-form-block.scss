@@ -1,0 +1,7 @@
+.contact-form-block {
+    @include contact-form-block;
+
+    .primary-container {
+        padding: 0;
+    }
+}

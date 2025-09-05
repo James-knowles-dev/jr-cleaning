@@ -1,0 +1,459 @@
+// WooCommerce Widget & Filter Styles
+// =============================================================================
+
+// WooCommerce Widgets Base
+.woocommerce {
+    .widget {
+        background: $white;
+        border-radius: rem-calc(12);
+        padding: rem-calc(24);
+        margin-bottom: rem-calc(24);
+        @include card-shadow;
+
+        .widget-title {
+            @include font-style(heading-5);
+            color: $primary-base;
+            margin: 0 0 rem-calc(16);
+            padding-bottom: rem-calc(8);
+            border-bottom: 2px solid $primary-20;
+        }
+    }
+
+    // Product Categories Widget
+    .widget_product_categories {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: 0;
+                
+                a {
+                    display: block;
+                    padding: rem-calc(8 0);
+                    color: $grey-80;
+                    text-decoration: none;
+                    @include font-style(body-medium);
+                    transition: $ease;
+                    border-bottom: 1px solid $grey-20;
+
+                    &:hover {
+                        color: $primary-base;
+                        padding-left: rem-calc(8);
+                    }
+                }
+
+                &.current-cat {
+                    > a {
+                        color: $primary-base;
+                        font-weight: 600;
+                    }
+                }
+
+                .count {
+                    float: right;
+                    background: $grey-20;
+                    color: $grey-80;
+                    padding: rem-calc(2 8);
+                    border-radius: rem-calc(12);
+                    font-size: rem-calc(12);
+                    line-height: 1.4;
+                }
+
+                // Nested categories
+                ul {
+                    margin-top: rem-calc(8);
+                    padding-left: rem-calc(16);
+
+                    li a {
+                        font-size: rem-calc(14);
+                        color: $grey-70;
+                    }
+                }
+            }
+        }
+    }
+
+    // Price Filter Widget
+    .widget_price_filter {
+        .price_slider_wrapper {
+            margin-bottom: rem-calc(16);
+        }
+
+        .price_slider {
+            height: rem-calc(4);
+            background: $grey-20;
+            border-radius: rem-calc(2);
+            position: relative;
+            margin: rem-calc(16 0);
+
+            .ui-slider-range {
+                background: $primary-base;
+                border-radius: rem-calc(2);
+                height: 100%;
+            }
+
+                .ui-slider-handle {
+                    width: rem-calc(20);
+                    height: rem-calc(20);
+                    background: $primary-base;
+                    border: rem-calc(2) solid $white;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    box-shadow: 0 rem-calc(2) rem-calc(4) rgba(0, 0, 0, 0.08);
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 rem-calc(3) rgba($primary-base, 0.1);
+                    }
+                }
+        }
+
+        .price_slider_amount {
+            @include flex-between;
+            margin-top: rem-calc(16);
+
+            input[type="text"] {
+                @include filter-input-base;
+                width: rem-calc(80);
+                padding: rem-calc(8 12);
+                font-size: rem-calc(14);
+                text-align: center;
+                border: 1px solid $grey-30;
+                background: $white;
+            }
+
+            .button {
+                @include primary-button;
+                padding: rem-calc(8 16);
+                font-size: rem-calc(14);
+                width: auto;
+            }
+        }
+    }
+
+    // Layered Navigation (Attribute Filters)
+    .widget_layered_nav {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: 0;
+                
+                a {
+                    display: block;
+                    padding: rem-calc(8 0);
+                    color: $grey-80;
+                    text-decoration: none;
+                    @include font-style(body-medium);
+                    transition: $ease;
+                    border-bottom: 1px solid $grey-20;
+
+                    &:hover {
+                        color: $primary-base;
+                    }
+                }
+
+                &.chosen {
+                    a {
+                        color: $primary-base;
+                        font-weight: 600;
+                        position: relative;
+
+                        &::before {
+                            content: '✓';
+                            margin-right: rem-calc(8);
+                        }
+                    }
+                }
+
+                .count {
+                    float: right;
+                    background: $grey-20;
+                    color: $grey-80;
+                    padding: rem-calc(2 8);
+                    border-radius: rem-calc(12);
+                    font-size: rem-calc(12);
+                    line-height: 1.4;
+                }
+            }
+        }
+    }
+
+    // Top Rated Products Widget
+    .widget_top_rated_products,
+    .widget_recent_products,
+    .widget_featured_products {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                @include flex-between;
+                align-items: flex-start;
+                margin: 0 0 rem-calc(16);
+                padding-bottom: rem-calc(16);
+                border-bottom: 1px solid $grey-20;
+
+                &:last-child {
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                    border-bottom: none;
+                }
+
+                a {
+                    display: flex;
+                    gap: rem-calc(12);
+                    text-decoration: none;
+                    color: inherit;
+                    flex: 1;
+
+                    img {
+                        width: rem-calc(60);
+                        height: rem-calc(60);
+                        object-fit: cover;
+                        border-radius: rem-calc(6);
+                        flex-shrink: 0;
+                    }
+
+                    .product-title {
+                        @include font-style(body-small);
+                        font-weight: 600;
+                        color: $primary-base;
+                        line-height: 1.4;
+                        margin-bottom: rem-calc(4);
+                    }
+
+                    .price {
+                        @include font-style(body-small);
+                        color: $secondary-base;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+
+    // Product Search Widget
+    .widget_product_search {
+        form {
+            position: relative;
+
+            input[type="search"] {
+                @include filter-input-base;
+                width: 100%;
+                padding: rem-calc(12 40 12 16);
+                border: 1px solid $grey-30;
+                background: $white;
+
+                &:focus {
+                    outline: none;
+                    border-color: $primary-base;
+                }
+            }
+
+            button {
+                position: absolute;
+                right: rem-calc(8);
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                padding: rem-calc(8);
+                cursor: pointer;
+                color: $grey-80;
+                transition: $ease;
+
+                &:hover {
+                    color: $primary-base;
+                }
+
+                svg {
+                    width: rem-calc(16);
+                    height: rem-calc(16);
+                }
+            }
+        }
+    }
+
+    // Rating Filter Widget
+    .widget_rating_filter {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: 0 0 rem-calc(8);
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: rem-calc(8);
+                    color: $grey-80;
+                    text-decoration: none;
+                    padding: rem-calc(4 0);
+                    transition: $ease;
+
+                    &:hover {
+                        color: $primary-base;
+                    }
+
+                    .star-rating {
+                        font-size: rem-calc(14);
+                        color: $secondary-50;
+                    }
+
+                    .count {
+                        margin-left: auto;
+                        background: $grey-20;
+                        color: $grey-80;
+                        padding: rem-calc(2 8);
+                        border-radius: rem-calc(12);
+                        font-size: rem-calc(12);
+                    }
+                }
+
+                &.chosen a {
+                    color: $primary-base;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    // Active Filters Widget
+    .widget_layered_nav_filters {
+        .chosen {
+            display: flex;
+            flex-wrap: wrap;
+            gap: rem-calc(8);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+                margin: 0;
+
+                a {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: rem-calc(6);
+                    background: $primary-base;
+                    color: $white;
+                    padding: rem-calc(4 8);
+                    border-radius: rem-calc(4);
+                    text-decoration: none;
+                    @include font-style(body-xsmall);
+                    font-weight: 600;
+                    transition: $ease;
+
+                    &:hover {
+                        background: $primary-90;
+                    }
+
+                    &::after {
+                        content: '×';
+                        font-size: rem-calc(16);
+                        line-height: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Sidebar Layout for Shop with Filters
+.woocommerce-shop-with-sidebar {
+    @media #{$tablet} {
+        display: grid;
+        grid-template-columns: rem-calc(280) 1fr;
+        gap: rem-calc(40);
+        align-items: start;
+
+        .shop-sidebar {
+            position: sticky;
+            top: rem-calc(120);
+        }
+
+        .shop-content {
+            min-width: 0; // Prevent grid blowout
+        }
+    }
+
+    @media #{$desktop} {
+        grid-template-columns: rem-calc(320) 1fr;
+        gap: rem-calc(48);
+    }
+}
+
+// Mobile Filter Toggle
+.shop-filters-toggle {
+    @include primary-button;
+    width: 100%;
+    margin-bottom: rem-calc(20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem-calc(8);
+
+    @media #{$tablet} {
+        display: none;
+    }
+
+    &::after {
+        content: '⚙';
+        font-size: rem-calc(16);
+    }
+
+    &.active::after {
+        content: '×';
+    }
+}
+
+// Mobile Filter Overlay
+.shop-filters-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: $ease;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+
+        .shop-sidebar {
+            transform: translateX(0);
+        }
+    }
+
+    .shop-sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: rem-calc(280);
+        height: 100%;
+        background: $white;
+        padding: rem-calc(20);
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: $ease;
+    }
+
+    @media #{$tablet} {
+        display: none;
+    }
+}

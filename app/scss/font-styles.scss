@@ -1,0 +1,224 @@
+@import 'vars';
+
+// font styles map
+$font-styles: (
+    hero: (
+        large: (
+            font-size: rem-calc(72),
+            font-style: normal,
+            font-weight: 300,
+            line-height: 115%,
+        ),
+        small: (
+            font-size: rem-calc(48),
+            font-style: normal,
+            font-weight: 300,
+            line-height: 115%,
+        ),
+    ),
+    heading-1: (
+        small: (
+            font-size: rem-calc(48),
+            font-weight: 300,
+            line-height: 115%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(56),
+            font-weight: 300,
+            line-height: 115%,
+            font-style: normal,
+        )
+    ),
+    heading-2: (
+        small: (
+            font-size: rem-calc(32),
+            font-weight: 300,
+            line-height: 115%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(48),
+            font-weight: 300,
+            line-height: 115%,
+            font-style: normal,
+        )
+    ),
+    heading-3: (
+        small: (
+            font-size: rem-calc(24),
+            font-weight: 400,
+            line-height: 115%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(40),
+            font-weight: 400,
+            line-height: 115%,
+            font-style: normal,
+        )
+    ),
+    heading-4: (
+        small: (
+            font-size: rem-calc(16),
+            font-weight: 400,
+            line-height: 115%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(32),
+            font-weight: 400,
+            line-height: 115%,
+            font-style: normal,
+        )
+    ),
+    heading-5: (
+        small: (
+            font-size: rem-calc(24),
+            font-weight: 300,
+            line-height: 130%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(24),
+            font-weight: 300,
+            line-height: 130%,
+            font-style: normal,
+        )
+    ),
+    heading-6: (
+        small: (
+            color: $secondary-100,
+            font-size: rem-calc(20),
+            font-weight: 300,
+            line-height: 130%,
+            font-style: normal,
+        ),
+        large: (
+            color: $secondary-100,
+            font-size: rem-calc(20),
+            font-weight: 300,
+            line-height: 130%,
+            font-style: normal,
+        )
+    ),
+    body-large: (
+        small: (
+            font-size: rem-calc(18),
+            font-weight: 400,
+            line-height: 145%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(18),
+            font-weight: 400,
+            line-height: 145%,
+            font-style: normal,
+        )
+    ),
+    body-medium: (
+        small: (
+            font-size: rem-calc(16),
+            font-weight: 400,
+            line-height: 150%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(16),
+            font-weight: 400,
+            line-height: 150%,
+            font-style: normal,
+        )
+    ),
+    body-small: (
+        small: (
+            font-size: rem-calc(13),
+            font-weight: 400,
+            line-height: 150%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(13),
+            font-weight: 400,
+            line-height: 150%, 
+            font-style: normal,
+        )
+    ),
+
+    body-xsmall: (
+        small: (
+            font-size: rem-calc(12),
+            font-weight: 400,
+            line-height: 150%,
+            font-style: normal,
+        ),
+        large: (
+            font-size: rem-calc(12),
+            font-weight: 400,
+            line-height: 150%, 
+            font-style: normal,
+        )
+    ),
+
+    button-sm: (
+        small: (
+            font-size: rem-calc(14),
+            font-weight: 600,
+            line-height: rem-calc(14),
+            font-style: normal,
+            letter-spacing: rem-calc(0.07),
+        ),
+        large: (
+            font-size: rem-calc(14),
+            font-weight: 600,
+            line-height: rem-calc(14),
+            font-style: normal,
+            letter-spacing: rem-calc(0.07),
+        )
+    ),
+
+    button-md: (
+        small: (
+            font-size: rem-calc(16),
+            font-weight: 600,
+            line-height: rem-calc(16),
+            font-style: normal,
+            letter-spacing: rem-calc(0.08),
+        ),
+        large: (
+            font-size: rem-calc(16),
+            font-weight: 600,
+            line-height: rem-calc(16),
+            font-style: normal,
+            letter-spacing: rem-calc(0.08),
+        )
+    ),
+
+    button-lg: (
+        small: (
+            font-size: rem-calc(18),
+            font-weight: 600,
+            line-height: rem-calc(18),
+            font-style: normal,
+            letter-spacing: rem-calc(0.09),
+        ),
+        large: (
+            font-size: rem-calc(18),
+            font-weight: 600,
+            line-height: rem-calc(18),
+            font-style: normal,
+            letter-spacing: rem-calc(0.09),
+        )
+    ),
+);
+
+// Mixin for applying font styles
+@mixin font-style($id) {
+    @each $breakpoint, $properties in map-get($font-styles, $id) {
+        @include breakpoint($breakpoint) {
+            @each $property, $value in $properties {
+                #{$property}: #{$value};
+            }
+        }
+    }
+}

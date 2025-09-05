@@ -1,0 +1,232 @@
+
+// Header Styles
+// =============================================================================
+
+header {
+    width: 100vw;
+    max-width: 100%;
+    background-color: $white;
+    position: fixed;
+    z-index: 99999;
+    transition: $ease;
+    top:0;
+    padding: rem-calc(0 50);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &.sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: $white;
+
+        .header-content-wrapper {
+            .site-logo {
+                img {
+                    max-width: rem-calc(125);
+                }
+            }
+        }
+
+        nav {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        &.transparent-background {
+            .mobile-navigation {
+                .hamburger__wrap {
+                    .hamburger__line {
+                        background-color: $secondary-100;
+                    }
+                }
+            }
+        }
+    }
+
+    .header-content-wrapper {
+        @include flex-between;
+        width: 100%;
+        margin: 0 auto;
+        padding: rem-calc(24 0);
+
+        @media #{$mobile} {
+            padding: rem-calc(20 0);
+        }
+
+        @media #{$tablet} {
+            align-items: center;
+        }
+
+        .site-logo {
+            position: relative;
+            z-index: 2;
+            max-height: rem-calc(55);
+            transition: $ease;
+
+            @media #{$mobile} {
+                max-height: rem-calc(40);
+
+                img {
+                    max-height: rem-calc(40);
+                }
+            }
+
+            img {
+                object-fit: contain;
+                max-width: rem-calc(124);
+                transition: $ease;
+                max-height: rem-calc(48);
+
+                @media #{$s-tablet} {
+                    max-width: rem-calc(170);
+                    max-height: rem-calc(48);
+                }
+            }
+        }
+
+        .header-nav-container {
+            display: none;
+            gap: rem-calc(30);
+
+            @media #{$s-tablet} {
+                @include flex-center;
+            }
+        }
+
+        nav {
+            display: none;
+            gap: rem-calc(24);
+
+            @media #{$s-tablet} {
+                @include flex-center;
+            }
+
+            @media #{$tablet} {
+                gap: rem-calc(33);
+            }
+
+            ul {
+                @include flex-center;
+                gap: rem-calc(20);
+
+                @media #{$tablet} {
+                    gap: rem-calc(33);
+                }
+
+                li {
+                    list-style-type: none;
+                    position: relative;
+
+                    &.menu-item-has-children {
+                        .sub-menu {
+                            position: absolute;
+                            top: 100%;
+                            display: none;
+                            min-width: rem-calc(240);
+                            background-color: $white;
+                            padding: rem-calc(20);
+                            border-radius: rem-calc(10);
+                            left: rem-calc(-15);
+                            opacity: 0;
+                            visibility: hidden;
+                            transition: $ease;
+                            @include card-shadow;
+
+                            @media #{$tablet} {
+                                display: block;
+                            }
+                        }
+
+                        &:hover {
+                            .sub-menu {
+                                opacity: 1;
+                                visibility: visible;
+                            }
+                        }
+                    }
+
+                    a {
+                        @include font-style(button-sm);
+                        padding: rem-calc(8 0);
+                        display: inline-block;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+
+        .woo-header-icons {
+            display: flex;
+            gap: rem-calc(15);
+
+            a {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: rem-calc(8);
+                transition: $ease;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+
+                svg {
+                    width: rem-calc(24);
+                    height: rem-calc(24);
+                    fill: $primary-base;
+                    transition: $ease;
+
+                    @media #{$tablet} {
+                        width: rem-calc(28);
+                        height: rem-calc(28);
+                    }
+                }
+
+                .cart-count {
+                    position: absolute;
+                    top: rem-calc(-2);
+                    right: rem-calc(-2);
+                    background-color: $primary-base;
+                    color: $white;
+                    border-radius: 50%;
+                    width: rem-calc(18);
+                    height: rem-calc(18);
+                    font-size: rem-calc(10);
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    line-height: 1;
+                    min-width: rem-calc(18);
+
+                    @media #{$tablet} {
+                        width: rem-calc(20);
+                        height: rem-calc(20);
+                        font-size: rem-calc(11);
+                        min-width: rem-calc(20);
+                        top: rem-calc(-4);
+                        right: rem-calc(-4);
+                    }
+                }
+            }
+        }
+
+        .mobile-menu {
+            display: block;
+
+            @media #{$s-tablet} {
+                display: none;
+            }
+        }
+    }
+}
+
+.logged-in header, .logged-in header.sticky {
+    top: rem-calc(30);
+}

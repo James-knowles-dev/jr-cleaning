@@ -1,0 +1,50 @@
+
+// Gravity Forms Component Styles
+// =============================================================================
+
+.gform-contact-block {
+    @include contact-form-block;
+}
+
+.gform-newsletter-block {
+    @include newsletter-form-block;
+}
+
+.gform-compact {
+    .gform_wrapper {
+        .gform_fields .gfield {
+            margin-bottom: rem-calc(12);
+        }
+        .gform_footer {
+            margin-top: rem-calc(16);
+        }
+    }
+}
+
+.gform-inline {
+    .gform_wrapper {
+        .gform_fields {
+            @media #{$tablet} {
+                display: flex;
+                gap: rem-calc(16);
+                align-items: flex-end;
+                
+                .gfield {
+                    margin-bottom: 0;
+                    flex: 1;
+                }
+            }
+        }
+        
+        .gform_footer {
+            @media #{$tablet} {
+                margin-top: 0;
+                margin-left: rem-calc(16);
+                
+                .gform_button {
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

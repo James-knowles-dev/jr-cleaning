@@ -1,0 +1,16 @@
+.woocommerce-checkout {
+
+    .wp-block-woocommerce-checkout {
+        max-width: $max-width;
+        margin: rem-calc(50) auto;
+
+        .wc-block-components-checkout-place-order-button {
+            @include primary-button;
+        }
+    }
+
+    .wc-block-components-sidebar {
+        position: sticky;
+        top: rem-calc(130)!important;
+    }
+}

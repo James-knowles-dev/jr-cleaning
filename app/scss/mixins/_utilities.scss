@@ -1,0 +1,106 @@
+// Utility Mixins
+// =============================================================================
+
+@mixin default-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@mixin card-shadow {
+    box-shadow: 0 167px 47px 0 hsla(0, 0%, 80%, 0), 
+                0 107px 43px 0 hsla(0, 0%, 80%, .01), 
+                0 60px 36px 0 hsla(0, 0%, 80%, .05), 
+                0 27px 27px 0 hsla(0, 0%, 80%, .09), 
+                0 7px 15px 0 hsla(0, 0%, 80%, .1);
+    border: rem-calc(0.5) solid $primary-10;
+}
+
+@mixin filter-input-base {
+    border: none;
+    outline: none;
+    color: $black;
+    font-weight: 700;
+    padding: rem-calc(20 40);
+    border-radius: rem-calc(16);
+    @include card-shadow;
+
+    &::placeholder {
+        color: $black;
+    }
+}
+
+// Common image wrapper styling
+@mixin image-wrapper($border-radius: 8) {
+    border-radius: rem-calc($border-radius);
+    overflow: hidden;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        @include absolute-image-cover;
+    }
+}
+
+// Blog-specific utility mixins
+@mixin dropdown-arrow($right: 20, $top: 50%) {
+    &::after {
+        width: rem-calc(15);
+        height: rem-calc(15);
+        right: rem-calc($right);
+        top: $top;
+        content: "";
+        position: absolute;
+        @include default-background;
+        background-image: url('/wp-content/themes/pixelbase/images/arrow.svg');
+        pointer-events: none;
+        transition: $ease;
+    }
+}
+
+@mixin content-overlay($gradient-color: $white, $opacity: 0.2) {
+    &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: linear-gradient(98.07deg, rgba($gradient-color, 0) 38.82%, rgba($gradient-color, $opacity) 97.62%), 
+                         linear-gradient(262.33deg, rgba($black, 0) 1.48%, rgba($black, $opacity) 94.8%);
+    }
+}
+
+@mixin post-content-base {
+    p {
+        @include font-style(body-medium);
+        color: $black;
+        font-weight: 300;
+    }
+
+    a {
+        @include font-style(body-medium);
+        text-decoration: underline;
+        color: $black;
+
+        &:hover {
+            color: $primary-90;
+        }
+    }
+
+    ul {
+        padding-left: rem-calc(20);
+        margin: rem-calc(20) 0;
+
+        li {
+            @include font-style(body-medium);
+            color: $black;
+            font-weight: 300;
+            margin-bottom: rem-calc(10);
+        }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: rem-calc(28);
+    }
+}

@@ -1,0 +1,25 @@
+// Mixins Index
+// =============================================================================
+// Master import file for all mixin categories
+// Import order matters - dependencies first
+
+// Core functions (no dependencies)
+@import 'functions';
+
+// Base layout utilities (depends on functions)
+@import 'responsive';
+@import 'layout';
+
+// Typography mixins (depends on functions)
+@import 'typography';
+
+// Component mixins (depends on functions, responsive, layout)
+@import 'buttons';
+@import 'forms';
+
+// Utility mixins (can depend on any of the above)
+@import 'utilities';
+@import 'grid';
+
+// WooCommerce specific mixins
+@import 'woocommerce';

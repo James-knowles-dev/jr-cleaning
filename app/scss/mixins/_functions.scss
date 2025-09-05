@@ -1,0 +1,16 @@
+// Functions
+// =============================================================================
+
+@function rem-calc($value) {
+  @if type-of($value) == 'list' {
+    // Convert each value in the list to rem and return the list
+    $remList: ();
+    @each $val in $value {
+      $remList: append($remList, #{math.div($val, 16)}rem);
+    }
+    @return $remList;
+  } @else {
+    // Convert single value to rem
+    @return #{math.div($value, 16)}rem;
+  }
+}

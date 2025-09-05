@@ -1,0 +1,205 @@
+.footer {
+    width: 100vw;
+    max-width: 100%;
+    padding: rem-calc(0 50);
+
+    .primary-container {
+        .footer {
+            &__main {
+                @include flex-center(column);
+                padding: rem-calc(40 0);
+                gap: unset;
+
+                @media #{$tablet} {
+                    @include flex-between;
+                    flex-direction: row;
+                     gap: rem-calc(100);
+                }
+
+                // Footer menus styling
+                .footer__menus {
+                        @include flex-between;
+                        flex-direction: column;
+                        gap: rem-calc(30);
+
+                   @media #{$tablet} { 
+                        @include flex-center(row);
+                        gap: rem-calc(40);
+                        width: 100%;
+                    }
+
+                    @media #{$tablet} {
+                        flex: 2;
+                        justify-content: flex-start;
+                        gap: rem-calc(60);
+                    }
+
+                    .footer__menu-column {
+                        flex: 1;
+
+                        .footer__menu {
+                            list-style: none;
+                            margin: 0;
+                            padding: 0;
+
+                            li {
+                                margin-bottom: rem-calc(10);
+
+                                a {
+                                    @include font-style(body-small);
+                                    color: $black;
+                                    text-decoration: none;
+                                    transition: color 0.3s ease;
+
+                                    &:hover {
+                                        color: $primary-base;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Footer form styling
+                .footer__form {
+                    width: 100%;
+                    margin-top: rem-calc(40);
+
+                    @media #{$tablet} {
+                        flex: 1;
+                        margin-top: 0;
+                        margin-left: rem-calc(60);
+                    }
+
+                    .footer__form-content {
+                        @include footer-form-block;
+                    }
+                }
+
+                &__content {
+                    @include flex-center(column);
+                    gap: rem-calc(45);
+
+                    &-locations {
+                        p {
+                            @include font-style(body-xsmall);
+                            margin-bottom: 0;
+                            color: $black;
+                        }
+                    }
+
+                    &-credentials {
+                        @include flex-center;
+                        gap: rem-calc(39);
+
+                        .credential {
+                            p {
+                                @include font-style(body-xsmall);
+                                margin: rem-calc(11 0 0);
+                                color: $black;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__copyright {
+                @include flex-center(column);
+                padding: rem-calc(11 0 30);
+                gap: rem-calc(40);
+
+                @media #{$tablet} {
+                    @include flex-between;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: unset;
+                }
+
+                &-content {
+                    @include flex-center(column);
+                    gap: rem-calc(40);
+                    flex-wrap: wrap;
+
+                    @media #{$tablet} {
+                        flex-direction: row;
+                        gap: rem-calc(58);
+                    }
+
+                    @media #{$desktop} {
+                        flex-wrap: nowrap;
+                    }
+
+                    p, 
+                    a {
+                        @include font-style(body-xsmall);
+                        width: max-content;
+                        margin-bottom: 0;
+                        color: $black;
+                        max-width: 100%;
+                    }
+
+                    a {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &__socials {
+                @include flex-center;
+                gap: rem-calc(20);
+
+                .footer__social {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    svg {
+                        width: rem-calc(24);
+                        height: rem-calc(24);
+                        
+                        * {
+                            fill: $black;
+                        }
+
+                        &:hover * {
+                            fill: $primary-base;
+                        }
+                    }
+                }
+            }
+
+            &__right {
+                @include flex-center(column);
+                gap: rem-calc(20);
+                order: 2;
+
+                @media #{$tablet} {
+                    @include flex-center;
+                    flex-direction: row;
+                    gap: rem-calc(30);
+                    order: unset;
+                }
+            }
+
+            &__signature {
+                @include flex-center;
+                @include font-style(body-xsmall);
+                color: $black;
+
+                svg {
+                    margin-left: rem-calc(7);
+                    width: rem-calc(80);
+                    height: auto;
+
+                    * {
+                        fill: $black;
+                    }
+
+                    &:hover * {
+                        fill: $primary-base;
+                    }
+                }
+            }
+        }
+    }
+}

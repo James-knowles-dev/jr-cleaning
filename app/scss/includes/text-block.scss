@@ -1,0 +1,10 @@
+.text-block {
+    max-width: rem-calc(760);
+    margin: 0 auto;
+
+    &__blocks {
+        display: flex;
+        flex-direction: column;
+        gap: rem-calc(50);
+    }
+}

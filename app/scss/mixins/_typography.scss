@@ -1,0 +1,11 @@
+// Typography Mixins
+// =============================================================================
+
+// Text truncation mixin
+@mixin text-clamp($lines: 3) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

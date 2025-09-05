@@ -1,0 +1,14 @@
+@mixin post-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: rem-calc(24);
+    padding: rem-calc(0 24);
+
+    @media #{$mobile} {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media #{$tablet} {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

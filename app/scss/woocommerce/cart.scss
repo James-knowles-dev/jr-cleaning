@@ -1,0 +1,8 @@
+.wp-block-woocommerce-cart {
+    max-width: $max-width;
+    margin: rem-calc(50) auto;
+
+    .wc-block-cart__submit-button {
+        @include primary-button;
+    }
+}

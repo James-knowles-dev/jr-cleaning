@@ -1,0 +1,509 @@
+// WooCommerce Mixins
+// =============================================================================
+
+// Product Grid Mixins
+@mixin wc-product-grid($columns: 3) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem-calc(280), 1fr));
+    gap: rem-calc(24);
+    margin: rem-calc(32) 0;
+
+    @media #{$mobile} {
+        grid-template-columns: repeat(2, 1fr);
+        gap: rem-calc(20);
+    }
+
+    @media #{$tablet} {
+        grid-template-columns: repeat($columns, 1fr);
+        gap: rem-calc(24);
+    }
+
+    @media #{$desktop} {
+        gap: rem-calc(32);
+    }
+}
+
+// Product Card Base
+@mixin wc-product-card {
+    @include card-shadow;
+    background: $white;
+    border-radius: rem-calc(12);
+    overflow: hidden;
+    transition: $ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &:hover {
+        transform: translateY(rem-calc(-4));
+        box-shadow: 0 rem-calc(20) rem-calc(40) rgba(0, 0, 0, 0.15);
+    }
+
+    .woocommerce-loop-product__link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+// Product Image
+@mixin wc-product-image {
+    position: relative;
+    width: 100%;
+    height: rem-calc(200);
+    overflow: hidden;
+    background: $grey-10;
+
+    @media #{$tablet} {
+        height: rem-calc(240);
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: $ease;
+    }
+
+    .onsale {
+        position: absolute;
+        top: rem-calc(12);
+        left: rem-calc(12);
+        background: $secondary-base;
+        color: $white;
+        padding: rem-calc(4 8);
+        border-radius: rem-calc(4);
+        @include font-style(body-xsmall);
+        font-weight: 600;
+        z-index: 2;
+    }
+}
+
+// Product Content
+@mixin wc-product-content {
+    padding: rem-calc(16 20 20);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .woocommerce-loop-product__title {
+        @include font-style(body-medium);
+        font-weight: 600;
+        color: $primary-base;
+        margin: 0 0 rem-calc(8);
+        line-height: 1.4;
+        flex: 1;
+    }
+
+    .price {
+        @include font-style(body-medium);
+        font-weight: 700;
+        color: $secondary-base;
+        margin-bottom: rem-calc(12);
+
+        del {
+            color: $grey-70;
+            font-weight: 400;
+            margin-right: rem-calc(8);
+        }
+
+        ins {
+            text-decoration: none;
+        }
+    }
+
+    .button {
+        @include primary-button;
+        margin-top: auto;
+        font-size: rem-calc(14);
+        padding: rem-calc(12 16);
+    }
+}
+
+// Shop Controls Bar
+@mixin wc-shop-controls {
+    @include flex-between;
+    padding: rem-calc(20 0);
+    border-bottom: 1px solid $grey-20;
+    margin-bottom: rem-calc(24);
+    gap: rem-calc(16);
+    flex-wrap: wrap;
+
+    @media #{$mobile} {
+        flex-wrap: nowrap;
+    }
+
+    .woocommerce-result-count {
+        @include font-style(body-medium);
+        color: $grey-80;
+        margin: 0;
+        order: 1;
+
+        @media #{$mobile} {
+            order: 0;
+        }
+    }
+
+    .woocommerce-ordering {
+        order: 0;
+
+        @media #{$mobile} {
+            order: 1;
+        }
+
+        select {
+            @include filter-input-base;
+            @include font-style(body-small);
+            background-color: $white;
+            border: 1px solid $grey-30;
+            padding: rem-calc(8 32 8 12);
+            border-radius: rem-calc(6);
+            min-width: rem-calc(160);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right rem-calc(8) center;
+            background-repeat: no-repeat;
+            background-size: rem-calc(16);
+
+            &:focus {
+                outline: none;
+                border-color: $primary-base;
+            }
+        }
+    }
+}
+
+// Shop Header
+@mixin wc-shop-header {
+    margin-bottom: rem-calc(32);
+
+    .woocommerce-products-header__title {
+        @include font-style(heading-2);
+        color: $primary-base;
+        margin: 0 0 rem-calc(16);
+        text-align: center;
+
+        @media #{$tablet} {
+            text-align: left;
+        }
+    }
+
+    .woocommerce-archive-description {
+        @include font-style(body-medium);
+        color: $grey-80;
+        text-align: center;
+        
+        @media #{$tablet} {
+            text-align: left;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+}
+
+// Pagination
+@mixin wc-pagination {
+    margin-top: rem-calc(48);
+    text-align: center;
+
+    .page-numbers {
+        display: inline-flex;
+        gap: rem-calc(8);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin: 0;
+        }
+
+        a, span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: rem-calc(40);
+            height: rem-calc(40);
+            border-radius: rem-calc(6);
+            text-decoration: none;
+            @include font-style(body-small);
+            font-weight: 600;
+            transition: $ease;
+            border: 1px solid $grey-30;
+            background: $white;
+            color: $grey-80;
+
+            &:hover {
+                background: $primary-base;
+                color: $white;
+                border-color: $primary-base;
+            }
+
+            &.current {
+                background: $primary-base;
+                color: $white;
+                border-color: $primary-base;
+            }
+
+            &.prev, &.next {
+                width: auto;
+                padding: rem-calc(0 12);
+            }
+        }
+    }
+}
+
+// Notices
+@mixin wc-notices {
+    .woocommerce-notices-wrapper {
+        margin-bottom: rem-calc(24);
+
+        .woocommerce-message,
+        .woocommerce-error,
+        .woocommerce-info {
+            padding: rem-calc(16);
+            border-radius: rem-calc(8);
+            margin-bottom: rem-calc(16);
+            position: relative;
+            @include font-style(body-medium);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: underline;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .woocommerce-message {
+            background: $success-light;
+            border-left: rem-calc(4) solid $success-color;
+            color: $success-color;
+        }
+
+        .woocommerce-error {
+            background: $error-light;
+            border-left: rem-calc(4) solid $error-color;
+            color: $error-color;
+        }
+
+        .woocommerce-info {
+            background: $primary-10;
+            border-left: rem-calc(4) solid $primary-base;
+            color: $primary-base;
+        }
+    }
+}
+
+// Empty Shop State
+@mixin wc-no-products {
+    text-align: center;
+    padding: rem-calc(64 24);
+
+    .woocommerce-info {
+        @include font-style(body-large);
+        color: $grey-80;
+        margin-bottom: rem-calc(24);
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    .continue-shopping {
+        @include primary-button;
+        display: inline-flex;
+    }
+}
+
+// Shop Filters (if using custom filters)
+@mixin wc-shop-filters {
+    background: $white;
+    border-radius: rem-calc(12);
+    padding: rem-calc(24);
+    margin-bottom: rem-calc(32);
+    @include card-shadow;
+
+    .filter-title {
+        @include font-style(heading-5);
+        color: $primary-base;
+        margin: 0 0 rem-calc(16);
+    }
+
+    .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: rem-calc(12);
+
+        .filter-option {
+            @include button-base($grey-10, 1px solid $grey-30, $primary-base, $grey-80);
+            padding: rem-calc(8 16);
+            font-size: rem-calc(14);
+            width: auto;
+
+            &.active {
+                background: $primary-base;
+                color: $white;
+                border-color: $primary-base;
+            }
+        }
+    }
+}
+
+// Product Category Grid
+@mixin wc-category-grid($columns: 3) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem-calc(200), 1fr));
+    gap: rem-calc(20);
+    margin: rem-calc(32 0);
+
+    @media #{$mobile} {
+        grid-template-columns: repeat(auto-fit, minmax(rem-calc(240), 1fr));
+        gap: rem-calc(24);
+    }
+
+    @media #{$tablet} {
+        grid-template-columns: repeat(auto-fit, minmax(rem-calc(280), 1fr));
+        gap: rem-calc(28);
+    }
+
+    @media #{$desktop} {
+        grid-template-columns: repeat($columns, 1fr);
+    }
+}
+
+// Product Category Card
+@mixin wc-category-card {
+    background: $white;
+    border-radius: rem-calc(16);
+    overflow: hidden;
+    @include card-shadow;
+    transition: $ease;
+    text-align: center;
+    position: relative;
+    
+    &:hover {
+        transform: translateY(rem-calc(-4));
+        box-shadow: 0 rem-calc(12) rem-calc(30) rgba(0, 0, 0, 0.15);
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        padding: rem-calc(32 20 24);
+        height: 100%;
+        
+        .category-image,
+        img {
+            width: rem-calc(80);
+            height: rem-calc(80);
+            border-radius: rem-calc(12);
+            margin: 0 auto rem-calc(16);
+            object-fit: cover;
+            background: $grey-10;
+            
+            // Fallback for categories without images
+            &::before {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, $primary-20 0%, $primary-40 100%);
+                border-radius: rem-calc(12);
+            }
+        }
+
+        .category-name,
+        .woocommerce-loop-category__title {
+            @include font-style(heading-5);
+            color: $primary-base;
+            margin: 0 0 rem-calc(8);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .category-count,
+        .count {
+            @include font-style(body-small);
+            color: $grey-70;
+            background: $grey-10;
+            border-radius: rem-calc(20);
+            padding: rem-calc(4 12);
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        &:hover {
+            .category-name,
+            .woocommerce-loop-category__title {
+                color: $primary-90;
+            }
+        }
+    }
+}
+
+// Horizontal Category Pills
+@mixin wc-category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem-calc(16);
+    margin: rem-calc(24 0);
+    justify-content: center;
+
+    @media #{$tablet} {
+        justify-content: flex-start;
+    }
+
+    .category-item {
+        background: $white;
+        border-radius: rem-calc(50);
+        padding: rem-calc(12 24);
+        @include card-shadow;
+        transition: $ease;
+        
+        &:hover {
+            background: $primary-base;
+            transform: translateY(rem-calc(-2));
+            
+            a {
+                color: $white;
+            }
+        }
+
+        a {
+            @include font-style(body-medium);
+            font-weight: 600;
+            color: $primary-base;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: rem-calc(8);
+
+            .count {
+                background: $primary-10;
+                color: $primary-base;
+                border-radius: rem-calc(12);
+                padding: rem-calc(2 8);
+                font-size: rem-calc(12);
+                line-height: 1.4;
+                min-width: rem-calc(20);
+                text-align: center;
+            }
+        }
+
+        &:hover a .count {
+            background: rgba(255, 255, 255, 0.2);
+            color: $white;
+        }
+    }
+}

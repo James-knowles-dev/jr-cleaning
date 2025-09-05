@@ -1,0 +1,47 @@
+// Button Mixins
+// =============================================================================
+
+// Base button styles
+@mixin button-base($background, $border: none, $hover-bg: $background, $text-color: inherit) {
+  @include font-style(button-md);
+  display: inline-flex;
+  padding: rem-calc(16);
+  justify-content: center;
+  align-items: center;
+  gap: rem-calc(8);
+  border-radius: rem-calc(8);
+  border: $border;
+  background: $background;
+  color: $text-color;
+  width: 100%;
+
+  &:hover {
+    background: $hover-bg;
+    text-decoration: none;
+  }
+
+  @media #{$tablet} {
+    width: max-content;
+  }
+}
+
+// Button Mixins
+@mixin primary-button {
+  @include button-base($primary-40, none, $primary-30, $primary-100);
+}
+
+@mixin white-button {
+  @include button-base($white-base, none, #D9D9D9);
+}
+
+@mixin outline-button {
+  @include button-base($white-base, rem-calc(1) solid #552E20, #D9D9D9);
+}
+
+@mixin white-outline-button {
+  @include button-base(transparent, rem-calc(1) solid $white, transparent, white);
+}
+
+@mixin text-button {
+  @include button-base(inherit, none, transparent, $primary-70);
+}

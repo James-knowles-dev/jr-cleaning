@@ -1,0 +1,4 @@
+/* Hide default Gravatar option */
+tr.user-profile-picture {
+  display: none;
+}

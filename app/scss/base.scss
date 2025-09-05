@@ -1,0 +1,199 @@
+// Default element styles and main containers.
+@use "sass:math";
+
+@import 'vars'; 
+@import 'font-styles'; 
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: $black;
+  font-family: $font;
+  font-weight: 400;
+  font-size: rem-calc(16);
+  line-height: 1.1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+header.woocommerce-products-header {
+    top: unset;
+    position: static;
+}
+
+body,
+html {
+  height: 100%;
+}
+body.menu-open{
+  overflow: hidden;
+}
+
+main.content {
+    padding-top: rem-calc(90);
+}
+
+.primary-container {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+section {
+  margin: rem-calc(40 0);
+  padding: rem-calc(0 50);
+  @media #{$tablet} {
+    margin: rem-calc(100 0);
+  }
+}
+
+:-moz-loading {
+  overflow-y: hidden;
+}
+
+p {
+  @include font-style(body-large);
+  width: 100%;
+
+  &:not(:last-of-type) {
+    margin-bottom: rem-calc(20);
+  }
+}
+
+h1,h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+  font-family: $heading-font;
+}
+
+h1 {
+  @include font-style(heading-1);
+}
+
+h2 {
+  @include font-style(heading-2);
+}
+
+h3 {
+  @include font-style(heading-3);
+}
+
+h4 {
+  @include font-style(heading-4);
+}
+
+h5 {
+  @include font-style(heading-5);
+}
+
+h6 {
+  @include font-style(heading-6);
+}
+
+.title-large {
+  @include font-style(title-large);
+}
+
+.title-medium {
+  @include font-style(title-medium);
+}
+
+.title-small {
+  @include font-style(title-small);
+}
+
+.body-large {
+  @include font-style(body-large);
+}
+
+.body-medium {
+  @include font-style(body-medium);
+}
+
+.body-small {
+  @include font-style(body-small);
+}
+
+
+.button--primary {
+  @include primary-button;
+}
+
+.button--outline {
+  @include outline-button;
+}
+
+.button--white {
+  @include white-button;
+}
+
+.button--text {
+  @include text-button;
+}
+
+
+a {
+  transition: $ease;
+  text-decoration: none;
+}
+
+span,
+u,
+b,
+strong,
+i,
+em,
+blockquote,
+a {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+i,
+em,
+blockquote {
+  font-style: italic;
+}
+
+b,
+strong {
+  font-weight: 600;
+}
+
+img {
+  object-fit: cover;
+  height: auto;
+}
+
+blockquote {
+  padding-left: rem-calc(20);
+  border-left: solid rem-calc(1) $black;
+}
+
+svg {
+  transition: $ease;
+    * {
+      transition: $ease;
+    }
+}
+
+.white-outline-button {
+  @include white-outline-button;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+.no-margin-top {
+  margin-top: 0;
+}
+
+
+mark {
+    background-color: white;
+    text-decoration: underline;
+}

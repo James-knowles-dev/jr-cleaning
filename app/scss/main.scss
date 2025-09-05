@@ -1,0 +1,37 @@
+// Main SCSS file - imports all components in proper order
+// =============================================================================
+
+// Import base files first
+@import 'base';
+@import 'misc';
+
+// Import layout files
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/blog';
+@import 'layout/error';
+
+// Import component files
+@import 'components/menu';
+@import 'components/gravity-forms';
+
+// Import includes/block files
+@import 'includes/hero';
+@import 'includes/content-split';
+@import 'includes/text-block';
+@import 'includes/contact-form-block';
+@import 'includes/inner-hero';
+@import 'includes/image-block';
+
+// Import global files
+@import 'global/animations';
+
+// Import WooCommerce styles
+@import 'woocommerce/cart-sidebar';
+@import 'woocommerce/archive-product';
+@import 'woocommerce/widgets';
+@import 'woocommerce/account';
+@import 'woocommerce/single-product';
+@import 'woocommerce/cart';
+@import 'woocommerce/checkout';
+

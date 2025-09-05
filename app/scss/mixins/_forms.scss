@@ -1,0 +1,309 @@
+// Form Mixins (Gravity Forms)
+// =============================================================================
+
+// Base form input mixins
+@mixin gform-input-base {
+    width: 100%;
+    padding: rem-calc(12 16);
+    border: rem-calc(1) solid $grey-40;
+    border-radius: rem-calc(4);
+    @include font-style(body-small);
+    background-color: $white-base;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+        border-color: $primary-base;
+        outline: none;
+        box-shadow: 0 0 0 rem-calc(2) rgba($primary-base, 0.1);
+    }
+
+    &::placeholder {
+        color: $placeholder-color;
+        opacity: 1;
+    }
+
+    &.gfield_error {
+        border-color: $error-color;
+        
+        &:focus {
+            border-color: $error-color;
+            box-shadow: 0 0 0 rem-calc(2) rgba($error-color, 0.1);
+        }
+    }
+}
+
+@mixin gform-textarea {
+    @include gform-input-base;
+    min-height: rem-calc(120);
+    resize: vertical;
+    font-family: inherit;
+}
+
+@mixin gform-select {
+    @include gform-input-base;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right rem-calc(12) center;
+    background-repeat: no-repeat;
+    background-size: rem-calc(16);
+    padding-right: rem-calc(40);
+    appearance: none;
+}
+
+@mixin gform-label {
+    @include font-style(body-small);
+    font-weight: 600;
+    color: $black;
+    margin-bottom: rem-calc(6);
+    display: block;
+    text-align: left;
+}
+
+@mixin gform-validation-message {
+    @include font-style(body-xsmall);
+    color: $error-color;
+    margin-top: rem-calc(4);
+    display: block;
+}
+
+@mixin gform-required-indicator {
+    color: $error-color;
+    margin-left: rem-calc(2);
+}
+
+// Base button styling for forms
+@mixin gform-button-base {
+    @include primary-button;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// Complete Gravity Form styling mixin
+@mixin gform-wrapper-styles {
+    .gform_wrapper {
+        .gform_heading {
+            margin-bottom: rem-calc(24);
+            
+            .gform_title {
+                @include font-style(heading-3);
+                margin-bottom: rem-calc(8);
+            }
+            
+            .gform_description {
+                @include font-style(body-medium);
+                color: $grey-80;
+            }
+        }
+
+                    .gform_footer {
+                margin-top: rem-calc(24);
+                
+                .gform_button {
+                    @include gform-button-base;
+                }
+            }
+
+        .gform_fields {
+            .gfield {
+                margin-bottom: rem-calc(20);
+
+                .gfield_label {
+                    @include gform-label;
+                    
+                    .gfield_required {
+                        @include gform-required-indicator;
+                    }
+                }
+
+                input[type="text"],
+                input[type="email"],
+                input[type="tel"],
+                input[type="url"],
+                input[type="password"],
+                input[type="number"] {
+                    @include gform-input-base;
+                }
+
+                textarea {
+                    @include gform-textarea;
+                }
+
+                select {
+                    @include gform-select;
+                }
+
+                .gfield_checkbox,
+                .gfield_radio {
+                    .gchoice {
+                        margin-bottom: rem-calc(8);
+                        display: flex;
+                        align-items: center;
+                        gap: rem-calc(8);
+
+                        input[type="checkbox"],
+                        input[type="radio"] {
+                            width: auto;
+                            margin: 0;
+                        }
+
+                        label {
+                            @include font-style(body-small);
+                            margin: 0;
+                            font-weight: normal;
+                        }
+                    }
+                }
+
+                .validation_message {
+                    @include gform-validation-message;
+                }
+            }
+        }
+
+        .gform_confirmation_message {
+            @include font-style(body-medium);
+            color: $success-color;
+            padding: rem-calc(16);
+            background-color: $primary-10;
+            border: rem-calc(1) solid $success-color;
+            border-radius: rem-calc(4);
+            margin-bottom: rem-calc(20);
+        }
+
+        .validation_error {
+            @include font-style(body-small);
+            color: $error-color;
+            background-color: $error-light;
+            border: rem-calc(1) solid $error-color;
+            border-radius: rem-calc(4);
+            padding: rem-calc(12 16);
+            margin-bottom: rem-calc(20);
+        }
+    }
+}
+
+// Block wrapper mixin - automatically styles any block containing a gravity form
+@mixin gform-block-wrapper($background: transparent, $padding: rem-calc(60 0), $text-align: left) {
+    background-color: $background;
+    padding: $padding;
+    text-align: $text-align;
+    
+    .primary-container {
+        max-width: rem-calc(800);
+        margin: 0 auto;
+        padding: rem-calc(0 20);
+        
+        @media #{$tablet} {
+            padding: rem-calc(0 40);
+        }
+    }
+
+    .gfield_description, .ginput_complex label {
+        text-align:left;
+        padding-bottom: rem-calc(10);
+    }
+
+    // Auto-apply form wrapper styles
+    @include gform-wrapper-styles;
+    
+    // Override form title alignment if block is centered
+    @if $text-align == center {
+        .gform_wrapper .gform_heading .gform_title {
+            text-align: center;
+        }
+    }
+}
+
+// Specialized block mixins for different form contexts
+@mixin contact-form-block($background: transparent) {
+    @include gform-block-wrapper($background, rem-calc(80 50), center);
+    
+    .gform_wrapper {
+        .gform_heading .gform_title {
+            @include font-style(heading-2);
+            margin-bottom: rem-calc(16);
+        }
+    }
+}
+
+@mixin footer-form-block {
+    @include gform-wrapper-styles;
+    
+    .gform_wrapper {
+        .gform_heading {
+            .gform_title {
+                @include font-style(heading-4);
+                color: $black;
+                margin-bottom: rem-calc(16);
+            }
+            
+            .gform_description {
+                color: $grey-80;
+                @include font-style(body-small);
+                margin-bottom: rem-calc(20);
+            }
+        }
+
+        .gform_fields .gfield {
+            margin-bottom: rem-calc(16);
+        }
+
+        .gform_footer {
+            margin-top: rem-calc(16);
+            
+            .gform_button {
+                width: 100%;
+                
+                @media #{$tablet} {
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+@mixin newsletter-form-block {
+    @include gform-wrapper-styles;
+    
+    .gform_wrapper {
+        .gform_fields {
+            @media #{$tablet} {
+                display: flex;
+                gap: rem-calc(12);
+                align-items: flex-end;
+            }
+            
+            .gfield {
+                margin-bottom: rem-calc(12);
+                
+                @media #{$tablet} {
+                    margin-bottom: 0;
+                    flex: 1;
+                }
+                
+                .gfield_label {
+                    @include font-style(body-xsmall);
+                    font-weight: 500;
+                    text-align: left;
+                }
+                
+                input[type="email"] {
+                    padding: rem-calc(10 12);
+                }
+            }
+        }
+        
+        .gform_footer {
+            margin-top: 0;
+            
+            @media #{$tablet} {
+                margin-left: rem-calc(12);
+            }
+        }
+    }
+}

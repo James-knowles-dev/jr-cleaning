@@ -1,0 +1,32 @@
+.image-block {
+    margin: rem-calc(40) auto;
+    padding: rem-calc(0 50);
+    max-width: $max-width;
+
+    @media #{$tablet} {
+        margin: rem-calc(100) auto;
+    }
+
+    &.full-width {
+        max-width: 100%;
+        padding: 0;
+
+        .image-block {
+
+            &__caption {
+                margin: rem-calc(0 50);
+            }
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: rem-calc(40);
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+}
