@@ -1,0 +1,55 @@
+{
+    "key": "group_68bc8c9cac4e9",
+    "title": "Menu Item Settings",
+    "fields": [
+        {
+            "key": "field_68bc8c9d05837",
+            "label": "Button Style",
+            "name": "button_style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "standard": "Standard",
+                "primary_button": "Primary Button",
+                "outline_button": "Outline Button"
+            },
+            "default_value": "standard",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "nav_menu_item",
+                "operator": "==",
+                "value": "location\/menu"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1757187327
+}

@@ -72,7 +72,7 @@ if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
 }
 
 // Ensure a default background colour
-$colour_picker = ! empty( $colour_picker ) ? $colour_picker : '#aabfff';
+$colour_picker = ! empty( $colour_picker ) ? $colour_picker : '#143458';
 
 // Build breadcrumb HTML once to avoid repeating echo logic
 if ( $breadcrumb_force_home ) {

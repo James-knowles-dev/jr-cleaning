@@ -36,6 +36,15 @@
 
                     .footer__menu-column {
                         flex: 1;
+                        display:flex;
+                        flex-direction: column;
+                        gap: rem-calc(15);
+
+                        .footer__menu-title {
+                            @include font-style(heading-6);
+                            color: $black;
+                            text-decoration: underline;
+                        }
 
                         .footer__menu {
                             list-style: none;

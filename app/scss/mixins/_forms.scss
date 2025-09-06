@@ -194,7 +194,7 @@
     text-align: $text-align;
     
     .primary-container {
-        max-width: rem-calc(800);
+        max-width: $max-width;
         margin: 0 auto;
         padding: rem-calc(0 20);
         
@@ -221,12 +221,33 @@
 
 // Specialized block mixins for different form contexts
 @mixin contact-form-block($background: transparent) {
-    @include gform-block-wrapper($background, rem-calc(80 50), center);
+    @include gform-block-wrapper($background, center);
+
+    .gf_progressbar_percentage  {
+        background-color: $primary-base!important;
+    }
     
+    .gform_previous_button {
+        @include outline-button;
+    }
+
+    input[type="submit"] {
+        @include primary-button;
+    }   
+
+    .chosen-choices{
+            @include gform-input-base;
+            cursor: pointer!important;
+    }
+
     .gform_wrapper {
         .gform_heading .gform_title {
             @include font-style(heading-2);
             margin-bottom: rem-calc(16);
+        }
+
+        .gform_next_button {
+            @include primary-button;
         }
     }
 }

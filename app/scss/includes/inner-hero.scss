@@ -15,10 +15,19 @@
         gap: rem-calc(16);
     }
 
+    &__heading {
+        color: $white-base;
+    }
+
     &__breadcrumb {
+        
+        p {
+            color: $white-base;
+        }
 
         a {
             text-decoration: underline;
+            color: $white-base;
         }
     }
 }

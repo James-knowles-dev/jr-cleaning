@@ -13,151 +13,45 @@
         padding: rem-calc(50 30);
     }
 
-     &.images-carousel-text {
+    .container-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: rem-calc(40);
 
-        .primary-container {
-            display:flex;
-            gap: rem-calc(50);
-            flex-direction: column;
-
-            @media #{$tablet} {
-                flex-direction: row;
-                align-items: center;
-                gap: rem-calc(100);
-            }
-        }
-        
-    }
-
-    &.has-background-image, &.has-background-video{
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-
-        .container-wrapper {
-            width: 100%;
-            background-color: $white-base;
-            padding: rem-calc(30);
-            border-radius: rem-calc(5);
-            display: flex;
-            flex-direction: column;
-            gap: rem-calc(15);
-
-            @media #{$tablet} {
-                width: max-content;
-            }
-        }
-    }
-    
-    &.has-background-video {
-        background: none;
-        position: relative;
-        overflow: hidden;
-
-        .primary-container {
-            position: relative;
-            z-index: 2;
-        }
-
-        // Video wrapper sits behind content and hides overflow
-        .hero-block__video-wrap {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        // Ensure iframe ignores pointer events so content is clickable
-        .hero-block__video-wrap iframe {
-            pointer-events: none;
-        }
-
-        // Default iframe sizing: try to cover using viewport-based sizing
-        .hero-block__video-iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            /* fallback cover sizing; JS will recalc to exact container size on resize */
-            width: calc(100vh * (16 / 9));
-            height: 100vh;
-            min-width: 100%;
-            min-height: 100%;
-            max-width: none;
-            max-height: none;
-        }
-
-        .hero-block__video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25));
-            pointer-events: none;
+        @media #{$tablet} {
+            flex-direction: row;
+            gap: rem-calc(80);
+            align-items: stretch;
         }
     }
 
     &__content {
-        width: 100%;
-        display: flex;
+        display:flex;
         flex-direction: column;
-        gap: rem-calc(15);
+        gap: rem-calc(32);
+        width: 100%;
 
         @media #{$tablet} {
             width: 50%;
+            justify-content: center;
         }
     }
 
-
-
-    &__images {
+    &__image {
         width:100%;
 
         @media #{$tablet} {
             width: 50%;
         }
 
-        &--carousel {
-            position: relative;
-
-            .slick-next {
-                position: absolute;
-                right: 0;
-                top: 50%;
-                transform: rotate(-90deg);
-            }
-
-            .slick-prev {
-                position: absolute;
-                top: 50%;
-                transform: rotate(-90deg);
-            }
-
-            .slick-list {
-                margin: 0 auto;
-                max-width: 80%;
-            }
-
-            .slick-arrow {
-                padding: 10px;
-                border-radius: rem-calc(5);
-                border:none;
-                cursor: pointer;
-                z-index: 999;
-            }
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: rem-calc(5);
+            display: block;
         }
-    }
-
-    &__image {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: rem-calc(5);
-        display: block;
     }
 
     &__buttons {

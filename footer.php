@@ -13,6 +13,7 @@
           // Footer Menu 1
           if (has_nav_menu('footer_menu_1')) { ?>
             <div class="footer__menu-column">
+              <h6 class="footer__menu-title">Quick Links</h6>
               <?php wp_nav_menu(array(
                 'theme_location' => 'footer_menu_1',
                 'menu_class' => 'footer__menu footer__menu--1',
@@ -25,6 +26,7 @@
           // Footer Menu 2
           if (has_nav_menu('footer_menu_2')) { ?>
             <div class="footer__menu-column">
+              <h6 class="footer__menu-title">Services</h6>
               <?php wp_nav_menu(array(
                 'theme_location' => 'footer_menu_2',
                 'menu_class' => 'footer__menu footer__menu--2',
