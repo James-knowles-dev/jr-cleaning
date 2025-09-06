@@ -53,7 +53,7 @@ get_header();
                 $img_src = get_the_post_thumbnail_url($post, "thumbnail");
                 $img_alt = get_post_meta(get_post_thumbnail_id($post->ID), "_wp_attachment_image_alt", "true");
               } else {
-                $img_src = "/wp-content/themes/pixelbase/images/placeholder.png";
+                $img_src = "/wp-content/themes/jrcleaning/images/placeholder.png";
                 $img_alt = "The placeholder featured image.";
               }
               ?>

@@ -33,9 +33,9 @@ if ( empty( $heading ) ) {
     }
 
     if ( is_home() || is_post_type_archive( 'post' ) || is_page_template( 'page-template-index.php' ) || 'index.php' === $current_template ) {
-        $heading = __( 'Blog', 'pixelbase' );
+        $heading = __( 'Blog', 'jrcleaning' );
     } elseif ( ( function_exists( 'is_shop' ) && is_shop() ) || is_post_type_archive( 'product' ) ) {
-        $heading = __( 'Shop', 'pixelbase' );
+        $heading = __( 'Shop', 'jrcleaning' );
     }
 }
 

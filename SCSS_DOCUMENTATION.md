@@ -1,7 +1,7 @@
-# PixelBase SCSS Architecture Documentation
+# jrcleaning SCSS Architecture Documentation
 
 ## Overview
-This document provides a comprehensive guide to the SCSS architecture used in the PixelBase WordPress theme. The system is designed with modularity, maintainability, and consistency in mind.
+This document provides a comprehensive guide to the SCSS architecture used in the jrcleaning WordPress theme. The system is designed with modularity, maintainability, and consistency in mind.
 
 ## File Structure
 

@@ -52,7 +52,7 @@
         content: "";
         position: absolute;
         @include default-background;
-        background-image: url('/wp-content/themes/pixelbase/images/arrow.svg');
+        background-image: url('/wp-content/themes/jrcleaning/images/arrow.svg');
         pointer-events: none;
         transition: $ease;
     }

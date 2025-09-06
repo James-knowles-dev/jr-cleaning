@@ -72,7 +72,7 @@
     <div class="primary-container">
       <div class="header-content-wrapper">
       <?php if( !empty( $site_logo ) ): ?>
-        <a href="/" class="site-logo"><img src="<?php echo esc_url($site_logo['url']); ?>" alt="pixelbase Health" /></a>
+        <a href="/" class="site-logo"><img src="<?php echo esc_url($site_logo['url']); ?>" alt="jrcleaning Health" /></a>
       <?php endif; ?>
 
       <div class="header-nav-container">

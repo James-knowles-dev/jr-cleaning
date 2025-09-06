@@ -27,7 +27,7 @@
 
 // Button Mixins
 @mixin primary-button {
-  @include button-base($primary-40, none, $primary-30, $primary-100);
+  @include button-base($primary-base, none, $primary-70, $white-base);
 }
 
 @mixin white-button {

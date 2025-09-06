@@ -56,9 +56,9 @@
                                 "id": ""
                             },
                             "choices": {
-                                "background_video": "<div class=\"selector-wrapper\"><h4>Background Video<\/h4><img src=\"https:\/\/pixelbase.pixelpreview.net\/wp-content\/themes\/pixelbase\/images\/acf\/hero-layouts\/background-video.png\" style=\"width:250px;height:auto;min-height:93px;border:1px solid #ccc;\"><\/div>",
-                                "background_image": "<div class=\"selector-wrapper\"><h4>Background Image<\/h4><img src=\"https:\/\/pixelbase.pixelpreview.net\/wp-content\/themes\/pixelbase\/images\/acf\/hero-layouts\/background-image.png\" style=\"width:250px;height:auto;min-height:93px;border:1px solid #ccc;\"><\/div>",
-                                "image_carousel_text": "<div class=\"selector-wrapper\"><h4>Image Carousel with Text<\/h4><img src=\"https:\/\/pixelbase.pixelpreview.net\/wp-content\/themes\/pixelbase\/images\/acf\/hero-layouts\/image-carousel-text.png\" style=\"width:250px;height:auto;min-height:93px;border:1px solid #ccc;\"><\/div>"
+                                "background_video": "<div class=\"selector-wrapper\"><h4>Background Video<\/h4><img src=\"https:\/\/jrcleaning.pixelpreview.net\/wp-content\/themes\/jrcleaning\/images\/acf\/hero-layouts\/background-video.png\" style=\"width:250px;height:auto;min-height:93px;border:1px solid #ccc;\"><\/div>",
+                                "background_image": "<div class=\"selector-wrapper\"><h4>Background Image<\/h4><img src=\"https:\/\/jrcleaning.pixelpreview.net\/wp-content\/themes\/jrcleaning\/images\/acf\/hero-layouts\/background-image.png\" style=\"width:250px;height:auto;min-height:93px;border:1px solid #ccc;\"><\/div>",
+                                "image_carousel_text": "<div class=\"selector-wrapper\"><h4>Image Carousel with Text<\/h4><img src=\"https:\/\/jrcleaning.pixelpreview.net\/wp-content\/themes\/jrcleaning\/images\/acf\/hero-layouts\/image-carousel-text.png\" style=\"width:250px;height:auto;min-height:93px;border:1px solid #ccc;\"><\/div>"
                             },
                             "default_value": "background_image",
                             "return_format": "value",

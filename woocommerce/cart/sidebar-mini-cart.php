@@ -4,7 +4,7 @@
  *
  * Custom sidebar cart template for the theme
  *
- * @package PixelBase
+ * @package jrcleaning
  */
 
 defined( 'ABSPATH' ) || exit;

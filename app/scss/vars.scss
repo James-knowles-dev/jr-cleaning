@@ -6,17 +6,17 @@ $white: #fff;
 
 
 // Secondary Palette
-$secondary-10:   #ffe8e0; 
-$secondary-20:   #ffd2c1;
-$secondary-30:   #ffb199;
-$secondary-40:   #ff8f72;
-$secondary-50:   #ff6e4a;  
-$secondary-base: #f4531f;
-$secondary-60:   #c9441a;  
-$secondary-70:   #9e3614;
-$secondary-80:   #73270f;
-$secondary-90:   #47190a;
-$secondary-100:  #250d05;   
+$secondary-10:   #E6E8EA; 
+$secondary-20:   #E6E8EA;
+$secondary-30:   #E6E8EA;
+$secondary-40:   #CED1D5;
+$secondary-50:   #54606D;  
+$secondary-base: #0C1D2F;
+$secondary-60:   #091725;  
+$secondary-70:   #040B12;
+$secondary-80:   #03080E;
+$secondary-90:   #03080E;
+$secondary-100:  #03080E;   
 
 // White Palette
 $white-10: #fdfdfd;
@@ -32,17 +32,17 @@ $white-90: #515151;
 $white-100: #313131;
 
 // Primary Palette
-$primary-10:   #e5ebff;  
-$primary-20:   #ccd8ff;
-$primary-30:   #aabfff;
-$primary-40:   #88a6ff;
-$primary-50:   #668cff;
-$primary-base: #315cfe;   
-$primary-60:   #294dd5;   
-$primary-70:   #2141aa;
-$primary-80:   #193580;
-$primary-90:   #102955;
-$primary-100:  #081c33; 
+$primary-10:   #E7EAEE;  
+$primary-20:   #E7EAEE;
+$primary-30:   #E7EAEE; 
+$primary-40:   #D0D6DD;
+$primary-50:   #5A708A;
+$primary-base: #143458;   
+$primary-60:   #102946;   
+$primary-70:   #081423;
+$primary-80:   #060F1A;
+$primary-90:   #060F1A;
+$primary-100:  #060F1A; 
 
 // Grey Palette
 $grey-10: #f5f5f5;
@@ -66,9 +66,11 @@ $placeholder-color: #999999;
 
 
 // Fonts.
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-$font: "Poppins", sans-serif;
-$heading-font: "Poppins", sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Sora:wght@100..800&display=swap');
+
+$font:"Assistant", sans-serif;
+$heading-font: "Sora", sans-serif;
 
 
 // Media querys.

@@ -82,37 +82,37 @@
                     switch ($platform) {
                         case 'facebook':
                             echo '<a href="' . esc_url($url) . '" target="_blank" class="footer__social footer__social--facebook" title="Facebook">'.
-                                    file_get_contents("wp-content/themes/pixelbase/images/socials/facebook.svg")
+                                    file_get_contents("wp-content/themes/jrcleaning/images/socials/facebook.svg")
                                   .'</a>';
                             break;
                         case 'twitter':
                             echo '<a href="' . esc_url($url) . '" target="_blank" class="footer__social footer__social--twitter" title="X">'.
-                                    file_get_contents("wp-content/themes/pixelbase/images/socials/twitter.svg")
+                                    file_get_contents("wp-content/themes/jrcleaning/images/socials/twitter.svg")
                                   .'</a>';
                             break;
                         case 'linkedin':
                             echo '<a href="' . esc_url($url) . '" target="_blank" class="footer__social footer__social--linkedin" title="linked In">'.
-                                    file_get_contents("wp-content/themes/pixelbase/images/socials/linkedin.svg")
+                                    file_get_contents("wp-content/themes/jrcleaning/images/socials/linkedin.svg")
                                   .'</a>';
                             break;
                         case 'pinterest':
                             echo '<a href="' . esc_url($url) . '" target="_blank" class="footer__social footer__social--pinterest" title="Pinterest">'.
-                                    file_get_contents("wp-content/themes/pixelbase/images/socials/pinterest.svg")
+                                    file_get_contents("wp-content/themes/jrcleaning/images/socials/pinterest.svg")
                                   .'</a>';
                             break;
                         case 'youtube':
                             echo '<a href="' . esc_url($url) . '" target="_blank" class="footer__social footer__social--youtube" title="Youtube">'.
-                                    file_get_contents("wp-content/themes/pixelbase/images/socials/youtube.svg")
+                                    file_get_contents("wp-content/themes/jrcleaning/images/socials/youtube.svg")
                                   .'</a>';
                             break;
                         case 'tiktok':
                             echo '<a href="' . esc_url($url) . '" target="_blank" class="footer__social footer__social--tiktok" title="Tiktok">'.
-                                    file_get_contents("wp-content/themes/pixelbase/images/socials/tiktok.svg")
+                                    file_get_contents("wp-content/themes/jrcleaning/images/socials/tiktok.svg")
                                     .'</a>';
                             break;
                         case 'instagram':
                             echo '<a href="' . esc_url($url) . '" target="_blank" class="footer__social footer__social--instagram" title="instagram">'.
-                                    file_get_contents("wp-content/themes/pixelbase/images/socials/instagram.svg")
+                                    file_get_contents("wp-content/themes/jrcleaning/images/socials/instagram.svg")
                                     .'</a>';
                             break;
                     }
@@ -121,7 +121,7 @@
               } ?>
           </div>
           <p class="footer__signature">Made by <a href="https://pixelkicks.co.uk" title="Pixel Kicks"
-              target="_blank"><?php echo file_get_contents("wp-content/themes/pixelbase/images/pixelkicks.svg"); ?></a>
+              target="_blank"><?php echo file_get_contents("wp-content/themes/jrcleaning/images/pixelkicks.svg"); ?></a>
           </p>
         </div>
     </div>
