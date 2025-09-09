@@ -31,7 +31,7 @@
 
                     <?php if( $icon ): ?>
                         <div class="icon-block__card-icon">
-                            <img src="<?php echo esc_url( $icon['url'] ); ?>" alt="<?php echo esc_attr( $icon['alt'] ); ?>" />
+                            <img src="<?php echo esc_url( $icon['url'] ); ?>" alt="<?php echo esc_attr( $icon['alt'] ); ?>" width="40" height="40" />
                         </div>
                     <?php endif; ?>
 

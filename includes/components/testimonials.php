@@ -27,7 +27,7 @@ $subheading = get_sub_field('subheading');
                         <?php if ($stars): ?>
                             <div class="testimonial__stars">
                                 <?php for ($i = 0; $i < $stars; $i++): ?>
-                                    <img src="<?php echo esc_url(get_template_directory_uri() . '/images/star.svg'); ?>" alt="Star" />
+                                    <img src="<?php echo esc_url(get_template_directory_uri() . '/images/star.svg'); ?>" alt="Star" width="20" height="20" />
                                 <?php endfor; ?>
                             </div>
                         <?php endif; ?>

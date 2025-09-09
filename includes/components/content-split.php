@@ -52,7 +52,7 @@
                                     $image_src = wp_get_attachment_image_src($image['id'], 'medium')[0];
                                     $image_count++; ?>
                                     <div class="content-split__image-wrapper">
-                                        <img class="content-split__image" src="<?php echo esc_url($image_src); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+                                        <img class="content-split__image" src="<?php echo esc_url($image_src); ?>" alt="<?php echo esc_attr($image['alt']); ?>" width="400" height="300" />
                                     </div>
                                     <?php
                                 }

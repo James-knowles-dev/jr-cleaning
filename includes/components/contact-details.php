@@ -32,7 +32,7 @@
                 <div class="contact-details-block__item">
 
                     <div class="contact-details-block__item-label">
-                        <img src="<?php echo esc_url(get_theme_file_uri('/images/mail.svg')); ?>" alt="Email Icon">
+                        <img src="<?php echo esc_url(get_theme_file_uri('/images/mail.svg')); ?>" alt="Email Icon" width="20" height="20">
                         <p>Email</p>
                     </div>
 
@@ -47,7 +47,7 @@
                 <div class="contact-details-block__item">
 
                     <div class="contact-details-block__item-label">
-                        <img src="<?php echo esc_url(get_theme_file_uri('/images/phone.svg')); ?>" alt="Phone Icon">
+                        <img src="<?php echo esc_url(get_theme_file_uri('/images/phone.svg')); ?>" alt="Phone Icon" width="20" height="20">
                         <p>Phone</p>
                     </div>
 

@@ -10,7 +10,7 @@
     <?php if ( $image ) : ?>
         <div class="image-block__wrapper">
 
-            <img class="image-block__image" style="max-height: <?php echo esc_attr( $max_height ); ?>px" src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
+            <img class="image-block__image" style="max-height: <?php echo esc_attr( $max_height ); ?>px" src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" width="1" height="1" />
 
             <?php if ( $caption ) : ?>
 

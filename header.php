@@ -35,11 +35,11 @@
     <?php echo esc_html($title); echo " | "; echo esc_html($title_parent); echo esc_html($site_name); echo " | "; echo esc_html($site_description); ?>
   </title>
   <meta name="theme-color" content="#16204b">
-  <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/resources/slick/slick.css"/>
+    <!-- Removed slick-theme.css reference as file is missing -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/resources/slick/slick.min.js"></script>
   
   <?php 
   // Output Head Tags from ACF options
@@ -66,13 +66,16 @@
     endwhile;
   endif; 
   ?>
+  <a class="screen-reader-shortcut" href="#wp-toolbar" tabindex="0">Skip to toolbar</a>
   <header>
     <?php
     $site_logo = get_field('site_logo', 'options'); ?>
     <div class="primary-container">
       <div class="header-content-wrapper">
       <?php if( !empty( $site_logo ) ): ?>
-        <a href="/" class="site-logo"><img src="<?php echo esc_url($site_logo['url']); ?>" alt="jrcleaning Health" /></a>
+        <a href="/" class="site-logo">
+          <img src="<?php echo esc_url($site_logo['url']); ?>" alt="jrcleaning" width="50" height="50" />
+        </a>
       <?php endif; ?>
 
       <div class="header-nav-container">

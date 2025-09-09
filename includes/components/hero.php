@@ -36,7 +36,7 @@ $image = get_sub_field('image');
             </div>
             <div class="hero-block__image">
                 <?php if ( $image ) : ?>
-                    <img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
+                    <img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" width="800" height="400" />
                 <?php endif; ?>
             </div>
         </div>
