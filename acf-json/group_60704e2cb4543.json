@@ -1404,6 +1404,58 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_68c08851250de": {
+                    "key": "layout_68c08851250de",
+                    "name": "contact_details",
+                    "label": "Contact Details",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_68c08859250e0",
+                            "label": "Heading",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_68c0885f250e1",
+                            "label": "Subheading",
+                            "name": "subheading",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -1436,5 +1488,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757446378
+    "modified": 1757448300
 }
