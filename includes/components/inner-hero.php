@@ -47,53 +47,43 @@ if ( ! in_array( $heading_level, $allowed_levels, true ) ) {
 }
 
 // Visibility flags with sensible defaults
-$show_breadcrumb = true;
 $show_heading = true;
 if ( is_array( $args_from_var ) ) {
-    if ( array_key_exists( 'show_breadcrumb', $args_from_var ) ) {
-        $show_breadcrumb = (bool) $args_from_var['show_breadcrumb'];
-    }
     if ( array_key_exists( 'show_heading', $args_from_var ) ) {
         $show_heading = (bool) $args_from_var['show_heading'];
     }
 }
 
-// WooCommerce: avoid duplicating WC breadcrumbs/titles, but keep a simple breadcrumb on main shop page
-$breadcrumb_force_home = false;
-if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
-    if ( function_exists( 'is_shop' ) && is_shop() ) {
-        $show_breadcrumb = true;
-        $show_heading = true;
-        $breadcrumb_force_home = true;
-    } else {
-        $show_breadcrumb = false;
-        $show_heading = false;
-    }
-}
 
 // Ensure a default background colour
 $colour_picker = ! empty( $colour_picker ) ? $colour_picker : '#143458';
 
-// Build breadcrumb HTML once to avoid repeating echo logic
-if ( $breadcrumb_force_home ) {
-    $breadcrumb_html = '<p>Back to <a href="' . esc_url( home_url( '/' ) ) . '">Home</a></p>';
-} elseif ( $parent_id ) {
-    $link  = get_permalink( $parent_id );
-    $title = get_the_title( $parent_id );
-    $breadcrumb_html = '<p>Back to <a href="' . esc_url( $link ) . '">' . esc_html( $title ) . '</a></p>';
-} else {
-    $breadcrumb_html = '<p>Back to <a href="' . esc_url( home_url( '/' ) ) . '">Home</a></p>';
-}
 ?>
 
 <section class="inner-hero-block" style="background-color: <?php echo esc_attr( $colour_picker ); ?>;">
     <div class="primary-container">
         <div class="row-wrapper">
-            <?php if ( $show_breadcrumb ) : ?>
-                <div class="inner-hero-block__breadcrumb">
-                    <?php echo $breadcrumb_html; ?>
-                </div>
-            <?php endif; ?>
+            
+            <div class="inner-hero-block__breadcrumb">
+                    <?php
+                    // Output breadcrumbs: prefer Yoast SEO, fallback to basic
+                    if ( function_exists('yoast_breadcrumb') ) {
+                        yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+                    } else {
+                        // Basic fallback: Home > Current
+                        echo '<p id="breadcrumbs">';
+                        echo '<a href="' . esc_url(home_url('/')) . '">' . esc_html__('Home', 'jrcleaning') . '</a>';
+                        if ( is_singular() ) {
+                            echo ' &gt; ' . esc_html(get_the_title());
+                        } elseif ( is_archive() ) {
+                            echo ' &gt; ' . esc_html(get_the_archive_title());
+                        } elseif ( is_search() ) {
+                            echo ' &gt; ' . esc_html__('Search', 'jrcleaning');
+                        }
+                        echo '</p>';
+                    }
+                    ?>
+            </div>
 
             <?php if ( $show_heading && ! empty( $heading ) ) : ?>
                 <<?php echo esc_attr( $heading_level ); ?> class="inner-hero-block__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_attr( $heading_level ); ?>>
