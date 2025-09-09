@@ -4,7 +4,7 @@
     max-width: $max-width;
 
     @media #{$tablet} {
-        margin: rem-calc(100) auto;
+        margin: rem-calc(150) auto;
     }
 
     &.full-width {
