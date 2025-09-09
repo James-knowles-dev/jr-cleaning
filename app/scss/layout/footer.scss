@@ -18,9 +18,8 @@
 
                 // Footer menus styling
                 .footer__menus {
-                        @include flex-between;
-                        flex-direction: column;
-                        gap: rem-calc(30);
+                    @include flex-between;
+                    gap: rem-calc(100);
 
                    @media #{$tablet} { 
                         @include flex-center(row);
@@ -35,10 +34,13 @@
                     }
 
                     .footer__menu-column {
-                        flex: 1;
                         display:flex;
                         flex-direction: column;
                         gap: rem-calc(15);
+
+                        @media #{$tablet} {
+                            flex: 1;
+                        }
 
                         .footer__menu-title {
                             @include font-style(heading-6);

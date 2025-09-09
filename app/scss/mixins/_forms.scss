@@ -248,8 +248,17 @@
 
         .gform_next_button {
             @include primary-button;
+            margin-left: 0!important;
+
+            @media #{$tablet} {
+                margin-left: rem-calc(8)!important;
+            }
         }
     }
+}
+
+input#input_5_19 {
+    width: max-content;
 }
 
 @mixin footer-form-block {

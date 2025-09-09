@@ -21,6 +21,8 @@
     }
 }
 
+
+
 .gform-inline {
     .gform_wrapper {
         .gform_fields {
@@ -45,6 +47,14 @@
                     white-space: nowrap;
                 }
             }
+
+             input+input {
+                margin-left: 0!important;
+
+                @media #{$tablet} {
+                    margin-left: rem-calc(8);
+                }
+             }
         }
     }
 }
