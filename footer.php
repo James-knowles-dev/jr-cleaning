@@ -122,8 +122,8 @@
                 }
               } ?>
           </div>
-          <p class="footer__signature">Made by <a href="https://pixelkicks.co.uk" title="Pixel Kicks"
-              target="_blank"><?php echo file_get_contents("wp-content/themes/jrcleaning/images/pixelkicks.svg"); ?></a>
+          <p class="footer__signature">Made by<a href="https://james-knowles.co.uk" title="James Knowles Portfolio"
+              target="_blank">James Knowles</a>
           </p>
         </div>
     </div>

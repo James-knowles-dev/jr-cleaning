@@ -1,0 +1,35 @@
+.testimonials-block {
+    max-width: $max-width;
+    margin: rem-calc(40) auto;
+    padding: rem-calc(0 50);
+    display: flex;
+    flex-direction: column;
+    gap: rem-calc(40);
+
+    @media #{$tablet} {
+        padding: 0;
+        gap: rem-calc(80);
+        margin: rem-calc(100) auto;
+    }
+
+    &__heading {
+        margin-bottom: rem-calc(24);
+    }
+
+    &__grid {
+        margin-top: rem-calc(80);
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: rem-calc(40);
+
+        @media #{$tablet} {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .testimonial {
+            display: flex;
+            flex-direction: column;
+            gap: rem-calc(32);
+        }
+    }
+}

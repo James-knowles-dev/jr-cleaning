@@ -1,0 +1,33 @@
+.cta-block {
+    padding: rem-calc(60 50);
+    background-size: cover;
+    background-position: center;
+
+    @media #{$mobile} {
+        padding: rem-calc(112 0);
+    }
+
+    &__content {
+        max-width: $max-width;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: rem-calc(24);
+    }
+
+    &__heading {
+        color: $white-base;
+    }
+
+    &__text {
+
+        * {
+            color: $white-base;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        gap: rem-calc(16);
+    }
+}

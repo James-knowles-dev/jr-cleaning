@@ -1,40 +1,4 @@
 <?php 
-// Admin .css file.
-function admin_style() {
-    wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin.css');
-}
-add_action('admin_enqueue_scripts', 'admin_style');
-
-function my_admin_acf_custom_css() {
-    echo '<style>
-        .acf-fc-popup ul {
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
-        .acf-fc-popup li {
-            height: auto;
-        }
-
-        .acf-field-68b5dd1f8f2c2 .acf-radio-list {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .acf-field-68b5dd1f8f2c2 .acf-radio-list:before {
-            display: none;
-        }
-
-        .acf-field-68b5dd1f8f2c2 .acf-radio-list li label {
-            display:flex!important;
-            gap: 20px;
-            flex-direction: column-reverse;
-            align-items: center;
-        }
-
-    </style>';
-}
-add_action('admin_head', 'my_admin_acf_custom_css');
 
 
 // Enable featured images on posts and pages.
