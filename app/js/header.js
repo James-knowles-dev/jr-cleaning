@@ -1,4 +1,12 @@
 $(document).ready(function () {
+	// Add class to body when page is scrolled
+	$(window).on('scroll', function() {
+		if ($(window).scrollTop() > 0) {
+			$('body').addClass('scrolled');
+		} else {
+			$('body').removeClass('scrolled');
+		}
+	});
 
 	var hamburger_open = false;
 	$('.hamburger').click(function (event) {

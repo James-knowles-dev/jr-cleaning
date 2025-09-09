@@ -230,3 +230,32 @@ header {
 .logged-in header, .logged-in header.sticky {
     top: rem-calc(30);
 }
+
+
+.home {
+
+    header {
+        background-color:transparent;
+        box-shadow: none;
+    }
+
+    main.content {
+        padding-top:0;
+    }
+
+    .hero-block {
+        padding-top: rem-calc(100);
+
+        @media #{$mobile} {
+            padding-top: rem-calc(184);
+        }
+    }
+
+    &.scrolled {
+
+        header {
+            background-color: $white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+}

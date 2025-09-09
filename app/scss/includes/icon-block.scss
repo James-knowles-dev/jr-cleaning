@@ -1,0 +1,54 @@
+.icon-block {
+    max-width: $max-width;
+    margin: rem-calc(40) auto;
+    padding: rem-calc(0 50);
+    display: flex;
+    flex-direction: column;
+    gap: rem-calc(40);
+
+    @media #{$tablet} {
+        padding: 0;
+        gap: rem-calc(80);
+        margin: rem-calc(100) auto;
+    }
+
+    &__heading {
+        max-width: rem-calc(768);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__blocks {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: rem-calc(40);
+
+        @media #{$mobile} {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        gap: rem-calc(24);
+        justify-content: space-around;
+
+
+        &-icon {
+            text-align:center;
+        }
+        &-button {
+            @include text-button;
+        }
+
+        &-text {
+            @include font-style(body-medium);
+            text-align: center;
+        }
+
+        &-heading {
+            text-align: center;
+        }
+    }
+}
