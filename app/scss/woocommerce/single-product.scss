@@ -16,7 +16,14 @@
 	flex-direction: column;
 	align-items: center;
 	padding: rem-calc(32 16);
-	min-height: 100vh;
+
+	 img {
+    border-radius: rem-calc(5);
+}
+
+	.testimonials-block {
+		margin-top: 0;
+	}
 
 		
 		.related {
@@ -36,12 +43,16 @@
 			display: flex;
 			flex-direction: column;
 			gap: rem-calc(48);
-			max-width: rem-calc(1100);
+			max-width: $max-width;
 			width: 100%;
-			padding: rem-calc(40 32);
+			padding: rem-calc(50 40);
+
+		    @media #{$tablet} {
+           		padding: rem-calc(50 0);
+       		}
 
 			&.main {
-				flex-direction: row;;
+				flex-direction: row;
 			}
 
 				.woocommerce-product-gallery {

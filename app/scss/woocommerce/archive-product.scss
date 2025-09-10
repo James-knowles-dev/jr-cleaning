@@ -478,3 +478,21 @@ body.shop-filters-open {
         }
     }
 }
+
+.tax-product_area {
+    .inner-hero-block {
+        
+        @media #{$tablet} {
+            margin-top: rem-calc(80);
+        }
+    }
+
+    .site-main {
+        top: rem-calc(50);
+    }
+}
+
+    .woocommerce .site-main {
+        top:0;
+        margin: 0 auto!important;
+    }

@@ -203,4 +203,35 @@ add_action('wp_footer', function() {
     <?php
 });
 
-?>
+// Register "Areas" taxonomy for WooCommerce Products
+function my_custom_product_areas_taxonomy() {
+
+    $labels = array(
+        'name'              => _x( 'Areas', 'taxonomy general name', 'textdomain' ),
+        'singular_name'     => _x( 'Area', 'taxonomy singular name', 'textdomain' ),
+        'search_items'      => __( 'Search Areas', 'textdomain' ),
+        'all_items'         => __( 'All Areas', 'textdomain' ),
+        'parent_item'       => __( 'Parent Area', 'textdomain' ),
+        'parent_item_colon' => __( 'Parent Area:', 'textdomain' ),
+        'edit_item'         => __( 'Edit Area', 'textdomain' ),
+        'update_item'       => __( 'Update Area', 'textdomain' ),
+        'add_new_item'      => __( 'Add New Area', 'textdomain' ),
+        'new_item_name'     => __( 'New Area Name', 'textdomain' ),
+        'menu_name'         => __( 'Areas', 'textdomain' ),
+    );
+
+    $args = array(
+        'hierarchical'      => true, // true = category-like, false = tag-like
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'area' ),
+    );
+
+    register_taxonomy( 'product_area', array( 'product' ), $args );
+
+}
+add_action( 'init', 'my_custom_product_areas_taxonomy' );
+
+remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );

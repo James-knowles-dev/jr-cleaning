@@ -24,7 +24,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			<h2 class="custom-product-card-title"><?php the_title(); ?></h2>
 			<div class="custom-product-card-price">
 				<?php echo $product->get_price_html(); ?>
-				<span class="custom-product-card-vat">(inc VAT)</span>
 			</div>
 		</div>
 		<div class="custom-product-card-footer">

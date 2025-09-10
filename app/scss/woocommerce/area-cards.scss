@@ -1,0 +1,60 @@
+.area-cards {
+    max-width: $max-width;
+    margin: rem-calc(40) auto;
+    padding: rem-calc(0 50);
+    gap: rem-calc(40);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+    @media #{$tablet} {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0;
+        gap: rem-calc(80);
+        margin: rem-calc(150) auto;
+    }
+}
+
+// Area Card Styles (match blog post card)
+.area-card {
+    @include post-card-base;
+    margin-bottom: rem-calc(15);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: $black;
+    transition: $ease;
+
+    img {
+        @include responsive-image(250, 16 16 0 0);
+    }
+
+    .title-button {
+        padding: rem-calc(20);
+        background-color: $white-base;
+        @include flex-center(column);
+        justify-content: space-between;
+        gap: rem-calc(30);
+        flex-grow: 1;
+        border-radius: 0 0 rem-calc(16) rem-calc(16);
+        width: 100%;
+
+        .button {
+            @include primary-button;
+            width: 100%;
+        }
+
+        h3 {
+            transition: $ease;
+            width: auto;
+            margin-right: rem-calc(20);
+            text-align: left;
+            @include font-style(heading-4);
+        }
+    }
+
+    &:hover {
+        .title-button h3 {
+            color: $primary-base;
+        }
+    }
+}
