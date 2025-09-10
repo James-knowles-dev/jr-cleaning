@@ -1477,6 +1477,13 @@
                 "operator": "==",
                 "value": "post"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "case_studies"
+            }
         ]
     ],
     "menu_order": 0,
@@ -1488,5 +1495,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757448300
+    "modified": 1757500557
 }

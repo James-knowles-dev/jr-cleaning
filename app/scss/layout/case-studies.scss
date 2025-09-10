@@ -1,0 +1,175 @@
+.post-type-archive-case_studies{
+    .content {
+        .blog-filter {
+            @include flex-center;
+            margin: rem-calc(50) auto;
+            
+            @media #{$tablet} {
+                margin: rem-calc(100) auto;
+            }
+        }
+    }
+
+    .post-container {
+        margin-bottom: rem-calc(20);
+        @include post-grid;
+
+        @media #{$tablet} {
+            margin-bottom: rem-calc(50);
+        }
+
+        .post {
+            @include post-card-base;
+            margin-bottom: rem-calc(15);
+
+            a {
+                color: $black;
+                text-decoration: underline;
+            }
+
+            img {
+                @include responsive-image(250, 16 16 0 0);
+            }
+
+            .title-button {
+                padding: rem-calc(20);
+                background-color: $white-base;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: rem-calc(30);
+                flex-grow: 1;
+                border-radius: 0 0 rem-calc(16) rem-calc(16);
+                width: 100%;
+
+                p {
+                    width: max-content;
+                    white-space: nowrap;
+                    box-shadow: none;
+                    @include primary-button;
+                }
+
+                .button {
+                    width:100%;
+                }
+
+                h3 {
+                    transition: $ease;
+                    width: auto;
+                    margin-right: rem-calc(20);
+                    text-align: left;
+                    @include font-style(heading-4);
+                }
+            }
+
+            &:hover {
+                .title-button h3 {
+                    color: $primary-base;
+                }
+            }
+        }
+    }
+
+    .blog-filter {
+        @include flex-center(column);
+        flex-direction: column!important;
+        justify-content: space-between;
+        gap: rem-calc(50);
+        position: relative;
+        padding: rem-calc(0 24);
+
+        @media #{$mobile} {
+            flex-direction: row!important;
+            padding: 0;
+            gap: rem-calc(50);
+        }
+
+        @include dropdown-arrow(36, calc(83% - 7.5px));
+
+        @media #{$tablet} {
+            &::after {
+                top: calc(50% - 7.5px);
+                right: rem-calc(20);
+            }
+        }
+
+        .search {
+            @include filter-input-base;
+            width: 100%;
+
+            @media #{$mobile} {
+                width: rem-calc(300);
+            }
+        }
+
+        form {
+            width: 100%;
+
+            @media #{$mobile} {
+                width: max-content;
+            }
+
+            
+            .category-filter-dropdown {
+                @include filter-input-base;
+                appearance: none;
+                width: 100%;
+            }
+        }
+    }
+
+    .no-results {
+        display: none;
+
+        &.visible {
+            @include flex-center;
+        }
+
+        h3 {
+            text-align: center;
+            width: 100%;
+
+            span {
+                color: $primary-base;
+            }
+        }
+    }
+
+    .blog-author-next {
+        @include flex-between;
+    }
+}
+
+.case-study-meta {
+    display: flex;
+    flex-direction: column;
+    gap: rem-calc(8);
+}
+
+// Pagination Styles
+// =============================================================================
+
+.pagination {
+    @include flex-center;
+    gap: rem-calc(24);
+
+    .page-numbers {
+        @include flex-center(column);
+        padding: rem-calc(2 9);
+        gap: rem-calc(8);
+
+        &.next {
+            margin-left: rem-calc(32);
+        }
+
+        &.prev {
+            margin-right: rem-calc(32);
+        }
+
+        &:hover,
+        &.current {
+            background-color: $primary-30;
+            border-radius: rem-calc(8);
+        }
+    }
+}

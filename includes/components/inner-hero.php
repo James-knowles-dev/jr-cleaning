@@ -36,6 +36,8 @@ if ( empty( $heading ) ) {
         $heading = __( 'Blog', 'jrcleaning' );
     } elseif ( ( function_exists( 'is_shop' ) && is_shop() ) || is_post_type_archive( 'product' ) ) {
         $heading = __( 'Shop', 'jrcleaning' );
+    } elseif ( is_post_type_archive( 'case_studies' ) ) {
+        $heading = __( 'Case Studies', 'jrcleaning' );
     }
 }
 
@@ -57,6 +59,9 @@ if ( is_array( $args_from_var ) ) {
 
 // Ensure a default background colour
 $colour_picker = ! empty( $colour_picker ) ? $colour_picker : '#143458';
+
+$client_name = get_field( 'client_name');
+$date_completed = get_field( 'date_completed' );
 
 ?>
 
@@ -87,6 +92,24 @@ $colour_picker = ! empty( $colour_picker ) ? $colour_picker : '#143458';
 
             <?php if ( $show_heading && ! empty( $heading ) ) : ?>
                 <<?php echo esc_attr( $heading_level ); ?> class="inner-hero-block__heading"><?php echo esc_html( $heading ); ?></<?php echo esc_attr( $heading_level ); ?>>
+            <?php endif; ?>
+
+            <?php if ( is_singular('case_studies') ) : ?>
+                <div class="inner-hero-block__meta">
+                    <?php if ( $client_name ) : ?>
+                        <div class="inner-hero-block__meta-item">
+                            <span class="inner-hero-block__meta-label"><?php esc_html_e( 'Client:', 'jrcleaning' ); ?></span>
+                            <span class="inner-hero-block__meta-value"><?php echo esc_html( $client_name ); ?></span>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ( $date_completed ) : ?>
+                        <div class="inner-hero-block__meta-item">
+                            <span class="inner-hero-block__meta-label"><?php esc_html_e( 'Date Completed:', 'jrcleaning' ); ?></span>
+                            <span class="inner-hero-block__meta-value"><?php echo esc_html( $date_completed ); ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
             <?php endif; ?>
         </div>
     </div>

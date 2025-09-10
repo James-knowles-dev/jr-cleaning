@@ -1,6 +1,10 @@
 .text-block {
     max-width: rem-calc(760);
-    margin: 0 auto;
+    margin: rem-calc(40) auto;
+
+    @media #{$tablet} {
+        margin: rem-calc(100) auto;
+    }
 
     &__blocks {
         display: flex;

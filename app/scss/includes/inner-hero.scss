@@ -29,6 +29,21 @@
             color: $white-base;
         }
     }
+
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        gap: rem-calc(8);
+
+        @media #{$tablet} {
+            flex-direction: row;
+            gap: rem-calc(16);
+        }
+
+        * {
+            color: $white-base;
+        }
+    }
 }
 
 .woocommerce-shop {
