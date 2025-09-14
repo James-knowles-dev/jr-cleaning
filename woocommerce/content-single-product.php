@@ -107,13 +107,6 @@ if ( post_password_required() ) {
 <?php do_action( 'woocommerce_after_single_product' ); ?>
 
 
-<?php 
-
-$heading = get_sub_field('heading');
-$subheading = get_sub_field('subheading');
-
-?>
-
 <section class="testimonials-block">
     <div class="testimonials-block__content">
         
@@ -121,31 +114,43 @@ $subheading = get_sub_field('subheading');
 
 
         <?php if (have_rows('testimonials', 'options')): ?>
-            <div class="testimonials-block__grid">
-                <?php while (have_rows('testimonials', 'options')) {
+            <?php
+                // Collect testimonials into array
+                $testimonials = array();
+                while (have_rows('testimonials', 'options')) {
                     the_row();
-                    $stars = get_sub_field('stars');
-                    $review = get_sub_field('review');
-                    $client_name = get_sub_field('client_name');
-                ?>
+                    $testimonials[] = array(
+                        'stars' => get_sub_field('stars'),
+                        'review' => get_sub_field('review'),
+                        'client_name' => get_sub_field('client_name'),
+                    );
+                }
+                $testimonial_count = count($testimonials);
+                // Note: The 'owl-carousel' class is used for Slick Carousel initialization in JS.
+                $slider_class = $testimonial_count > 3 ? ' owl-carousel' : '';
+            ?>
+            <div class="testimonials-slider-wrapper">
+              <div class="testimonials-block__grid<?php echo $slider_class; ?>">
+                <?php foreach ($testimonials as $testimonial) { ?>
                     <div class="testimonial">
-                        <?php if ($stars): ?>
+                        <?php if ($testimonial['stars']): ?>
                             <div class="testimonial__stars">
-                                <?php for ($i = 0; $i < $stars; $i++): ?>
+                                <?php for ($i = 0; $i < $testimonial['stars']; $i++): ?>
                                     <img src="<?php echo esc_url(get_template_directory_uri() . '/images/star.svg'); ?>" alt="Star" width="20" height="20" />
                                 <?php endfor; ?>
                             </div>
                         <?php endif; ?>
 
-                        <?php if ($review): ?>
-                            <div class="testimonial__review"><?php echo $review; ?></div>
+                        <?php if ($testimonial['review']): ?>
+                            <div class="testimonial__review"><?php echo $testimonial['review']; ?></div>
                         <?php endif; ?>
 
-                        <?php if ($client_name): ?>
-                            <p class="testimonial__client-name">- <?php echo esc_html($client_name); ?></p>
+                        <?php if ($testimonial['client_name']): ?>
+                            <p class="testimonial__client-name">- <?php echo esc_html($testimonial['client_name']); ?></p>
                         <?php endif; ?>
                     </div>
                 <?php } ?>
+              </div>
             </div>
         <?php endif; ?>
     </div>

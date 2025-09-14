@@ -27,9 +27,63 @@
         }
 
         .testimonial {
-            display: flex;
+            display: flex!important;
             flex-direction: column;
             gap: rem-calc(32);
+
+            &__stars {
+                display: flex;
+                gap: rem-calc(8);
+            }
+        }
+
+        &.owl-carousel {
+            position: relative;
+            margin-bottom: rem-calc(60);
+
+            @media #{$tablet} {
+                margin-bottom: 0;
+            }
+
+            .slick-next {
+                position: absolute;
+                transform: rotate(-90deg);
+                bottom: rem-calc(-70);
+                right: 0;    
+
+                @media #{$tablet} {
+                    bottom: unset;
+                    right: 0;          
+                    top: 50%;
+                }
+            }
+
+            .slick-prev {
+                position: absolute;
+                transform: rotate(-90deg);
+                bottom: rem-calc(-70);
+
+                @media #{$tablet} {
+                    bottom: unset;
+                top: 50%;
+                transform: rotate(-90deg);
+    
+
+                }
+            }
+
+            .slick-list {
+                margin: 0 auto;
+                max-width: 80%;
+            }
+
+            .slick-arrow {
+                padding: 10px;
+                border-radius: rem-calc(5);
+                border: none;
+                cursor: pointer;
+                z-index: 999;
+            }
         }
     }
 }
