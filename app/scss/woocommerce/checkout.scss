@@ -1,16 +1,177 @@
+// WooCommerce Checkout Styles
+// =============================================================================
+
 .woocommerce-checkout {
 
-    .wp-block-woocommerce-checkout {
+    .woocommerce {
         max-width: $max-width;
-        margin: rem-calc(50) auto;
+        margin: 0 auto;
+        padding: rem-calc(40 16);
+        background: $white;
 
-        .wc-block-components-checkout-place-order-button {
-            @include primary-button;
-        }
     }
+}
 
-    .wc-block-components-sidebar {
-        position: sticky;
-        top: rem-calc(130)!important;
-    }
+.woocommerce-checkout h3 {
+	@include font-style(heading-3);
+	color: $primary-base;
+	margin-bottom: rem-calc(24);
+}
+
+.col2-set {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: rem-calc(40);
+	margin-bottom: rem-calc(32);
+
+	@media #{$mobile} {
+		grid-template-columns: 1fr;
+		gap: rem-calc(24);
+	}
+}
+
+.woocommerce-billing-fields__field-wrapper,
+.woocommerce-additional-fields__field-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: rem-calc(20);
+}
+
+.form-row {
+	display: flex;
+	flex-direction: column;
+	gap: rem-calc(6);
+}
+
+.form-row label {
+	@include gform-label;
+}
+
+.form-row .required {
+	@include gform-required-indicator;
+}
+
+.woocommerce-input-wrapper input[type="text"],
+.woocommerce-input-wrapper input[type="email"],
+.woocommerce-input-wrapper input[type="tel"],
+.woocommerce-input-wrapper input[type="number"],
+.woocommerce-input-wrapper input[type="password"] {
+	@include gform-input-base;
+}
+
+.woocommerce-input-wrapper textarea {
+	@include gform-textarea;
+}
+
+.woocommerce-input-wrapper select {
+	@include gform-select;
+}
+
+.shop_table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin-bottom: rem-calc(24);
+	background: $white-base;
+	border-radius: rem-calc(8);
+	overflow: hidden;
+}
+
+.shop_table th,
+.shop_table td {
+	padding: rem-calc(16 12);
+	text-align: left;
+	@include font-style(body-medium);
+	color: $primary-base;
+}
+
+.shop_table th {
+	background: $primary-10;
+	font-weight: 600;
+}
+
+.shop_table tr {
+	border-bottom: 1px solid $grey-20;
+}
+
+.shop_table tr:last-child {
+	border-bottom: none;
+}
+
+.shop_table .product-name {
+	@include font-style(body-medium);
+	color: $primary-base;
+}
+
+.shop_table .product-total {
+	@include font-style(body-medium);
+	color: $secondary-base;
+	font-weight: 700;
+}
+
+.order-total td strong {
+	color: $primary-base;
+}
+
+#order_review_heading {
+	@include font-style(heading-4);
+	color: $primary-base;
+	margin-bottom: rem-calc(16);
+}
+
+.woocommerce-checkout-payment {
+	margin-top: rem-calc(24);
+}
+
+.wc_payment_methods {
+	list-style: none;
+	margin: 0 0 rem-calc(16) 0;
+	padding: 0;
+}
+
+.woocommerce-info {
+	@include wc-notices;
+}
+
+.place-order {
+	display: flex;
+	flex-direction: column;
+	gap: rem-calc(16);
+	margin-top: rem-calc(24);
+}
+
+.button.alt,
+button[type="submit"],
+input[type="submit"] {
+	@include primary-button;
+	width: 100%;
+	font-size: rem-calc(18);
+	padding: rem-calc(16);
+	margin-top: rem-calc(8);
+}
+
+.woocommerce-terms-and-conditions-wrapper {
+	margin-top: rem-calc(16);
+	font-size: rem-calc(14);
+	color: $grey-80;
+}
+
+.woocommerce-privacy-policy-link {
+	color: $primary-base;
+	text-decoration: underline;
+	&:hover {
+		color: $primary-70;
+		text-decoration: none;
+	}
+}
+
+// Responsive tweaks
+@media #{$mobile} {
+	.woocommerce-checkout {
+		padding: rem-calc(24 4);
+	}
+	.shop_table th,
+	.shop_table td {
+		padding: rem-calc(10 6);
+	}
 }
