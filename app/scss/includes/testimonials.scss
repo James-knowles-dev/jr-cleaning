@@ -31,6 +31,10 @@
             flex-direction: column;
             gap: rem-calc(32);
 
+            @media #{$tablet} {
+                padding-right: rem-calc(100);
+            }
+
             &__stars {
                 display: flex;
                 gap: rem-calc(8);
