@@ -34,19 +34,13 @@
                 'depth' => 1,
               )); ?>
             </div>
-          <?php }
-          
-          // Footer Menu 3
-          if (has_nav_menu('footer_menu_3')) { ?>
-            <div class="footer__menu-column">
-              <?php wp_nav_menu(array(
-                'theme_location' => 'footer_menu_3',
-                'menu_class' => 'footer__menu footer__menu--3',
-                'container' => false,
-                'depth' => 1,
-              )); ?>
-            </div>
           <?php } ?>
+
+          <div class="footer__menu-column">
+            <a href='https://www.bark.com/en/gb/company/jr-cleaning-amp-sons-ltd/ZOy4n/' target='_blank' class='bark-widget' data-type='reviews' data-id='ZOy4n' data-image='small-navy' data-version='3.0'>JR Cleaning &amp; Sons Ltd</a>
+            <script type='text/javascript' src='https://www.bark.com/assets/js/frontend-v2/widgets-v2.ba38e085aae1515863c2b173b1b30a6e.v2.js' defer></script>
+            </div>
+       
         </div>
         
         <?php if ($footer_form_id) { ?>
