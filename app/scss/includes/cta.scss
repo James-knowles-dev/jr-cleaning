@@ -1,7 +1,7 @@
 .cta-block {
     padding: rem-calc(60 50);
     background-size: cover;
-    background-position: center;
+    background-position: 50% 80%;
 
     @media #{$mobile} {
         padding: rem-calc(112 0);

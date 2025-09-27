@@ -6,7 +6,7 @@ $text = get_sub_field('text');
 
 ?>
 
-<section class="cta-block" <?php if ($background_image): ?>style="background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<?php echo esc_url($background_image); ?>);"<?php endif; ?>>
+<section class="cta-block" <?php if ($background_image): ?>style="background-image:linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(<?php echo esc_url($background_image); ?>);"<?php endif; ?>>
     <div class="cta-block__content">
         <?php if ($heading): ?>
             <h2 class="cta-block__heading"><?php echo esc_html($heading); ?></h2>
