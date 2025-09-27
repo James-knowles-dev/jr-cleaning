@@ -80,7 +80,14 @@ if ( post_password_required() ) {
                             woocommerce_template_single_excerpt();
                             // Output custom enquire button after excerpt
                             $service_slug = $product->get_slug();
-                            $contact_url = esc_url( home_url( "/contact?service={$service_slug}" ) );
+                            
+                            // Check ACF field to determine contact URL
+                            $use_wizard = get_field('wizard_or_contact', $product->get_id());
+                            if ( $use_wizard ) {
+                                $contact_url = esc_url( home_url( "/wizard?service={$service_slug}" ) );
+                            } else {
+                                $contact_url = esc_url( home_url( "/contact?service={$service_slug}" ) );
+                            }
                             ?>
                             <a href="<?php echo $contact_url; ?>" class="button enquire-now-button">Enquire Now</a>
                             <?php
