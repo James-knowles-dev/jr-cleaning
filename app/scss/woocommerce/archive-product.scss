@@ -286,8 +286,10 @@ body.shop-filters-open {
                     justify-content: center;
 
                     img {
-                        max-height: rem-calc(225);
-                        object-fit:contain;
+                            max-height: 14.0625rem;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
                     }
                 }
 

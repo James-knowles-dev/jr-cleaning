@@ -323,10 +323,6 @@
 
 	/* Related products layout */
 	.related.products {
-		display: grid;
-		grid-template-columns: repeat(3, minmax(rem-calc(160), 1fr));
-		gap: rem-calc(24);
-		align-items: start;
 		margin-top: rem-calc(24);
 	}
 
@@ -373,4 +369,9 @@
 				max-width: 100%;
 			}
 		}
+	}
+
+
+	.ul.tabs.wc-tabs {
+		display:none;
 	}
