@@ -43,20 +43,61 @@ if ( post_password_required() ) {
              */
             do_action( 'woocommerce_before_single_product_summary' );
             ?>
-                <?php
-                // Manually output product main image if not shown
-                if ( $product && $product->get_image_id() ) {
-                    echo '<div class="custom-product-image">' . $product->get_image() . '</div>';
-                }
-                    // Fallback: show first gallery image if no featured image
-                    else {
-                        $attachment_ids = $product->get_gallery_image_ids();
-                        if ( !empty($attachment_ids) ) {
-                            $gallery_img = wp_get_attachment_image( $attachment_ids[0], 'woocommerce_single' );
-                            echo '<div class="custom-product-image fallback-gallery-image">' . $gallery_img . '</div>';
+            
+            <?php
+            // Custom product gallery implementation
+            $post_thumbnail_id = $product->get_image_id();
+            $attachment_ids = $product->get_gallery_image_ids();
+            
+            // Collect all images (featured + gallery)
+            $all_images = array();
+            if ( $post_thumbnail_id ) {
+                $all_images[] = $post_thumbnail_id;
+            }
+            if ( $attachment_ids ) {
+                $all_images = array_merge($all_images, $attachment_ids);
+            }
+            ?>
+            
+            <?php if ( !empty($all_images) ) : ?>
+                <div class="custom-product-gallery">
+                    <!-- Main Image Display -->
+                    <div class="gallery-main-image">
+                        <?php 
+                        foreach ( $all_images as $index => $image_id ) {
+                            $image = wp_get_attachment_image( $image_id, 'woocommerce_single', false, array(
+                                'class' => 'main-product-image' . ( $index === 0 ? ' active' : '' ),
+                                'data-image-id' => $image_id
+                            ) );
+                            echo $image;
                         }
-                    }
-                ?>
+                        ?>
+                    </div>
+                    
+                    <!-- Thumbnail Navigation -->
+                    <?php if ( count($all_images) > 1 ) : ?>
+                        <div class="gallery-thumbnails">
+                            <?php 
+                            foreach ( $all_images as $index => $image_id ) {
+                                $thumbnail = wp_get_attachment_image( $image_id, 'thumbnail', false, array(
+                                    'class' => 'gallery-thumb' . ( $index === 0 ? ' active' : '' ),
+                                    'data-image-id' => $image_id,
+                                    'data-index' => $index
+                                ) );
+                                echo '<div class="thumb-wrapper">' . $thumbnail . '</div>';
+                            }
+                            ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php else : ?>
+                <!-- No images - show placeholder -->
+                <div class="custom-product-gallery">
+                    <div class="gallery-main-image">
+                        <img src="<?php echo esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ); ?>" alt="<?php esc_html_e( 'Awaiting product image', 'woocommerce' ); ?>" class="main-product-image active" />
+                    </div>
+                </div>
+            <?php endif; ?>
 
             <div class="summary entry-summary">
                         <?php

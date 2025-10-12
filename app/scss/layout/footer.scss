@@ -18,8 +18,13 @@
 
                 // Footer menus styling
                 .footer__menus {
-                    @include flex-between;
-                    gap: rem-calc(100);
+                        align-items: flex-start;
+                        display: flex
+                    ;
+                        gap: 50px;
+                        justify-content: space-between;
+                        flex-direction: column;
+                        width: 100%;
 
                    @media #{$tablet} { 
                         @include flex-center(row);

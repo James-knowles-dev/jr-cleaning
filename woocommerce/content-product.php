@@ -15,9 +15,30 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		<div class="custom-product-card-image">
 			<?php
 			/**
-			 * Product image
+			 * Product image - try featured image first, then first gallery image
 			 */
-			echo $product->get_image( 'woocommerce_single', [ 'alt' => get_the_title() ] );
+			$image_html = '';
+			$image_id = $product->get_image_id();
+			
+			// If no featured image, get the first gallery image
+			if ( ! $image_id ) {
+				$gallery_image_ids = $product->get_gallery_image_ids();
+				if ( ! empty( $gallery_image_ids ) ) {
+					$image_id = $gallery_image_ids[0];
+				}
+			}
+			
+			// Display the image or placeholder
+			if ( $image_id ) {
+				$image_html = wp_get_attachment_image( $image_id, 'woocommerce_single', false, [
+					'alt' => get_the_title(),
+					'class' => 'attachment-woocommerce_single size-woocommerce_single'
+				] );
+			} else {
+				$image_html = wc_placeholder_img( 'woocommerce_single' );
+			}
+			
+			echo $image_html;
 			?>
 		</div>
 		<div class="custom-product-card-content">

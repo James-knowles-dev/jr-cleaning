@@ -15,6 +15,23 @@ add_action('woocommerce_after_main_content', function() {
 //Disable WooCommerce Default Styles
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
+//Disable WooCommerce Gallery Scripts (FlexSlider, Zoom, PhotoSwipe)
+add_action('wp_enqueue_scripts', function() {
+    if (is_product()) {
+        wp_dequeue_script('flexslider');
+        wp_dequeue_script('photoswipe');
+        wp_dequeue_script('photoswipe-ui-default');
+        wp_dequeue_script('wc-single-product');
+        wp_dequeue_script('zoom');
+        wp_dequeue_script('wc-zoom');
+        
+        // Also remove the gallery theme support to prevent automatic initialization
+        remove_theme_support('wc-product-gallery-zoom');
+        remove_theme_support('wc-product-gallery-lightbox');
+        remove_theme_support('wc-product-gallery-slider');
+    }
+}, 99);
+
 //Clean Up Product Page Tabs
 add_filter('woocommerce_product_tabs', function($tabs) {
     unset($tabs['reviews']);

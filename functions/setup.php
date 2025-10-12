@@ -9,9 +9,10 @@ add_theme_support('post-thumbnails', array(
 
 // Add WooCommerce support
 add_theme_support('woocommerce');
-add_theme_support('wc-product-gallery-zoom');
-add_theme_support('wc-product-gallery-lightbox');
-add_theme_support('wc-product-gallery-slider');
+// Gallery features disabled - using custom gallery implementation
+// add_theme_support('wc-product-gallery-zoom');
+// add_theme_support('wc-product-gallery-lightbox');
+// add_theme_support('wc-product-gallery-slider');
 
 // Remove WooCommerce breadcrumb
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);

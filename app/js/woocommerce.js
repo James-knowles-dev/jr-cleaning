@@ -184,4 +184,40 @@ jQuery(document).ready(function($) {
         }, 1000);
     });
     
+    // Custom Product Gallery Functionality
+    function initProductGallery() {
+        var $gallery = $('.custom-product-gallery');
+        var $mainImages = $gallery.find('.main-product-image');
+        var $thumbnails = $gallery.find('.thumb-wrapper');
+        
+        if ($mainImages.length <= 1) {
+            return; // No need for gallery if only one image
+        }
+        
+        // Handle thumbnail clicks
+        $thumbnails.on('click', function(e) {
+            e.preventDefault();
+            var index = $(this).find('.gallery-thumb').data('index');
+            
+            // Remove active class from all elements
+            $mainImages.removeClass('active');
+            $thumbnails.find('.gallery-thumb').removeClass('active');
+            
+            // Add active class to clicked elements
+            $(this).find('.gallery-thumb').addClass('active');
+            $mainImages.eq(index).addClass('active');
+        });
+        
+        // Show the gallery
+        $gallery.fadeIn(300);
+    }
+    
+    // Initialize gallery on page load
+    initProductGallery();
+    
+    // Re-initialize gallery if content is updated (for AJAX scenarios)
+    $(document.body).on('updated_wc_div', function() {
+        setTimeout(initProductGallery, 100);
+    });
+    
 });
