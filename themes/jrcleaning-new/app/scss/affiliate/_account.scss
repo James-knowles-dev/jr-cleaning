@@ -1,0 +1,91 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Account details additions (branch fields + email preferences)
+// =============================================================================
+// WooCommerce owns the form, so these are scoped blocks dropped into it rather than a
+// restyle of the whole screen.
+.jrc-account-block {
+  margin: functions.rem(28 0 0);
+  padding: functions.rem(22 24 24);
+  border: functions.rem(1) solid vars.$line;
+  border-radius: vars.$r-lg;
+  background: vars.$paper;
+
+  legend {
+    padding: functions.rem(0 10);
+    margin-left: functions.rem(-10);
+    font-family: vars.$serif;
+    font-weight: 700;
+    font-size: functions.rem(18);
+    color: vars.$navy;
+  }
+
+  &__intro {
+    margin: functions.rem(4 0 18);
+    font-family: vars.$sans;
+    font-size: functions.rem(14);
+    color: vars.$muted;
+  }
+
+  &__help {
+    display: block;
+    margin-top: functions.rem(6);
+    font-family: vars.$sans;
+    font-size: functions.rem(13);
+    line-height: 1.55;
+    color: vars.$muted;
+  }
+
+  // Woo's own field styling is inconsistent between themes and versions; pin the two
+  // controls this block introduces so they match the rest of the partner area.
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    font-family: vars.$sans;
+    font-size: functions.rem(15.5);
+    color: vars.$ink;
+    background: vars.$white;
+    border: functions.rem(1.5) solid #d6dae2;
+    border-radius: vars.$r-sm;
+    padding: functions.rem(12 14);
+
+    &:focus { border-color: vars.$accent-dark; }
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+  }
+
+  textarea { resize: vertical; line-height: 1.6; }
+}
+
+.jrc-notify-option {
+  display: flex;
+  align-items: flex-start;
+  gap: functions.rem(12);
+  padding: functions.rem(12 0);
+  border-top: functions.rem(1) solid vars.$line;
+  cursor: pointer;
+
+  &:first-of-type { border-top: 0; padding-top: 0; }
+
+  input[type="checkbox"] {
+    flex: 0 0 auto;
+    // Nudged down to sit on the first line of the label rather than between the two.
+    margin-top: functions.rem(3);
+    width: functions.rem(18);
+    height: functions.rem(18);
+    accent-color: vars.$accent-dark;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: functions.rem(3);
+
+    strong { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(15); color: vars.$navy; }
+    span   { font-family: vars.$sans; font-size: functions.rem(13.5); line-height: 1.55; color: vars.$muted; }
+  }
+}

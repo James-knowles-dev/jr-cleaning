@@ -1,0 +1,24 @@
+// J R Cleaning (Friendly) — partner marketing stylesheet
+// =============================================================================
+//
+// Loaded ON TOP OF main.css, and only on the four partner page templates (see
+// jrc_needs_partners() in functions/enqueue.php):
+//
+//   Partners / Bonus Program   page-partners.php
+//   Partner Channel            page-partner-channel.php
+//   Partner Registration       page-partner-register.php
+//   Partner Account Features   page-partner-account.php
+//
+// None of it applies to any other page on the site, so shipping it in main.css meant
+// every visitor to the home page downloaded the channel grid, the tier table and the
+// account-feature tour in order to render none of them.
+//
+// Foundation only — these emit no CSS of their own, they just make the tokens and
+// mixins available. base/reset, typography and layout are NOT repeated: main.css has
+// already loaded them.
+@use 'mixins/index';
+@use 'vars';
+
+@use 'layout/partners';
+@use 'layout/tiers';
+@use 'layout/partner-account';

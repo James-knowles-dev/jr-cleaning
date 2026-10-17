@@ -1,0 +1,156 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Request a clean
+// =============================================================================
+.aff-form {
+  background: vars.$white;
+  border: functions.rem(1) solid vars.$line;
+
+  &__intro {
+    margin: functions.rem(12 0 20);
+    font-family: vars.$sans;
+    font-size: functions.rem(15);
+    line-height: 1.65;
+    color: vars.$soft;
+    max-width: functions.rem(620);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: functions.rem(16);
+    @include responsive.bp('s-mobile') { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: functions.rem(7);
+    margin: 0;
+    min-width: 0;
+
+    // Full width whatever the grid is doing.
+    &--wide { @include responsive.bp('s-mobile') { grid-column: 1 / -1; } }
+
+    label {
+      font-family: vars.$sans;
+      font-weight: 700;
+      font-size: functions.rem(14);
+      color: vars.$navy;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      font-family: vars.$sans;
+      font-size: functions.rem(15.5);
+      color: vars.$ink;
+      background: vars.$white;
+      border: functions.rem(1.5) solid #d6dae2;
+      border-radius: vars.$r-sm;
+      padding: functions.rem(12 14);
+
+      &::placeholder { color: vars.$placeholder; }
+      &:focus { border-color: vars.$accent-dark; }
+      &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+    }
+
+    textarea { resize: vertical; min-height: functions.rem(96); line-height: 1.6; }
+
+    &.has-error {
+      input, select, textarea { border-color: vars.$error; background: vars.$error-tint; }
+    }
+  }
+
+  // A sub-heading inside the grid, not a field.
+  &__legend {
+    gap: functions.rem(2);
+    margin-top: functions.rem(8);
+    padding-top: functions.rem(18);
+    border-top: functions.rem(1) solid vars.$line;
+
+    span {
+      font-family: vars.$serif;
+      font-weight: 700;
+      font-size: functions.rem(17);
+      color: vars.$navy;
+    }
+    small { font-family: vars.$sans; font-size: functions.rem(13.5); color: vars.$muted; }
+  }
+
+  &__req { color: vars.$error; }
+
+  &__err {
+    font-family: vars.$sans;
+    font-size: functions.rem(13.5);
+    font-weight: 700;
+    color: vars.$error;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: functions.rem(14);
+    margin-top: functions.rem(24);
+    padding-top: functions.rem(20);
+    border-top: functions.rem(1) solid vars.$line;
+  }
+
+  &__note {
+    font-family: vars.$sans;
+    font-size: functions.rem(13.5);
+    color: vars.$muted;
+  }
+}
+
+// =============================================================================
+// Dashboard prompt through to the request form
+// =============================================================================
+.aff-cta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: functions.rem(16);
+  padding: functions.rem(20 24);
+  border-radius: vars.$r-lg;
+  background: vars.$accent-tint;
+  border: functions.rem(1) solid vars.$accent-border;
+
+  strong {
+    display: block;
+    font-family: vars.$serif;
+    font-size: functions.rem(18);
+    color: vars.$navy;
+  }
+  span {
+    font-family: vars.$sans;
+    font-size: functions.rem(14.5);
+    color: vars.$accent-ink;
+  }
+}
+
+
+// ---- date availability feedback ----
+// Written by app/js/availability.js when a partner picks a closed or full day.
+.aff-form__help {
+  display: block;
+  margin-top: functions.rem(6);
+  font-size: functions.rem(13);
+  color: vars.$muted;
+
+  &.is-closed {
+    color: vars.$error;
+    font-weight: 600;
+  }
+
+  &.is-ok {
+    color: vars.$success;
+    font-weight: 600;
+  }
+}

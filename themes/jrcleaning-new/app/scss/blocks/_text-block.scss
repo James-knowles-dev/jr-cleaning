@@ -1,0 +1,10 @@
+@use "../mixins/functions";
+@use "../vars";
+
+.text-block {
+  &__inner {
+    max-width: functions.rem(760);
+    margin: 0 auto;
+    padding: 0 vars.$gutter;
+  }
+}

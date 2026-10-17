@@ -1,0 +1,240 @@
+@use "../mixins/buttons";
+@use "../mixins/cards";
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Services archive + single service detail (follows design)
+// =============================================================================
+
+// ---- Archive head ----
+.services-archive {
+  &__head { padding-top: functions.rem(40); padding-bottom: 0; @include responsive.bp('tablet') { padding-top: functions.rem(60); } }
+  &__title { font-size: functions.fluid(36, 46); max-width: 14em; margin-top: functions.rem(12); }
+  &__intro { margin-top: functions.rem(18); max-width: 34em; }
+  &__rows { padding: functions.rem(28) 0 functions.rem(56); @include responsive.bp('tablet') { padding: functions.rem(36) 0 functions.rem(72); } }
+}
+
+// ---- Horizontal service rows ----
+.service-rows {
+  display: grid;
+  gap: functions.rem(16);
+  @include responsive.bp('s-tablet') { grid-template-columns: 1fr 1fr; gap: functions.rem(20); }
+}
+
+.service-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: functions.rem(14);
+  background: vars.$white;
+  border: functions.rem(1) solid #eceef2;
+  border-radius: vars.$r-lg;
+  padding: functions.rem(28);
+  height: 100%;
+  transition: box-shadow .18s ease, border-color .18s ease, transform .18s ease;
+
+  @include responsive.bp('s-tablet') {
+    padding: functions.rem(32 34);
+    // A lone card on the last row spans full width and goes horizontal,
+    // so it fills the space rather than floating in a half-empty card.
+    &:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+      gap: functions.rem(34);
+      .service-row__head { flex: 0 0 functions.rem(260); }
+      .service-row__desc { flex: 1; }
+      .service-row__btn { margin-top: 0; flex: none; }
+    }
+  }
+
+  &:hover { @include cards.card-lift($y: -3, $oy: 18, $spread: -24, $alpha: .35); border-color: vars.$accent; }
+
+  &__title { font-family: vars.$serif; font-weight: 700; font-size: functions.rem(22); color: vars.$navy; display: block; margin: 0; }
+  &__tag { display: inline-block; margin-top: functions.rem(6); color: vars.$accent-dark; font-family: vars.$sans; font-weight: 700; font-size: functions.rem(13); }
+  &__sub { display: inline-block; margin-top: functions.rem(6); color: vars.$muted; font-family: vars.$sans; font-weight: 600; font-size: functions.rem(13.5); }
+  &__desc { color: vars.$soft; font-size: functions.rem(15.5); line-height: 1.6; }
+
+  &__btn {
+    @include buttons.btn-navy;
+    margin-top: auto;
+    padding: functions.rem(13 22);
+    border-radius: functions.rem(12);
+    font-size: functions.rem(14.5);
+    span { display: inline-block; margin-left: functions.rem(2); transition: transform .15s ease; }
+  }
+  &:hover &__btn span { transform: translateX(functions.rem(3)); }
+}
+
+// ---- "How it works" process band ----
+.process {
+  background: vars.$navy;
+  border-radius: vars.$r-xl;
+  padding: functions.rem(54 28);
+  @include responsive.bp('tablet') { padding: functions.rem(74 48); }
+
+  &__heading { color: vars.$white; text-align: center; font-size: functions.fluid(26, 32); margin: 0 0 functions.rem(44); }
+  &__grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr; gap: functions.rem(28);
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+    @include responsive.bp('tablet') { grid-template-columns: repeat(4, 1fr); gap: functions.rem(22); }
+  }
+  &__step { margin: 0; }
+  &__num {
+    display: flex; align-items: center; justify-content: center;
+    width: functions.rem(36); height: functions.rem(36); border-radius: functions.rem(11);
+    background: vars.$accent; color: vars.$accent-ink;
+    font-family: vars.$serif; font-weight: 700; font-size: functions.rem(16);
+  }
+  &__step h3 { color: vars.$white; font-size: functions.rem(18); margin: functions.rem(16 0 6); }
+  &__step p { color: #aeb3c7; font-size: functions.rem(14); line-height: 1.55; margin: 0; }
+  &__cta { text-align: center; margin-top: functions.rem(42); .button { display: inline-flex; } }
+
+  // Phones: compact connected timeline (number left, text right, linked by a rail)
+  // instead of a tall stack of full-width blocks.
+  @include responsive.bp-down('s-mobile') {
+    padding: functions.rem(36 22);
+    &__heading { margin-bottom: functions.rem(28); }
+    &__grid { gap: functions.rem(22); }
+    &__step {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: functions.rem(15);
+      align-items: start;
+      // Rail from this number down to the next.
+      &:not(:last-child)::before {
+        content: "";
+        position: absolute;
+        left: functions.rem(17);
+        top: functions.rem(36);
+        bottom: functions.rem(-22);
+        width: functions.rem(2);
+        background: rgba(vars.$white, .16);
+      }
+    }
+    &__num { position: relative; z-index: 1; }
+    &__body h3 { margin: functions.rem(1 0 5); }
+  }
+}
+
+// =============================================================================
+// Single service detail
+// =============================================================================
+.service-detail {
+  &__hero { padding-top: functions.rem(14); }
+  &__hero-grid {
+    display: grid; grid-template-columns: 1fr; gap: functions.rem(40); align-items: center;
+    @include responsive.bp('tablet') { grid-template-columns: 1.1fr .9fr; gap: functions.rem(50); }
+  }
+  &__intro {
+    display: flex; flex-direction: column; align-items: flex-start; gap: functions.rem(0);
+    .eyebrow { margin-bottom: functions.rem(14); }
+    h1 { font-size: functions.fluid(36, 50); }
+    .lead { margin-top: functions.rem(20); max-width: 32em; }
+  }
+  &__buttons { display: flex; flex-wrap: wrap; gap: functions.rem(13); margin-top: functions.rem(30); }
+
+  &__card {
+    background: vars.$navy; color: vars.$white; border-radius: vars.$r-lg; padding: functions.rem(34);
+    box-shadow: 0 functions.rem(30) functions.rem(60) functions.rem(-30) rgba(vars.$navy, .55);
+  }
+  &__card-eyebrow { font-size: functions.rem(12); text-transform: uppercase; letter-spacing: .12em; opacity: .6; font-weight: 700; font-family: vars.$sans; }
+  &__stat { font-family: vars.$serif; font-weight: 700; font-size: functions.rem(46); color: vars.$white; margin-top: functions.rem(12); line-height: 1; }
+  &__stat-label { opacity: .7; font-size: functions.rem(14); margin-top: functions.rem(4); }
+  &__hi {
+    margin-top: functions.rem(22); padding-top: functions.rem(18); border-top: functions.rem(1) solid rgba(vars.$white, .14);
+    li { display: flex; gap: functions.rem(10); margin-bottom: functions.rem(11); font-size: functions.rem(14.5); line-height: 1.4; color: rgba(vars.$white, .92); font-family: vars.$sans;
+      span { color: vars.$accent; flex: none; } }
+  }
+
+  &__body {
+    max-width: functions.rem(760);
+    margin: 0 auto;
+    padding: functions.rem(40) vars.$gutter 0;
+    border-top: functions.rem(1) solid vars.$line;
+  }
+}
+
+// What's included
+.included-grid {
+  display: grid; grid-template-columns: 1fr; gap: functions.rem(14);
+  margin-top: functions.rem(36);
+  @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; column-gap: functions.rem(30); }
+}
+.included-item {
+  display: flex; gap: functions.rem(13); align-items: flex-start;
+  background: vars.$white; border: functions.rem(1) solid #eceef2; border-radius: vars.$r;
+  padding: functions.rem(18 20);
+  .ck { flex: none; width: functions.rem(26); height: functions.rem(26); border-radius: functions.rem(8); background: vars.$accent-tint; color: vars.$accent-dark; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: functions.rem(14); }
+  span:last-child { color: vars.$navy; font-size: functions.rem(15.5); font-weight: 600; font-family: vars.$sans; padding-top: functions.rem(2); }
+}
+
+// Phones: drop the per-item cards for a compact checklist with hairline dividers.
+@include responsive.bp-down('s-mobile') {
+  .included-grid { gap: 0; margin-top: functions.rem(24); }
+  .included-item {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: functions.rem(1) solid vars.$line;
+    padding: functions.rem(13 0);
+    align-items: center;
+    .ck { padding-top: 0; }
+    span:last-child { padding-top: 0; font-size: functions.rem(15); }
+    &:last-child { border-bottom: 0; }
+  }
+}
+
+// Who it's for
+.forwho-grid {
+  display: grid; grid-template-columns: 1fr; gap: functions.rem(18); margin-top: functions.rem(36);
+  @include responsive.bp('mobile') { grid-template-columns: repeat(3, 1fr); }
+}
+.forwho-card {
+  background: vars.$paper; border: functions.rem(1) solid #eceef2; border-radius: vars.$r-lg; padding: functions.rem(28);
+  &__ico { display: flex; align-items: center; justify-content: center; width: functions.rem(40); height: functions.rem(40); border-radius: functions.rem(11); background: vars.$navy; margin-bottom: functions.rem(16);
+    i { width: functions.rem(14); height: functions.rem(14); border-radius: 50%; background: vars.$accent; display: block; } }
+  h3 { font-size: functions.rem(18); margin-bottom: functions.rem(7); }
+  p { color: vars.$muted; font-size: functions.rem(14.5); line-height: 1.55; margin: 0; }
+}
+
+// Explore other services
+.other-grid {
+  display: grid; grid-template-columns: 1fr; gap: functions.rem(16);
+  @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+  @include responsive.bp('tablet') { grid-template-columns: repeat(4, 1fr); }
+
+  // Mobile / small tablet: swipeable snapping carousel with the next card peeking.
+  @include responsive.bp-down('mobile') {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: vars.$gutter;
+    margin-inline: calc(vars.$gutter * -1);
+    padding-inline: vars.$gutter;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+}
+.other-card {
+  display: flex; flex-direction: column; gap: functions.rem(6);
+  background: vars.$white; border: functions.rem(1) solid #eceef2; border-radius: functions.rem(18); padding: functions.rem(24);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  &:hover { @include cards.card-lift($oy: 18, $spread: -24); border-color: vars.$accent; }
+  // After the hover rule so it wins on touch, where :hover sticks after a tap.
+  @include responsive.bp-down('mobile') {
+    scroll-snap-align: start;
+    &:hover { transform: none; box-shadow: none; border-color: #eceef2; }
+  }
+  &__title { font-family: vars.$serif; font-weight: 700; font-size: functions.rem(18); color: vars.$navy; }
+  &__sub { color: vars.$muted; font-size: functions.rem(13.5); }
+  &__more { margin-top: functions.rem(10); font-family: vars.$sans; font-weight: 700; font-size: functions.rem(14); color: vars.$accent-dark; }
+}

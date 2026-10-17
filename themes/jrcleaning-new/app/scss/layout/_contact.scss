@@ -1,0 +1,124 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// Service-area map (inside the contact sidebar card)
+// Google My Maps has no option to hide its title bar, so we crop it: the frame is a
+// fixed height with overflow hidden, and the iframe is taller + pulled up to clip the header.
+$map-header: functions.rem(56); // height of the My Maps black title bar
+$map-h: functions.rem(285);     // visible map height
+.contact-card__map {
+  margin-top: functions.rem(12);
+  border-radius: functions.rem(12);
+  overflow: hidden;
+  border: functions.rem(1) solid #e6e9ef;
+  line-height: 0;
+  height: $map-h;
+  .jr-map-embed {
+    display: block;
+    width: 100%;
+    height: calc(#{$map-h} + #{$map-header});
+    margin-top: -$map-header;
+    border: 0;
+  }
+}
+.contact-card--map .contact-card__link { margin-top: functions.rem(14); }
+
+// Phone / email / location list on the contact page sidebar.
+.contact-card__details {
+  list-style: none;
+  margin: functions.rem(12) 0 0;
+  padding: 0;
+  display: grid;
+  gap: functions.rem(12);
+
+  li {
+    display: grid;
+    gap: functions.rem(2);
+    margin: 0;
+  }
+}
+.contact-card__det-label {
+  font-family: vars.$sans;
+  font-weight: 700;
+  font-size: functions.rem(11.5);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: vars.$muted;
+}
+.contact-card__det-val {
+  font-family: vars.$sans;
+  font-weight: 600;
+  font-size: functions.rem(16);
+  color: vars.$navy;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+
+  &:hover { color: vars.$accent-ink; }
+}
+
+// Contact page (follows design)
+.contact-page {
+  &__title { font-size: functions.fluid(36, 46); }
+  &__intro { margin-top: functions.rem(14); max-width: 34em; }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(28);
+    align-items: start;
+    margin-top: functions.rem(34);
+    @include responsive.bp('s-tablet') { grid-template-columns: 1fr functions.rem(340); }
+  }
+
+  &__form {
+    background: vars.$white;
+    border: functions.rem(1) solid #e6e9ef;
+    border-radius: vars.$r-xl;
+    padding: functions.rem(28);
+    box-shadow: 0 functions.rem(22) functions.rem(56) functions.rem(-34) rgba(vars.$navy, .35);
+    @include responsive.bp('tablet') { padding: functions.rem(32); }
+  }
+
+  &__side { display: grid; gap: functions.rem(16); }
+}
+
+.contact-card {
+  background: vars.$paper;
+  border: functions.rem(1) solid #eceef2;
+  border-radius: vars.$r-lg;
+  padding: functions.rem(26);
+
+  &__label {
+    font-family: vars.$sans;
+    font-weight: 700;
+    font-size: functions.rem(13);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: vars.$muted;
+    margin-bottom: functions.rem(10);
+  }
+  &__value { color: vars.$navy; font-weight: 700; font-size: functions.rem(16); font-family: vars.$sans; }
+  &__note { color: vars.$muted; font-size: functions.rem(14.5); margin-top: functions.rem(4); line-height: 1.55; }
+  &__link {
+    display: inline-flex; align-items: center; gap: functions.rem(6); margin-top: functions.rem(12);
+    font-family: vars.$sans; font-weight: 700; font-size: functions.rem(14); color: vars.$accent-dark;
+    span { transition: transform .15s ease; }
+    &:hover { color: vars.$navy; span { transform: translateX(functions.rem(3)); } }
+  }
+
+  &__hours {
+    div { display: flex; justify-content: space-between; color: vars.$navy; font-size: functions.rem(14.5); padding: functions.rem(6 0); font-family: vars.$sans;
+      & + div { border-top: functions.rem(1) solid #e6e9ef; } }
+    .is-muted { color: vars.$muted; strong { color: vars.$muted; } }
+  }
+
+  // navy variant
+  &--navy {
+    background: vars.$navy;
+    border-color: vars.$navy;
+    .contact-card__eyebrow { font-size: functions.rem(12); text-transform: uppercase; letter-spacing: .12em; opacity: .6; font-weight: 700; font-family: vars.$sans; color: vars.$white; }
+    .contact-card__phone { display: block; font-family: vars.$serif; font-weight: 700; font-size: functions.rem(24); color: vars.$white; margin: functions.rem(12 0 4); &:hover { color: vars.$accent; } }
+    .contact-card__email { display: block; color: #9fe6e3; font-size: functions.rem(14.5); font-weight: 600; &:hover { color: vars.$white; } }
+  }
+}

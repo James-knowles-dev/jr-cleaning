@@ -1,0 +1,349 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Affiliate dashboard (WooCommerce My Account → Affiliate)
+// =============================================================================
+.aff-empty { color: vars.$soft; a { color: vars.$accent-dark; font-weight: 700; } }
+
+.aff-dash {
+  display: grid;
+  // Constrain the single column so wide children (the jobs table) can scroll
+  // inside their card instead of stretching the whole dashboard off-screen.
+  grid-template-columns: minmax(0, 1fr);
+  gap: functions.rem(20);
+
+  &__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: functions.rem(16);
+    @include responsive.bp('s-mobile') { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  }
+
+  &__foot { color: vars.$muted; font-size: functions.rem(14); margin: functions.rem(6) 0 0;
+    a { color: vars.$accent-dark; font-weight: 700; &:hover { color: vars.$navy; } } }
+}
+
+// ---- cards ----
+.aff-card {
+  border-radius: vars.$r-lg;
+  padding: functions.rem(26 28);
+  &__eyebrow { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(12); text-transform: uppercase; letter-spacing: .12em; opacity: .7; }
+  &__note { font-size: functions.rem(13.5); margin: functions.rem(12) 0 0; color: vars.$muted; }
+  &__channel { display: inline-block; margin-top: functions.rem(14); padding: functions.rem(5 12); border-radius: vars.$r-pill; background: vars.$accent-tint; color: vars.$accent-dark; font-family: vars.$sans; font-weight: 700; font-size: functions.rem(12.5); }
+
+  // tier card = navy, like the hero stat card
+  &--tier {
+    background: vars.$navy; color: vars.$white;
+    .aff-card__eyebrow { color: rgba(vars.$white, .7); }
+  }
+  &--code { background: vars.$paper; border: functions.rem(1) solid #e6e9ef; }
+}
+
+.aff-tier {
+  display: flex; align-items: baseline; gap: functions.rem(12); margin-top: functions.rem(10);
+  &__name { font-family: vars.$serif; font-weight: 700; font-size: functions.rem(34); color: vars.$white; line-height: 1; }
+  &__badge { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(11.5); text-transform: uppercase; letter-spacing: .1em; color: vars.$accent-ink; background: vars.$accent; padding: functions.rem(4 10); border-radius: vars.$r-pill; }
+  &__discounts { margin-top: functions.rem(18); padding-top: functions.rem(16); border-top: functions.rem(1) solid rgba(vars.$white, .14); display: grid; gap: functions.rem(10); }
+  &__row { display: flex; justify-content: space-between; align-items: center; font-family: vars.$sans;
+    span { color: rgba(vars.$white, .75); font-size: functions.rem(14); }
+    strong { color: vars.$white; font-size: functions.rem(16); }
+    .is-accent { color: vars.$accent; }
+  }
+}
+
+.aff-code {
+  display: flex; align-items: stretch; gap: functions.rem(10); margin-top: functions.rem(12);
+  code {
+    flex: 1; min-width: 0; display: flex; align-items: center;
+    background: vars.$white; border: functions.rem(1.5) dashed #c9cfda; border-radius: vars.$r;
+    padding: functions.rem(12 16); font-family: vars.$sans; font-weight: 800; letter-spacing: .04em;
+    font-size: functions.rem(17); color: vars.$navy;
+  }
+  &__copy {
+    flex: none; border: 0; cursor: pointer; border-radius: vars.$r;
+    background: vars.$navy; color: vars.$white; font-family: vars.$serif; font-weight: 700;
+    font-size: functions.rem(14); padding: functions.rem(0 18); transition: background .15s ease;
+    &:hover { background: vars.$navy-700; }
+    &.is-copied { background: vars.$accent; color: vars.$accent-ink; }
+  }
+}
+
+// ---- stats ----
+.aff-stats {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: functions.rem(14);
+  @include responsive.bp('s-mobile') { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.aff-stat {
+  background: vars.$white; border: functions.rem(1) solid #eceef2; border-radius: vars.$r-lg; padding: functions.rem(22 24);
+  &__n { font-family: vars.$serif; font-weight: 700; font-size: functions.rem(34); color: vars.$navy; line-height: 1; &--sm { font-size: functions.rem(18); } }
+  &__l { color: vars.$muted; font-size: functions.rem(13.5); margin-top: functions.rem(8); line-height: 1.4; }
+  // Full-width row of its own. On wider screens the bar and the "what you get"
+  // list sit side by side, so the card stays a sensible height.
+  &--progress {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: functions.rem(14);
+    align-items: center;
+
+    @include responsive.bp('tablet') {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      column-gap: functions.rem(30);
+    }
+  }
+}
+.aff-progress {
+  &__top { display: flex; justify-content: space-between; align-items: baseline; font-family: vars.$sans; font-weight: 700; font-size: functions.rem(14); color: vars.$navy; margin-bottom: functions.rem(10); }
+  &__pct { color: vars.$accent-dark; }
+  &__bar { height: functions.rem(8); border-radius: vars.$r-pill; background: #dfe3ea; overflow: hidden;
+    span { display: block; height: 100%; border-radius: vars.$r-pill; background: vars.$accent; transition: width .4s cubic-bezier(.4,0,.2,1); } }
+  & + .aff-stat__l { margin-top: functions.rem(10); }
+}
+.aff-stat--progress .aff-stat__l { margin-top: functions.rem(10); }
+
+// ---- earnings / savings ----
+// ---- jobs table ----
+.aff-jobs {
+  background: vars.$white; border: functions.rem(1) solid #eceef2; border-radius: vars.$r-lg; padding: functions.rem(24 26);
+  h3 { font-size: functions.rem(18); color: vars.$navy; margin: 0 0 functions.rem(16); }
+  &__scroll { overflow-x: auto; }
+  &__table {
+    width: 100%; border-collapse: collapse; font-family: vars.$sans;
+    th { text-align: left; font-size: functions.rem(12); text-transform: uppercase; letter-spacing: .08em; color: vars.$muted; padding: functions.rem(0 14 10 0); }
+    td { padding: functions.rem(12 14 12 0); border-top: functions.rem(1) solid #eef0f4; color: vars.$navy; font-size: functions.rem(14.5); white-space: nowrap; }
+  }
+  &__empty { color: vars.$muted; margin: 0; }
+}
+.aff-status {
+  display: inline-block; padding: functions.rem(3 10); border-radius: vars.$r-pill;
+  font-size: functions.rem(12.5); font-weight: 700;
+  background: #eef0f4; color: vars.$soft;
+  &--completed, &--paid { background: vars.$accent-tint; color: vars.$accent-dark; }
+  &--pending, &--booked { background: #fff4e0; color: #9a6300; }
+}
+
+// ---- referral sharing tools ----
+// Own row rather than nested in the code card: the link + message are taller than
+// the tier card's content, so nesting them stretched the top grid and left a void.
+.aff-card--share {
+  background: vars.$paper;
+  border: functions.rem(1) solid #e6e9ef;
+}
+
+.aff-share {
+  &__intro {
+    font-family: vars.$sans;
+    font-size: functions.rem(14);
+    color: vars.$soft;
+    margin: functions.rem(10) 0 functions.rem(18);
+    max-width: functions.rem(560);
+  }
+
+  // Side by side once there is room; the message needs the width more than the link.
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: functions.rem(18);
+    @include responsive.bp('tablet') {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      gap: functions.rem(22);
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: functions.rem(12);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: vars.$muted;
+    margin-bottom: functions.rem(7);
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    gap: functions.rem(8);
+  }
+
+  &__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: vars.$sans;
+    font-size: functions.rem(13.5);
+    line-height: 1.5;
+    color: vars.$navy;
+    background: vars.$white;
+    border: functions.rem(1) solid #e6e9ef;
+    border-radius: functions.rem(10);
+    padding: functions.rem(10 12);
+    cursor: pointer;
+
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+
+    // Tall enough for the whole message, so the URL is never clipped mid-line.
+    &--area { resize: vertical; cursor: text; min-height: functions.rem(104); }
+  }
+}
+
+// ---- what the next tier gets you ----
+.aff-next {
+  margin: 0;
+  padding: functions.rem(14) 0 0;
+  border-top: functions.rem(1) dashed #e6e9ef;
+
+  @include responsive.bp('tablet') {
+    padding: 0 0 0 functions.rem(26);
+    border-top: 0;
+    border-left: functions.rem(1) dashed #e6e9ef;
+  }
+  font-family: vars.$sans;
+  font-size: functions.rem(13.5);
+  color: vars.$soft;
+
+  li { margin-bottom: functions.rem(5); }
+  strong { color: vars.$navy; }
+  &__from { color: vars.$muted; font-size: functions.rem(12.5); }
+}
+
+// ---- programme explainer ----
+.aff-how {
+  margin-top: functions.rem(22);
+  background: vars.$white;
+  border: functions.rem(1) solid #eceef2;
+  border-radius: vars.$r-lg;
+  padding: functions.rem(24 26);
+
+  h3 { font-size: functions.rem(18); color: vars.$navy; margin: 0 0 functions.rem(16); }
+
+  &__list {
+    margin: 0;
+    font-family: vars.$sans;
+
+    dt {
+      font-weight: 700;
+      color: vars.$navy;
+      font-size: functions.rem(14.5);
+      margin-top: functions.rem(14);
+      &:first-child { margin-top: 0; }
+    }
+
+    dd {
+      margin: functions.rem(4) 0 0;
+      color: vars.$soft;
+      font-size: functions.rem(14);
+      line-height: 1.6;
+    }
+  }
+}
+
+// Smaller copy button for the sharing rows — the code card's button is the primary
+// action and should stay visually dominant.
+.aff-code__copy--sm {
+  padding: functions.rem(10 14);
+  font-size: functions.rem(13);
+  align-self: flex-start;
+}
+
+// Scope is free text describing the job, so let it wrap rather than forcing the
+// table wider — every other cell is short and fixed-ish.
+.aff-jobs__scope {
+  white-space: normal !important;
+  min-width: functions.rem(200);
+  line-height: 1.45;
+}
+
+// December perks card. Warm accent rather than teal, so it reads as seasonal and
+// separate from the standing tier benefits.
+.aff-card--december {
+  background: #fffaf0;
+  border: functions.rem(1) solid #f5e2bf;
+
+  .aff-card__eyebrow { color: #9a6300; }
+  .tier-card__perks { margin-top: functions.rem(12); }
+}
+
+// Address wraps like scope does — both are free text, unlike the short fixed cells.
+.aff-jobs__addr {
+  white-space: normal !important;
+  min-width: functions.rem(150);
+  line-height: 1.45;
+}
+
+// =============================================================================
+// Chosen free bonus + sub-type notice
+// =============================================================================
+.aff-card--bonus {
+  .aff-bonus__intro {
+    font-family: vars.$sans;
+    color: vars.$soft;
+    margin: functions.rem(6 0 16);
+    max-width: functions.rem(560);
+  }
+
+  .aff-bonus__saved {
+    font-family: vars.$sans;
+    font-size: functions.rem(14.5);
+    color: vars.$accent-ink;
+    background: vars.$accent-tint;
+    border: functions.rem(1) solid vars.$accent-border;
+    border-radius: vars.$r;
+    padding: functions.rem(10 14);
+    margin: 0 0 functions.rem(14);
+  }
+
+  .aff-bonus__options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(10);
+    margin-bottom: functions.rem(16);
+
+    @include responsive.bp('s-mobile') { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  // Same chip treatment as the quote wizard, so a partner meets one visual language
+  // for "pick one of these" across the whole site.
+  .aff-bonus__option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: functions.rem(10);
+    cursor: pointer;
+    margin: 0;
+    padding: functions.rem(14 16);
+    background: vars.$paper;
+    border: functions.rem(1.5) solid #e6e9ef;
+    border-radius: vars.$r;
+    font-family: vars.$sans;
+    font-weight: 600;
+    font-size: functions.rem(15);
+    color: vars.$navy;
+    transition: border-color .15s ease, background .15s ease;
+
+    &:hover { border-color: vars.$accent; background: vars.$white; }
+
+    input { accent-color: vars.$accent; flex: none; margin: 0; }
+
+    // :has keeps the checked state on the label without a JS class toggle. Browsers
+    // without it simply show the radio, which is still perfectly usable.
+    &:has(input:checked) {
+      border-color: vars.$accent;
+      background: vars.$accent-tint;
+    }
+
+    &:focus-within {
+      outline: functions.rem(2) solid vars.$accent-dark;
+      outline-offset: functions.rem(2);
+    }
+  }
+
+  .aff-bonus__save { align-self: flex-start; }
+}
+
+.aff-card--note p {
+  font-family: vars.$sans;
+  color: vars.$soft;
+  margin: 0;
+}
+

@@ -1,0 +1,9 @@
+@use "functions";
+@use "../vars";
+
+// Card hover "lift": a small upward nudge plus a soft navy drop-shadow.
+// Defaults match the most common card; pass overrides for the tuned variants.
+@mixin card-lift($y: -4, $oy: 20, $spread: -22, $alpha: .4) {
+  transform: translateY(functions.rem($y));
+  box-shadow: 0 functions.rem($oy) functions.rem(40) functions.rem($spread) rgba(vars.$navy, $alpha);
+}

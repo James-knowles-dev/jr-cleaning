@@ -1,0 +1,233 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Service content blocks: rich text (teal-tick checklists) + FAQ accordion
+// =============================================================================
+.svc-rich-wrap { &[id] { scroll-margin-top: functions.rem(100); } }
+
+// ---- Feature block: intro + two-column tick checklist ----
+.svc-feature {
+  &[id] { scroll-margin-top: functions.rem(100); }
+  & + & .svc-feature__grid { border-top: functions.rem(1) solid vars.$line; padding-top: functions.rem(40); }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(24);
+    @include responsive.bp('tablet') { grid-template-columns: functions.rem(330) 1fr; gap: functions.rem(56); align-items: start; }
+  }
+
+  &__title { font-size: functions.fluid(22, 28); color: vars.$navy; }
+
+  // Optional CTA under the intro, so a feature block can close with an action
+  // instead of needing a separate prose section just to hold a button.
+  &__cta { margin-top: functions.rem(20); }
+
+  .eyebrow { display: block; margin-bottom: functions.rem(10); }
+  &__lead { color: vars.$soft; margin-top: functions.rem(14); line-height: 1.6; }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(12) functions.rem(28);
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+
+    li {
+      position: relative;
+      padding-left: functions.rem(32);
+      color: vars.$ink;
+      font-size: functions.rem(15);
+      line-height: 1.45;
+      font-family: vars.$sans;
+    }
+  }
+
+  &__tick {
+    position: absolute;
+    left: 0;
+    top: functions.rem(1);
+    width: functions.rem(22);
+    height: functions.rem(22);
+    border-radius: functions.rem(7);
+    background: vars.$accent-tint;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d8380' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E");
+    background-size: functions.rem(14);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.svc-rich {
+  max-width: functions.rem(760);
+  margin: 0;
+
+  // lists become on-brand teal-tick checklists
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: functions.rem(16 0);
+    display: grid;
+    gap: functions.rem(11);
+  }
+  ul li {
+    position: relative;
+    padding-left: functions.rem(32);
+    color: vars.$ink;
+    line-height: 1.55;
+    margin: 0;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: functions.rem(1);
+      width: functions.rem(22);
+      height: functions.rem(22);
+      border-radius: functions.rem(7);
+      background: vars.$accent-tint;
+      // teal check mark
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d8380' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E");
+      background-size: functions.rem(14);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  // prominent CTA links inside prose
+  a.button { color: vars.$accent-ink; }
+}
+
+// ---- Steps: numbered "how it works" ----
+.svc-steps {
+  &[id] { scroll-margin-top: functions.rem(100); }
+  &__heading { font-size: functions.fluid(24, 30); color: vars.$navy; margin-bottom: functions.rem(32); }
+  &__grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr; gap: functions.rem(24);
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+    @include responsive.bp('tablet') { grid-template-columns: repeat(4, 1fr); gap: functions.rem(22); }
+  }
+  &__step { margin: 0; }
+  &__num {
+    display: flex; align-items: center; justify-content: center;
+    width: functions.rem(38); height: functions.rem(38); border-radius: functions.rem(11);
+    background: vars.$accent; color: vars.$accent-ink;
+    font-family: vars.$serif; font-weight: 700; font-size: functions.rem(16);
+  }
+  &__step h3 { color: vars.$navy; font-size: functions.rem(18); margin: functions.rem(16 0 6); }
+  &__step p { color: vars.$soft; font-size: functions.rem(14.5); line-height: 1.55; margin: 0; }
+
+  // Phones: compact connected timeline (number left, text right, linked by a rail).
+  @include responsive.bp-down('s-mobile') {
+    &__heading { margin-bottom: functions.rem(24); }
+    &__grid { gap: functions.rem(20); }
+    &__step {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: functions.rem(15);
+      align-items: start;
+      &:not(:last-child)::before {
+        content: "";
+        position: absolute;
+        left: functions.rem(18);
+        top: functions.rem(38);
+        bottom: functions.rem(-20);
+        width: functions.rem(2);
+        background: rgba(vars.$navy, .12);
+      }
+    }
+    &__num { position: relative; z-index: 1; }
+    &__body h3 { margin: functions.rem(1 0 5); }
+  }
+}
+
+// ---- Reasons: "why choose us" cards ----
+.svc-reasons {
+  &[id] { scroll-margin-top: functions.rem(100); }
+  &__grid {
+    display: grid; grid-template-columns: 1fr; gap: functions.rem(16); margin-top: functions.rem(36);
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+    @include responsive.bp('tablet') { grid-template-columns: repeat(3, 1fr); }
+  }
+  &__card {
+    background: vars.$white; border: functions.rem(1) solid #eceef2; border-radius: vars.$r-lg;
+    padding: functions.rem(24 26);
+    h3 { display: flex; align-items: flex-start; gap: functions.rem(10); font-size: functions.rem(17); color: vars.$navy; margin: 0 0 functions.rem(8); }
+    p { color: vars.$muted; font-size: functions.rem(14.5); line-height: 1.55; margin: 0; }
+  }
+  &__tick {
+    flex: none; margin-top: functions.rem(2);
+    width: functions.rem(20); height: functions.rem(20); border-radius: functions.rem(6);
+    background: vars.$accent-tint;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d8380' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E");
+    background-size: functions.rem(13); background-repeat: no-repeat; background-position: center;
+  }
+}
+
+// ---- FAQ accordion ----
+.svc-faq {
+  max-width: functions.rem(760);
+  margin: 0;
+
+  &__heading { font-size: functions.fluid(24, 30); margin-bottom: functions.rem(24); }
+
+  &__list { display: grid; gap: functions.rem(12); }
+
+  &__item {
+    background: vars.$white;
+    border: functions.rem(1) solid vars.$line;
+    border-radius: vars.$r;
+    overflow: hidden;
+    transition: border-color .15s ease, box-shadow .15s ease;
+    &.is-open { border-color: vars.$accent; box-shadow: 0 functions.rem(14) functions.rem(34) functions.rem(-22) rgba(vars.$navy, .3); }
+  }
+
+  &__q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: functions.rem(16);
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: functions.rem(18 22);
+    font-family: vars.$serif;
+    font-weight: 700;
+    font-size: functions.rem(17);
+    color: vars.$navy;
+    line-height: 1.3;
+  }
+
+  &__chev {
+    flex: none;
+    width: functions.rem(10); height: functions.rem(10);
+    border-right: functions.rem(2) solid vars.$accent-dark;
+    border-bottom: functions.rem(2) solid vars.$accent-dark;
+    transform: rotate(45deg);
+    transition: transform .25s ease;
+    margin-right: functions.rem(4);
+  }
+  &__item.is-open &__chev { transform: rotate(-135deg); }
+
+  &__a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
+  }
+  &__a-inner {
+    padding: functions.rem(0 22 20);
+    color: vars.$ink;
+    font-size: functions.rem(15);
+    line-height: 1.65;
+    h3 { font-size: functions.rem(17); margin: functions.rem(16 0 8); }
+    ul { list-style: disc; padding-left: functions.rem(20); margin: functions.rem(8 0); }
+    li { margin-bottom: functions.rem(6); }
+  }
+}

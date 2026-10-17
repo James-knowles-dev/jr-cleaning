@@ -1,0 +1,211 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Partner cleaning calendar
+//
+// A month grid on desktop. Below the tablet breakpoint the same table reflows to a
+// day-by-day agenda — seven columns on a phone is unreadable, and hiding the empty
+// days turns the grid into exactly the list a partner wants on a small screen.
+// =============================================================================
+.aff-cal {
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: functions.rem(14);
+    margin-bottom: functions.rem(18);
+  }
+
+  &__count {
+    font-family: vars.$sans;
+    color: vars.$soft;
+    margin: functions.rem(6 0 0);
+
+    strong { color: vars.$navy; font-size: functions.rem(18); }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: functions.rem(8);
+  }
+
+  &__step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: functions.rem(38);
+    height: functions.rem(38);
+    border-radius: vars.$r-sm;
+    border: functions.rem(1) solid vars.$line;
+    background: vars.$white;
+    color: vars.$navy;
+    text-decoration: none;
+    font-size: functions.rem(16);
+    transition: border-color .15s ease, color .15s ease;
+
+    &:hover { border-color: vars.$accent; color: vars.$accent-dark; }
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+  }
+
+  &__month {
+    font-family: vars.$serif;
+    font-weight: 800;
+    font-size: functions.rem(17);
+    color: vars.$navy;
+    min-width: functions.rem(150);
+    text-align: center;
+  }
+
+  &__today {
+    font-family: vars.$sans;
+    font-size: functions.rem(13.5);
+    font-weight: 700;
+    color: vars.$accent-dark;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  // ---- the grid ----
+  &__grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: functions.rem(4);
+    table-layout: fixed;
+
+    th {
+      font-family: vars.$sans;
+      font-size: functions.rem(11.5);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: vars.$muted;
+      text-align: left;
+      padding: functions.rem(0 4 6);
+
+      abbr { text-decoration: none; border: 0; }
+    }
+  }
+
+  &__day {
+    vertical-align: top;
+    width: 14.28%;
+    height: functions.rem(112);
+    padding: functions.rem(8);
+    background: vars.$paper;
+    border: functions.rem(1) solid vars.$line;
+    border-radius: vars.$r-sm;
+
+    &.is-blank { background: transparent; border-color: transparent; }
+    &.is-today { border-color: vars.$accent; box-shadow: inset 0 0 0 functions.rem(1) vars.$accent; }
+  }
+
+  &__daynum {
+    display: block;
+    font-family: vars.$sans;
+    font-size: functions.rem(12);
+    font-weight: 700;
+    color: vars.$muted;
+    margin-bottom: functions.rem(4);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__dayname { display: none; }          // agenda-only, shown at the breakpoint below
+  .is-today &__daynum { color: vars.$accent-dark; }
+
+  // ---- one clean ----
+  &__ev {
+    display: block;
+    margin-top: functions.rem(4);
+    padding: functions.rem(4 6);
+    border-left: functions.rem(3) solid vars.$muted;
+    background: vars.$white;
+    border-radius: functions.rem(4);
+    font-family: vars.$sans;
+    font-size: functions.rem(11.5);
+    line-height: 1.35;
+
+    &--booked    { border-left-color: vars.$accent; }
+    &--completed { border-left-color: vars.$success; }
+    &--pending   { border-left-color: vars.$gold; }
+    &--cancelled { border-left-color: vars.$error; opacity: .55; }
+  }
+
+  &__time { font-weight: 800; color: vars.$navy; margin-right: functions.rem(4); font-variant-numeric: tabular-nums; }
+  &__type { color: vars.$navy; font-weight: 600; }
+
+  &__addr {
+    display: block;
+    color: vars.$muted;
+    // Long property names must not stretch a fixed-width column.
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__st { display: none; }               // the colour carries status in grid view
+
+  &__empty {
+    font-family: vars.$sans;
+    color: vars.$muted;
+    margin: functions.rem(10 0 0);
+  }
+
+  // ---- agenda reflow ----
+  @media (max-width: 48rem) {
+    &__grid {
+      border-spacing: 0;
+
+      thead { display: none; }
+      tbody, tr, td { display: block; width: 100%; }
+      tr { margin: 0; }
+    }
+
+    &__day {
+      height: auto;
+      margin-bottom: functions.rem(10);
+
+      &.is-blank,
+      &.is-empty { display: none; }      // empty days are noise in a list
+    }
+
+    &__dayname {
+      display: inline;
+      margin-right: functions.rem(6);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    &__daynum {
+      font-size: functions.rem(13);
+      padding-bottom: functions.rem(6);
+      border-bottom: functions.rem(1) solid vars.$line;
+    }
+
+    &__ev {
+      display: grid;
+      grid-template-columns: functions.rem(46) 1fr auto;
+      gap: functions.rem(4) functions.rem(10);
+      align-items: baseline;
+      font-size: functions.rem(14);
+      padding: functions.rem(8 10);
+    }
+
+    &__addr { grid-column: 2 / -1; }
+
+    &__st {
+      display: inline-block;
+      font-size: functions.rem(11);
+      font-weight: 700;
+      padding: functions.rem(2 8);
+      border-radius: vars.$r-pill;
+      background: vars.$cloud;
+      color: vars.$muted;
+    }
+  }
+}
+

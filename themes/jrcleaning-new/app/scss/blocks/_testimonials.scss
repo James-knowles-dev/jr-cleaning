@@ -1,0 +1,76 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.testimonials {
+  // slider: 1 per view on mobile, 3 on tablet+ (CSS scroll-snap + JS arrows)
+  &__slider { position: relative; margin-top: functions.rem(38); }
+
+  &__track {
+    display: flex;
+    gap: functions.rem(18);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    // NB: smooth scrolling is applied in JS (scrollBy) so the silent
+    // infinite-loop recenter (scrollLeft =) stays instant/invisible.
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;            // Firefox
+    padding-bottom: functions.rem(4);
+    &::-webkit-scrollbar { display: none; } // WebKit
+  }
+
+  &__card {
+    margin: 0;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    background: vars.$paper;
+    border: functions.rem(1) solid #eceef2;
+    border-radius: vars.$r-lg;
+    padding: functions.rem(26);
+    display: flex;
+    flex-direction: column;
+    gap: functions.rem(14);
+
+    @include responsive.bp('s-mobile') { flex-basis: calc((100% - #{functions.rem(18)}) / 2); }
+    @include responsive.bp('tablet')   { flex-basis: calc((100% - #{functions.rem(36)}) / 3); }
+
+    blockquote {
+      margin: 0;
+      color: vars.$ink;
+      font-size: functions.rem(15);
+      line-height: 1.6;
+      font-style: normal;
+    }
+    figcaption { font-family: vars.$sans; font-weight: 700; color: vars.$navy; font-size: functions.rem(14); }
+  }
+
+  // prev / next controls
+  &__nav {
+    display: flex;
+    justify-content: center;
+    gap: functions.rem(12);
+    margin-top: functions.rem(24);
+  }
+  &__arrow {
+    width: functions.rem(46);
+    height: functions.rem(46);
+    border-radius: 50%;
+    border: functions.rem(1.5) solid #d6dae2;
+    background: vars.$white;
+    color: vars.$navy;
+    font-size: functions.rem(18);
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .15s ease, background .15s ease, color .15s ease, opacity .15s ease;
+
+    &:hover { border-color: vars.$navy; }
+    &:disabled { opacity: .35; cursor: default; border-color: #d6dae2; }
+  }
+
+  // when everything fits (≤ items per view), hide the controls
+  &__slider.is-static .testimonials__nav { display: none; }
+  &__slider.is-static .testimonials__track { scroll-snap-type: none; }
+}

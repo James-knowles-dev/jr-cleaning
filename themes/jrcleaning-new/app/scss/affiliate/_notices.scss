@@ -1,0 +1,36 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Notices
+// =============================================================================
+// One component for every inline message in the partner area — request confirmations,
+// the rolling-window warning, validation summaries. Colour carries the severity; the
+// left rule carries it again for anyone who cannot see the colour.
+.aff-notice {
+  display: block;
+  margin: functions.rem(0 0 18);
+  padding: functions.rem(14 18);
+  border-radius: vars.$r;
+  border: functions.rem(1) solid transparent;
+  border-left-width: functions.rem(4);
+  font-family: vars.$sans;
+  font-size: functions.rem(14.5);
+  line-height: 1.6;
+  color: vars.$ink;
+
+  strong { color: vars.$navy; }
+  a { color: vars.$accent-dark; font-weight: 700; }
+  em { font-style: normal; font-weight: 700; }
+
+  &--ok    { background: vars.$accent-tint; border-color: vars.$accent-border; border-left-color: vars.$success; }
+  &--info  { background: vars.$paper; border-color: vars.$line; border-left-color: vars.$navy; }
+  &--warn  { background: #fff8e6; border-color: #f2e0ad; border-left-color: vars.$gold; }
+  &--error { background: vars.$error-tint; border-color: vars.$error-border; border-left-color: vars.$error;
+    strong { color: vars.$error; } }
+
+  // The tier-expiry notice sits in the dashboard's own grid rather than inside a card.
+  &--expiry { margin-bottom: 0; }
+}
+

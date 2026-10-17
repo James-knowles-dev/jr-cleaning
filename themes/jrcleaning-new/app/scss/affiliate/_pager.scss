@@ -1,0 +1,87 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Referred jobs pager
+// =============================================================================
+.aff-jobs__count {
+  font-family: vars.$sans;
+  font-size: functions.rem(14);
+  color: vars.$muted;
+  margin: functions.rem(-4 0 14);
+}
+
+.aff-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: functions.rem(14);
+  flex-wrap: wrap;
+  margin-top: functions.rem(18);
+  padding-top: functions.rem(16);
+  border-top: functions.rem(1) solid vars.$line;
+  font-family: vars.$sans;
+
+  &__pages {
+    display: flex;
+    align-items: center;
+    gap: functions.rem(4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__page,
+  &__step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: functions.rem(38);
+    height: functions.rem(38);
+    padding: functions.rem(0 12);
+    border-radius: vars.$r-sm;
+    font-size: functions.rem(14.5);
+    font-weight: 700;
+    text-decoration: none;
+    color: vars.$navy;
+    border: functions.rem(1) solid vars.$line;
+    background: vars.$white;
+    font-variant-numeric: tabular-nums;
+    transition: border-color .15s ease, background .15s ease, color .15s ease;
+
+    &:hover { border-color: vars.$accent; color: vars.$accent-dark; }
+
+    &:focus-visible {
+      outline: functions.rem(2) solid vars.$accent-dark;
+      outline-offset: functions.rem(2);
+    }
+  }
+
+  &__page.is-current {
+    background: vars.$navy;
+    border-color: vars.$navy;
+    color: vars.$white;
+    cursor: default;
+  }
+
+  // Disabled prev/next keep their footprint so the row doesn't shift between pages.
+  &__step.is-off {
+    color: vars.$placeholder;
+    border-color: vars.$line;
+    background: vars.$paper;
+    cursor: default;
+  }
+
+  &__gap {
+    color: vars.$muted;
+    padding: functions.rem(0 2);
+  }
+
+  @media (max-width: 30rem) {
+    justify-content: center;
+
+    &__pages { order: -1; width: 100%; justify-content: center; }
+  }
+}
+

@@ -1,0 +1,145 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Job status timeline
+//
+// Rendered by jrc_job_timeline_html() into the calendar's job modal and behind a
+// <details> in each row of the referred-jobs table.
+// =============================================================================
+
+.aff-timeline {
+  margin: functions.rem(10) 0 0;
+  padding: 0;
+  list-style: none;
+  // The spine. Drawn as a border on the list rather than a pseudo-element on each
+  // item so it is continuous — per-item segments leave hairline gaps at some zoom
+  // levels, which reads as a broken line rather than a deliberate one.
+  border-left: functions.rem(2) solid vars.$line;
+  padding-left: functions.rem(18);
+}
+
+.aff-timeline__item {
+  position: relative;
+  display: flex;
+  padding: 0 0 functions.rem(16);
+
+  &:last-child { padding-bottom: 0; }
+}
+
+.aff-timeline__dot {
+  position: absolute;
+  // Half the dot's width plus the spine's, so it sits centred ON the line.
+  left: functions.rem(-25);
+  top: functions.rem(3);
+  width: functions.rem(12);
+  height: functions.rem(12);
+  border-radius: 50%;
+  background: vars.$line;
+  // A ring in the card's own background colour, so the spine appears to pass behind
+  // the dot rather than through it.
+  box-shadow: 0 0 0 functions.rem(3) vars.$white;
+}
+
+.aff-timeline__body {
+  display: flex;
+  flex-direction: column;
+  gap: functions.rem(2);
+}
+
+.aff-timeline__status {
+  font-family: vars.$serif;
+  font-weight: 700;
+  font-size: functions.rem(14.5);
+  color: vars.$navy;
+}
+
+.aff-timeline__meaning {
+  font-size: functions.rem(13.5);
+  color: vars.$soft;
+}
+
+.aff-timeline__when {
+  font-size: functions.rem(12.5);
+  color: vars.$muted;
+}
+
+.aff-timeline__note {
+  font-size: functions.rem(12.5);
+  color: vars.$muted;
+  font-style: italic;
+}
+
+// Status colours on the dot. Kept to the four the workflow actually uses — an
+// unrecognised status still renders, just with the neutral dot above.
+.aff-timeline__item--requested .aff-timeline__dot { background: vars.$gold; }
+.aff-timeline__item--pending   .aff-timeline__dot { background: vars.$gold; }
+.aff-timeline__item--booked    .aff-timeline__dot { background: vars.$accent; }
+.aff-timeline__item--completed .aff-timeline__dot { background: vars.$success; }
+.aff-timeline__item--cancelled .aff-timeline__dot { background: vars.$error; }
+
+// The most recent entry is the current state, so give it the emphasis the status
+// badge elsewhere would have.
+.aff-timeline__item:last-child {
+  .aff-timeline__dot { box-shadow: 0 0 0 functions.rem(3) vars.$white, 0 0 0 functions.rem(5) rgba(vars.$navy, .12); }
+  .aff-timeline__status { color: vars.$accent-ink; }
+}
+
+// ---- in the job modal ----
+.aff-modal__history {
+  margin-top: functions.rem(22);
+  padding-top: functions.rem(18);
+  border-top: functions.rem(1) solid vars.$line;
+
+  h4 {
+    margin: 0 0 functions.rem(4);
+    font-family: vars.$serif;
+    font-size: functions.rem(15);
+    color: vars.$navy;
+  }
+}
+
+// ---- behind a disclosure in the jobs table ----
+.aff-jobs__history {
+  margin-top: functions.rem(8);
+
+  summary {
+    cursor: pointer;
+    font-size: functions.rem(12.5);
+    font-weight: 700;
+    color: vars.$accent-dark;
+    // The default triangle is inconsistent between browsers and misaligns with the
+    // small type here; a rotating caret of our own is predictable.
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: functions.rem(5);
+
+    &::-webkit-details-marker { display: none; }
+
+    &::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: functions.rem(4) solid currentColor;
+      border-top: functions.rem(4) solid transparent;
+      border-bottom: functions.rem(4) solid transparent;
+      transition: transform .15s ease;
+    }
+
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+  }
+
+  &[open] summary::before { transform: rotate(90deg); }
+
+  // The table cell is narrow; the timeline needs room to breathe without widening it.
+  .aff-timeline {
+    margin-top: functions.rem(10);
+    padding-left: functions.rem(14);
+  }
+  .aff-timeline__dot { left: functions.rem(-21); }
+
+  // Inside a striped table the dot's white ring is wrong on alternate rows.
+  .aff-timeline__dot { box-shadow: 0 0 0 functions.rem(3) vars.$paper; }
+}

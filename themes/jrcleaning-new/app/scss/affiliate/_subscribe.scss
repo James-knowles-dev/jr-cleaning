@@ -1,0 +1,58 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Calendar subscription
+// =============================================================================
+.aff-subscribe {
+  background: vars.$paper;
+  border: functions.rem(1) solid #e6e9ef;
+
+  &__intro {
+    margin: functions.rem(12 0 18);
+    font-family: vars.$sans;
+    font-size: functions.rem(14.5);
+    line-height: 1.65;
+    color: vars.$soft;
+    max-width: functions.rem(620);
+    em { font-style: normal; font-weight: 700; color: vars.$navy; }
+  }
+
+  // Deliberately not styled as an error: it is a standing property of the link, not
+  // something that has gone wrong. Gold rule, quiet type.
+  &__warn {
+    margin: functions.rem(16 0 0);
+    padding-left: functions.rem(14);
+    border-left: functions.rem(3) solid vars.$gold;
+    font-family: vars.$sans;
+    font-size: functions.rem(13.5);
+    line-height: 1.6;
+    color: vars.$muted;
+  }
+
+  &__reset {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: functions.rem(12);
+    margin: functions.rem(18 0 0);
+    padding-top: functions.rem(16);
+    border-top: functions.rem(1) solid vars.$line;
+  }
+
+  &__note {
+    font-family: vars.$sans;
+    font-size: functions.rem(13);
+    color: vars.$muted;
+  }
+}
+
+// A request nobody has confirmed yet, on the month grid. Dashed rather than filled, so
+// it reads as provisional next to the solid blocks of booked work.
+.aff-cal__ev--requested {
+  background: #fff8e6;
+  border: functions.rem(1) dashed #e0c470;
+  color: #6b5410;
+}
+

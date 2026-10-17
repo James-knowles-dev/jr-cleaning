@@ -1,0 +1,14 @@
+// J R Cleaning (Friendly) — areas / coverage stylesheet
+// =============================================================================
+//
+// Loaded ON TOP OF main.css, and only on the Areas template (page-areas.php — see
+// jrc_needs_areas() in functions/enqueue.php).
+//
+// The county grid, town pills, embedded map and coverage checker are used by exactly
+// one page on the site, so they no longer ship to every other one.
+//
+// Foundation only — no CSS is emitted by these; main.css has already loaded the base.
+@use 'mixins/index';
+@use 'vars';
+
+@use 'layout/areas';

@@ -1,0 +1,20 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.contact-form-block {
+  &__inner {
+    max-width: functions.rem(720);
+    margin: 0 auto;
+    padding: 0 vars.$gutter;
+  }
+  .section-head { margin-bottom: functions.rem(28); }
+  &__form {
+    background: vars.$white;
+    border: functions.rem(1) solid vars.$line;
+    border-radius: vars.$r-lg;
+    padding: functions.rem(28);
+    box-shadow: vars.$shadow-soft;
+    @include responsive.bp('tablet') { padding: functions.rem(36); }
+  }
+}

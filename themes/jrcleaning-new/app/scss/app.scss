@@ -1,0 +1,22 @@
+// J R Cleaning (Friendly) — shop + partner-area stylesheet
+// =============================================================================
+//
+// Loaded ON TOP OF main.css, and only on WooCommerce and My Account pages (see
+// jrc_needs_woo() in functions/enqueue.php). Everything here is behind a login or
+// on the shop; none of it applies to a marketing page, so shipping it to every
+// anonymous visitor was ~35% of the old single bundle for nothing.
+//
+// Foundation only — these emit no CSS of their own, they just make the mixins and
+// tokens available to the partials below. base/reset, typography and layout are
+// NOT repeated here: main.css has already loaded them.
+@use 'mixins/index';
+@use 'vars';
+
+@use 'layout/woocommerce';
+
+// The dashboard's December panel reuses .tier-card__perks, whose base rules live with
+// the public tier table. main.css no longer carries them, so this bundle needs its own
+// copy — see layout/_tiers.scss.
+@use 'layout/tiers';
+
+@use 'affiliate/index' as affiliate;

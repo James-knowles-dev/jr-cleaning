@@ -1,0 +1,103 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Quote wizard — the multi-page Gravity Form on page-quote.php
+// =============================================================================
+//
+// One template uses this and nothing else does, so it compiles to quote.css rather
+// than riding along in main.css. That includes the Gravity Forms progress-bar
+// overrides below: they style the wizard's own stepper, not forms generally, which is
+// why they are here and not in layout/_gravity-forms.scss.
+
+.quote {
+  background: vars.$cloud;
+  padding-bottom: functions.rem(80);
+
+  &__crumbs { padding-top: functions.rem(28); }
+  &__body { max-width: functions.rem(1060); margin: 0 auto; padding: functions.rem(20 28 0); }
+  &__top { margin-bottom: functions.rem(20); h1 { font-size: functions.fluid(30, 40); } }
+
+  &__grid { display: grid; grid-template-columns: 1fr; gap: functions.rem(28); align-items: start; @include responsive.bp('s-tablet') { grid-template-columns: 1fr functions.rem(320); } }
+  &__panel { background: vars.$white; border-radius: vars.$r-lg; padding: functions.rem(28); box-shadow: vars.$shadow-soft; @include responsive.bp('tablet') { padding: functions.rem(34); } }
+  &__hint { color: vars.$muted; }
+
+  // reassurance sidebar
+  &__summary {
+    background: vars.$white; border-radius: vars.$r-lg; padding: functions.rem(26); box-shadow: vars.$shadow-soft;
+    @include responsive.bp('s-tablet') { position: sticky; top: functions.rem(28); }
+    h3 { margin-bottom: functions.rem(16); }
+  }
+  &__assure { display: grid; gap: functions.rem(12);
+    li { display: flex; gap: functions.rem(10); align-items: flex-start; font-family: vars.$sans; font-size: functions.rem(14.5); color: vars.$ink; line-height: 1.4;
+      span { color: vars.$accent-dark; flex: none; font-weight: 800; } } }
+  &__reassure { margin-top: functions.rem(18); padding-top: functions.rem(16); border-top: functions.rem(1) solid vars.$line; font-size: functions.rem(13); color: vars.$muted; font-family: vars.$sans; }
+  &__coverage {
+    display: inline-flex; align-items: center; gap: functions.rem(6); margin-top: functions.rem(14);
+    font-family: vars.$sans; font-weight: 700; font-size: functions.rem(14); color: vars.$accent-dark;
+    span { transition: transform .15s ease; }
+    &:hover { color: vars.$navy; span { transform: translateX(functions.rem(3)); } }
+  }
+
+  // ---- Gravity Forms multi-page styling ----
+  .gform_wrapper {
+    // progress bar
+    .gf_progressbar_wrapper { margin-bottom: functions.rem(30); }
+    .gf_progressbar_title {
+      font-family: vars.$sans; font-weight: 700; font-size: functions.rem(13); color: vars.$muted;
+      text-transform: uppercase; letter-spacing: .08em; margin: 0 0 functions.rem(10);
+      span { color: vars.$navy; }
+    }
+    .gf_progressbar { background: #dfe3ea; border-radius: vars.$r-pill; height: functions.rem(8); overflow: hidden; box-shadow: none; padding: 0; }
+    .gf_progressbar_percentage {
+      background: vars.$accent !important; height: 100%; border-radius: vars.$r-pill;
+      transition: width .35s cubic-bezier(.4,0,.2,1);
+      span { display: none; }
+    }
+    // (legacy steps style, if ever switched back)
+    .gf_step { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(13); color: vars.$muted;
+      .gf_step_number { display: none; } &.gf_step_active { color: vars.$navy; } }
+
+    // step heading
+    .gfield_label, legend.gfield_label { font-family: vars.$serif; font-weight: 800; font-size: functions.rem(19); color: vars.$navy; margin-bottom: functions.rem(4); }
+    .gfield_description { color: vars.$muted; margin-bottom: functions.rem(16); }
+
+    // service step -> cards
+    .jrc-cards .gfield_radio,
+    .jrc-cards .gfield_checkbox { display: grid !important; grid-template-columns: 1fr; gap: functions.rem(12); @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; } }
+    .jrc-cards .gchoice { position: relative; margin: 0; width: auto; }
+    .jrc-cards .gchoice input { position: absolute; opacity: 0; pointer-events: none; }
+    .jrc-cards .gchoice label {
+      display: flex; align-items: center; min-height: functions.rem(64); cursor: pointer; margin: 0;
+      background: vars.$paper; border: functions.rem(1.5) solid #e6e9ef; border-radius: vars.$r; padding: functions.rem(16 20);
+      font-family: vars.$sans; font-weight: 700; font-size: functions.rem(16); color: vars.$navy; transition: .15s; line-height: 1.3;
+    }
+    .jrc-cards .gchoice label:hover { border-color: vars.$accent; background: vars.$white; transform: translateY(functions.rem(-2)); }
+    .jrc-cards .gchoice input:checked + label { border-color: vars.$accent; background: vars.$accent-tint; }
+
+    // property step -> chips (inline, wrapping)
+    .jrc-chips .gfield_radio,
+    .jrc-chips .gfield_checkbox { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; gap: functions.rem(10); grid-template-columns: none !important; }
+    .jrc-chips .gchoice { position: relative; flex: 0 0 auto; width: auto; margin: 0; }
+    .jrc-chips .gchoice input { position: absolute; opacity: 0; pointer-events: none; }
+    .jrc-chips .gchoice label {
+      display: inline-flex; align-items: center; cursor: pointer; margin: 0;
+      white-space: nowrap;
+      @include responsive.bp-down('s-mobile') { white-space: normal; }
+      padding: functions.rem(11 18); border-radius: vars.$r;
+      background: vars.$white; border: functions.rem(1.5) solid #e2e5ec; color: vars.$navy;
+      font-family: vars.$sans; font-weight: 600; font-size: functions.rem(14); transition: .15s;
+    }
+    .jrc-chips .gchoice label:hover { border-color: vars.$accent; }
+    .jrc-chips .gchoice input:checked + label { border-color: vars.$accent; background: vars.$accent-tint; }
+
+    // tidy the required indicator + spacing between the two property questions
+    .gfield_required { color: vars.$muted; font-weight: 600; }
+    .jrc-chips { margin-bottom: functions.rem(4); }
+
+    // page nav buttons
+    .gform_page_footer { display: flex; justify-content: space-between; gap: functions.rem(12); margin-top: functions.rem(26); border: none; padding: 0; }
+  }
+}
+

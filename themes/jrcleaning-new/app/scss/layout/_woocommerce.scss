@@ -1,0 +1,216 @@
+@use "../mixins/buttons";
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// Light-touch WooCommerce styling to match the Friendly look.
+.woocommerce {
+  .woo-wrap { padding-top: functions.rem(20); padding-bottom: functions.rem(80); }
+
+  ul.products {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: functions.rem(22);
+    margin: functions.rem(30) 0;
+    list-style: none;
+    @include responsive.bp('mobile') { grid-template-columns: repeat(3, 1fr); }
+
+    li.product {
+      width: auto !important;
+      margin: 0 !important;
+      background: vars.$white;
+      border: functions.rem(1) solid vars.$line;
+      border-radius: vars.$r-lg;
+      padding: functions.rem(18);
+      text-align: left;
+
+      img { border-radius: vars.$r-sm; margin-bottom: functions.rem(14); }
+      .woocommerce-loop-product__title { font-family: vars.$serif; font-size: functions.rem(18); color: vars.$navy; padding: 0; }
+      .price { color: vars.$navy; font-weight: 700; font-family: vars.$sans; .amount { color: vars.$navy; } }
+    }
+  }
+
+  // Buttons -> Friendly primary
+  a.button, button.button, .button, input.button, #respond input#submit, a.button.alt, button.button.alt {
+    @include buttons.btn-primary;
+  }
+
+  .price del { color: vars.$muted; }
+  .price ins { text-decoration: none; }
+
+  // Forms
+  .woocommerce-Input, input.input-text, select, textarea {
+    border: functions.rem(1.5) solid vars.$line !important;
+    border-radius: vars.$r-sm !important;
+    padding: functions.rem(12 14) !important;
+    font-family: vars.$sans !important;
+    // Keep a visible focus ring for keyboard users (WCAG 2.4.7); $accent-dark
+    // clears the 3:1 non-text contrast threshold that $accent does not.
+    &:focus { border-color: vars.$accent-dark !important; }
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+  }
+
+  // Notices
+  .woocommerce-message, .woocommerce-info {
+    border-top-color: vars.$accent;
+    border-radius: vars.$r-sm;
+    &::before { color: vars.$accent; }
+  }
+}
+
+// ---- My Account / login ----
+.woocommerce-account {
+  .section { padding-top: functions.rem(16); padding-bottom: functions.rem(48); }
+
+  // "Login" heading above the form
+  h2 { font-size: functions.rem(22); color: vars.$navy; margin: 0 0 functions.rem(18); }
+
+  // Logged-OUT view (login form) — centre it in a tidy column.
+  &:not(.logged-in) .woocommerce { max-width: functions.rem(480); margin: 0 auto; }
+
+  // Logged-IN view — replace WooCommerce's floated 35/65 split with a grid that
+  // stacks (nav on top) on mobile and sits side-by-side from small tablet up.
+  &.logged-in .woocommerce {
+    display: grid;
+    // minmax(0, …) lets the content column shrink below its intrinsic width so
+    // wide children (the jobs table) scroll internally instead of overflowing.
+    grid-template-columns: minmax(0, 1fr);
+    gap: functions.rem(24);
+    // WooCommerce adds clearfix ::before/::after to .woocommerce for its floated
+    // layout. As a grid, those pseudo-elements become stray grid items and throw
+    // the nav/content into the wrong cells — cancel them.
+    &::before, &::after { content: none; }
+    @include responsive.bp('s-tablet') {
+      grid-template-columns: functions.rem(230) minmax(0, 1fr);
+      gap: functions.rem(40);
+      align-items: start;
+    }
+  }
+  .woocommerce-MyAccount-navigation,
+  .woocommerce-MyAccount-content {
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    min-width: 0; // let content shrink instead of overflowing the viewport
+  }
+
+  form.woocommerce-form-login {
+    max-width: none;
+    margin: 0;
+    border: functions.rem(1) solid #e6e9ef;
+    border-radius: vars.$r-lg;
+    padding: functions.rem(30);
+    box-shadow: vars.$shadow-soft;
+
+    p { margin-bottom: functions.rem(16); }
+    label { font-family: vars.$sans; font-weight: 700; color: vars.$navy; }
+    .woocommerce-Input, input.input-text { width: 100%; padding: functions.rem(13 16) !important; border-radius: vars.$r !important; }
+    .woocommerce-form-login__submit { width: 100%; justify-content: center; margin: functions.rem(4) 0 0 !important; }
+    .woocommerce-form-login__rememberme { display: flex; align-items: center; gap: functions.rem(8); font-weight: 500; color: vars.$soft; margin-top: functions.rem(14); }
+  }
+
+  .woocommerce-LostPassword { margin: functions.rem(16) 0 0; a { color: vars.$accent-dark; font-weight: 700; &:hover { color: vars.$navy; } } }
+
+  // Dashboard home
+  .account-dash__hello { color: vars.$soft; font-size: functions.rem(16); margin: 0 0 functions.rem(20); strong { color: vars.$navy; } }
+  // Affiliate snapshot on the dashboard home
+  .account-snapshot {
+    max-width: functions.rem(560);
+    background: vars.$paper;
+    border: functions.rem(1) solid #e6e9ef;
+    border-radius: vars.$r-lg;
+    padding: functions.rem(20);
+    @include responsive.bp('s-mobile') { padding: functions.rem(24 26); }
+
+    &__stats {
+      list-style: none; margin: 0 0 functions.rem(20); padding: 0;
+      // Two-up on small phones, three-up once there's room — never 3 cramped columns.
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: functions.rem(16);
+      @include responsive.bp('s-mobile') { grid-template-columns: repeat(3, 1fr); }
+      li { display: flex; flex-direction: column; gap: functions.rem(5); min-width: 0; }
+    }
+    &__label { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(11.5); text-transform: uppercase; letter-spacing: .08em; color: vars.$muted; }
+    &__val { font-family: vars.$serif; font-weight: 700; font-size: functions.rem(20); color: vars.$navy; line-height: 1.1; }
+    &__code { display: inline-flex; align-items: center; gap: functions.rem(10); flex-wrap: wrap; }
+    &__copy {
+      flex: none; border: 0; cursor: pointer; border-radius: vars.$r-sm;
+      background: vars.$navy; color: vars.$white; font-family: vars.$serif; font-weight: 700;
+      font-size: functions.rem(12); padding: functions.rem(5 12); transition: background .15s ease;
+      &:hover { background: vars.$navy-700; }
+      &.is-copied { background: vars.$accent; color: vars.$accent-ink; }
+    }
+    &__cta { width: 100%; justify-content: center; }
+  }
+  .account-dash__help { margin: functions.rem(20) 0 0; color: vars.$muted; font-size: functions.rem(14.5);
+    a { color: vars.$accent-dark; font-weight: 700; &:hover { color: vars.$navy; } } }
+
+  // Account details form
+  form.woocommerce-EditAccountForm {
+    max-width: functions.rem(720);
+    p, .woocommerce-form-row { margin-bottom: functions.rem(18); }
+    label { font-family: vars.$sans; font-weight: 700; color: vars.$navy; }
+    .woocommerce-Input, input.input-text { width: 100%; padding: functions.rem(13 16) !important; border-radius: vars.$r !important; }
+    span.description, em { color: vars.$muted; font-style: normal; font-size: functions.rem(13); }
+    // Stack the paired rows on mobile; only float them side-by-side once there's width.
+    .form-row-first, .form-row-last { float: none; width: 100%; }
+    @include responsive.bp('s-mobile') {
+      .form-row-first { float: left; width: calc(50% - #{functions.rem(8)}); }
+      .form-row-last { float: right; width: calc(50% - #{functions.rem(8)}); }
+    }
+    .clear { clear: both; }
+    fieldset {
+      clear: both; border: functions.rem(1) solid #e6e9ef; border-radius: vars.$r-lg;
+      padding: functions.rem(8 24 20); margin: functions.rem(6) 0 0;
+      legend { font-family: vars.$serif; font-weight: 700; color: vars.$navy; font-size: functions.rem(16); padding: 0 functions.rem(8); }
+    }
+    .woocommerce-Button, button[type="submit"] { margin-top: functions.rem(22); }
+  }
+
+  // Logged-in dashboard navigation.
+  // Mobile: a compact strip of wrapping chips so it doesn't eat a whole screen.
+  // Desktop (s-tablet+): a vertical sidebar.
+  .woocommerce-MyAccount-navigation {
+    ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: functions.rem(8); }
+    li { margin: 0; }
+    li a {
+      display: block; padding: functions.rem(9 14); border-radius: functions.rem(10);
+      font-family: vars.$sans; font-weight: 600; font-size: functions.rem(14.5); color: vars.$navy;
+      background: rgba(vars.$navy, .05);
+      &:hover { background: rgba(vars.$navy, .1); }
+    }
+    li.is-active a { background: vars.$navy; color: vars.$white; }
+
+    // Unread-report count beside the "Reports" tab. Added to the menu label in
+    // functions/affiliate.php and let through by the wp_kses() allowlist in the
+    // myaccount/navigation.php override — core would escape it to literal text.
+    .aff-nav-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: functions.rem(19);
+      height: functions.rem(19);
+      margin-left: functions.rem(7);
+      padding: functions.rem(0 5);
+      border-radius: vars.$r-pill;
+      background: vars.$accent;
+      color: vars.$accent-ink;
+      font-size: functions.rem(11.5);
+      font-weight: 800;
+      line-height: 1;
+      vertical-align: text-top;
+    }
+
+    // On the active (navy) tab the teal pill sits on a dark ground; flip it to
+    // white so it keeps its contrast.
+    li.is-active a .aff-nav-count { background: vars.$white; color: vars.$navy; }
+
+    @include responsive.bp('s-tablet') {
+      ul { display: grid; gap: functions.rem(4); }
+      li a { background: transparent; &:hover { background: rgba(vars.$navy, .06); } }
+      li.is-active a { background: vars.$navy; }
+    }
+  }
+}
+
+// Header cart count badge
+.jrc-cart-count { display: inline-block; }

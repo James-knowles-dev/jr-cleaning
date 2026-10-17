@@ -1,0 +1,32 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.trust-strip {
+  background: vars.$navy;
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: functions.rem(20);
+    padding: functions.rem(30) vars.$gutter;
+    @include responsive.bp('mobile') { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  &__cell {
+    text-align: center;
+    @include responsive.bp('mobile') {
+      &:not(:last-child) { border-right: functions.rem(1) solid rgba(vars.$white, 0.12); }
+    }
+  }
+
+  &__n {
+    font-family: vars.$serif;
+    font-weight: 700;
+    font-size: functions.fluid(26, 32);
+    color: vars.$white;
+    span { color: vars.$accent; }
+  }
+
+  &__l { color: #aeb3c7; font-size: functions.rem(13); margin-top: functions.rem(2); }
+}

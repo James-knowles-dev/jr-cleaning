@@ -1,0 +1,63 @@
+@use "mixins/functions";
+
+// =============================================================================
+// J R Cleaning — Friendly design tokens
+// =============================================================================
+
+// Brand
+// Navy matches the colour used across the existing live site (and therefore the
+// physical brand material). NB: `images/jr-logo-navy.png` is #16204b, a noticeably
+// more violet navy — 229° hue against 212° here. The logo asset and the site have
+// never agreed; the site's own colour was taken as authoritative. If the logo is
+// ever confirmed as the brand reference, change $navy back to #16204b and the
+// derived shades below with it.
+$navy:        #143458;
+$navy-700:    #0f2741;
+$navy-900:    #0b1b2e;
+
+$accent:      #13b5b1; // teal — primary CTA / accent
+$accent-dark: #0d8380; // eyebrow + emphasis
+$accent-ink:  #06403f; // text on teal
+$accent-tint: #eafaf9; // soft teal bg
+$accent-border:#b6ebe8;
+
+// Neutrals
+$white:  #ffffff;
+$ink:    #3a3f57; // body copy on light
+$soft:   #54596f; // lead paragraph
+$muted:  #6b7088; // secondary text
+$line:   #e9ebf0; // hairlines / borders
+$paper:  #f7f8fa; // alt section background
+$cloud:  #eef0f4; // light app background (quote funnel)
+
+// Status
+$gold:        #f5b301;
+$error:       #d63638;
+$error-tint:  #fdf3ef;
+$error-border:#f1d6cb;
+$success:     #0c5f5c;
+$placeholder: #999999;
+
+// Typography (per design: Plus Jakarta Sans for display/headings, Hanken Grotesk for body)
+// NB: $serif now holds the display sans — kept the name to avoid churn across partials.
+$serif: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+$sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+// Radii
+$r-sm: functions.rem(12);
+$r:    functions.rem(14);
+$r-lg: functions.rem(20);
+$r-xl: functions.rem(28);
+$r-pill: functions.rem(999);
+
+// Layout
+$wrap: functions.rem(1180);
+$gutter: functions.rem(28);
+
+// Shadows
+$shadow-card: 0 functions.rem(16) functions.rem(36) functions.rem(-14) rgba($navy, 0.35);
+$shadow-soft: 0 functions.rem(18) functions.rem(50) functions.rem(-28) rgba($navy, 0.35);
+$shadow-hero: 0 functions.rem(34) functions.rem(64) functions.rem(-26) rgba($navy, 0.55);
+
+// Motion
+$ease: all 0.3s ease;

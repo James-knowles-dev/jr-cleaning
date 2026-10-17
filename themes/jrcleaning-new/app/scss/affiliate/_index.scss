@@ -1,0 +1,25 @@
+// =============================================================================
+// Partner (affiliate) area — WooCommerce My Account
+//
+// Split out of the former 1,343-line layout/_affiliate.scss. The order below is the
+// original source order and must stay that way: the partials were cut at contiguous
+// line boundaries so the compiled output is unchanged, and a few later sections
+// deliberately override earlier ones at equal specificity (aff-cal__ev in job-panel
+// after calendar; aff-cal__ev--requested in subscribe after both).
+//
+// Loaded via app.scss, which is enqueued only on WooCommerce/My Account pages —
+// none of this reaches a logged-out visitor on the marketing site.
+// =============================================================================
+
+@use 'dashboard';
+@use 'pager';
+@use 'calendar';
+@use 'job-panel';
+@use 'reports';
+@use 'notices';
+@use 'filters';
+@use 'toolbars';
+@use 'subscribe';
+@use 'request';
+@use 'account';
+@use 'timeline';

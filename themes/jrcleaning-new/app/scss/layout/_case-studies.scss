@@ -1,0 +1,32 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: functions.rem(22);
+  margin: functions.rem(40) 0;
+  @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+}
+
+.case-card {
+  position: relative;
+  display: block;
+  border-radius: vars.$r-lg;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: vars.$navy;
+
+  img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: vars.$ease; }
+  &:hover img { opacity: 1; transform: scale(1.03); }
+
+  &__overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: functions.rem(24);
+    background: linear-gradient(to top, rgba(vars.$navy, .85), transparent 70%);
+    h2 { color: vars.$white; font-size: functions.rem(22); }
+    span { color: rgba(vars.$white, .8); font-family: vars.$sans; font-size: functions.rem(13.5); margin-top: functions.rem(4); }
+  }
+}

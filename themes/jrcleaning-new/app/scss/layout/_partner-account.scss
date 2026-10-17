@@ -1,0 +1,280 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../mixins/cards";
+@use "../vars";
+
+// =============================================================================
+// Partner account features page (page-partner-account.php)
+//
+// Shares the visual language of layout/_partners.scss — same hero shape, same card
+// treatment, same prog-steps and partners-cta at the foot — so a visitor moving
+// between /partners/ and /partners/your-account/ does not feel handed to a different
+// site. Only what is genuinely new to this page lives here.
+// =============================================================================
+
+// ---- hero ----
+.pa-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: functions.rem(34);
+  align-items: start;
+
+  @include responsive.bp('tablet') {
+    // Slightly wider than half for the copy: the aside is a short list and a 50/50
+    // leaves the lead paragraph breaking every six or seven words.
+    grid-template-columns: 1.35fr 1fr;
+    gap: functions.rem(54);
+  }
+
+  h1 {
+    margin-top: functions.rem(14);
+    font-size: functions.fluid(32, 46);
+    line-height: 1.1;
+  }
+
+  .lead { margin-top: functions.rem(16); max-width: 34em; }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: functions.rem(13);
+    margin-top: functions.rem(30);
+  }
+
+  &__aside {
+    padding: functions.rem(26 28);
+    border: functions.rem(1) solid vars.$line;
+    border-radius: vars.$r-lg;
+    background: vars.$paper;
+
+    ul { margin-top: functions.rem(14); display: grid; gap: functions.rem(12); }
+
+    li {
+      display: flex;
+      gap: functions.rem(10);
+      align-items: flex-start;
+      font-family: vars.$sans;
+      font-size: functions.rem(14.5);
+      line-height: 1.5;
+      color: vars.$soft;
+    }
+
+    span {
+      flex: 0 0 auto;
+      color: vars.$accent-dark;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+  }
+
+  &__aside-eyebrow {
+    font-family: vars.$sans;
+    font-size: functions.rem(12);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+    color: vars.$muted;
+  }
+}
+
+// ---- the six feature cards ----
+.pa-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: functions.rem(22);
+  margin-top: functions.rem(38);
+
+  @include responsive.bp('s-mobile') { grid-template-columns: repeat(2, 1fr); }
+  @include responsive.bp('desktop')  { grid-template-columns: repeat(3, 1fr); }
+
+  // A card left alone on the last row stretches across it rather than leaving a gap,
+  // so adding or removing a tab never strands one.
+  @media (min-width: 540px) and (max-width: 1199px) {
+    > .pa-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
+  @include responsive.bp('desktop') {
+    > .pa-card:last-child:nth-child(3n+1) { grid-column: 1 / -1; }
+  }
+}
+
+.pa-card {
+  display: flex;
+  flex-direction: column;
+  padding: functions.rem(28 26 26);
+  border: functions.rem(1) solid vars.$line;
+  border-radius: vars.$r-lg;
+  background: vars.$white;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+
+  // Not a link — nothing on this page is clickable per card, so the lift is a
+  // readability cue for the card under the cursor, not a promise of navigation.
+  &:hover {
+    @include cards.card-lift($alpha: .28);
+    border-color: vars.$accent-border;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: functions.rem(44);
+    height: functions.rem(44);
+    border-radius: functions.rem(13);
+    background: vars.$accent-tint;
+    color: vars.$accent-ink;
+    margin-bottom: functions.rem(16);
+  }
+
+  &__tab {
+    font-family: vars.$sans;
+    font-size: functions.rem(12);
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: vars.$accent-dark;
+  }
+
+  h3 {
+    margin-top: functions.rem(6);
+    font-size: functions.rem(19);
+    line-height: 1.3;
+  }
+
+  p {
+    margin-top: functions.rem(10);
+    font-size: functions.rem(14.5);
+    line-height: 1.6;
+    color: vars.$soft;
+  }
+
+  &__points {
+    margin-top: functions.rem(16);
+    padding-top: functions.rem(15);
+    border-top: functions.rem(1) solid vars.$line;
+    display: grid;
+    gap: functions.rem(9);
+    // Pushes the list to the bottom so the rules line up across a row of cards whose
+    // paragraphs differ in length.
+    margin-block-start: auto;
+
+    li {
+      position: relative;
+      padding-left: functions.rem(19);
+      font-family: vars.$sans;
+      font-size: functions.rem(13.5);
+      line-height: 1.5;
+      color: vars.$ink;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: functions.rem(7);
+        width: functions.rem(7);
+        height: functions.rem(7);
+        border-radius: 50%;
+        background: vars.$accent;
+      }
+    }
+  }
+}
+
+// ---- privacy split ----
+.pa-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: functions.rem(34);
+  align-items: start;
+
+  @include responsive.bp('tablet') {
+    grid-template-columns: 1.2fr 1fr;
+    gap: functions.rem(54);
+  }
+
+  &__content {
+    h2 { margin-top: functions.rem(14); font-size: functions.fluid(26, 34); line-height: 1.18; }
+    > p { margin-top: functions.rem(14); color: vars.$soft; max-width: 34em; }
+  }
+
+  &__points {
+    margin-top: functions.rem(20);
+    display: grid;
+    gap: functions.rem(11);
+
+    li {
+      position: relative;
+      padding-left: functions.rem(28);
+      font-family: vars.$sans;
+      font-size: functions.rem(15);
+      line-height: 1.55;
+      color: vars.$ink;
+
+      // A tick drawn in CSS rather than an inline SVG per item: four identical marks
+      // in one list is exactly where a pseudo-element beats markup.
+      &::before {
+        content: "";
+        position: absolute;
+        left: functions.rem(2);
+        top: functions.rem(5);
+        width: functions.rem(6);
+        height: functions.rem(11);
+        border: solid vars.$accent-dark;
+        border-width: 0 functions.rem(2) functions.rem(2) 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &__note {
+    margin-top: functions.rem(20);
+    padding: functions.rem(14 18);
+    border-left: functions.rem(3) solid vars.$accent-border;
+    background: vars.$white;
+    border-radius: 0 vars.$r-sm vars.$r-sm 0;
+    font-size: functions.rem(14);
+    line-height: 1.6;
+    color: vars.$muted;
+  }
+}
+
+.pa-note {
+  padding: functions.rem(28);
+  border-radius: vars.$r-lg;
+  background: vars.$navy;
+  color: vars.$white;
+
+  h3 { color: vars.$white; font-size: functions.rem(19); }
+
+  p {
+    margin-top: functions.rem(12);
+    font-size: functions.rem(14.5);
+    line-height: 1.6;
+    color: rgba(vars.$white, .78);
+  }
+
+  ul {
+    margin-top: functions.rem(18);
+    padding-top: functions.rem(16);
+    border-top: functions.rem(1) solid rgba(vars.$white, .16);
+    display: grid;
+    gap: functions.rem(10);
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: functions.rem(10);
+    font-family: vars.$sans;
+    font-size: functions.rem(14);
+    color: rgba(vars.$white, .92);
+
+    &::before {
+      content: "";
+      flex: 0 0 auto;
+      width: functions.rem(6);
+      height: functions.rem(6);
+      border-radius: 50%;
+      background: vars.$accent;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Filter bar (reports library)
+// =============================================================================
+.aff-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: functions.rem(12);
+  margin: functions.rem(4 0 20);
+  padding: functions.rem(16);
+  background: vars.$paper;
+  border: functions.rem(1) solid vars.$line;
+  border-radius: vars.$r;
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: functions.rem(6);
+    // Enough to be usable on a phone without the row collapsing to one control a line.
+    flex: 1 1 functions.rem(150);
+    min-width: 0;
+
+    &--grow { flex: 3 1 functions.rem(220); }
+  }
+
+  &__label {
+    font-family: vars.$sans;
+    font-weight: 700;
+    font-size: functions.rem(12);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: vars.$muted;
+  }
+
+  input,
+  select {
+    width: 100%;
+    font-family: vars.$sans;
+    font-size: functions.rem(15);
+    color: vars.$ink;
+    background: vars.$white;
+    border: functions.rem(1.5) solid #d6dae2;
+    border-radius: vars.$r-sm;
+    padding: functions.rem(10 12);
+
+    &:focus { border-color: vars.$accent-dark; }
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: functions.rem(12);
+    flex: 0 0 auto;
+  }
+
+  &__clear {
+    font-family: vars.$sans;
+    font-size: functions.rem(14);
+    font-weight: 700;
+    color: vars.$muted;
+    &:hover { color: vars.$navy; }
+  }
+}
+

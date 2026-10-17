@@ -1,0 +1,175 @@
+@use "sass:color";
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// Global pre-footer CTA band
+.footer-cta {
+  background: vars.$white;
+  padding: functions.rem(40) 0 0;
+
+  &__card {
+    position: relative;
+    overflow: hidden;
+    background: vars.$navy;
+    border-radius: vars.$r-xl;
+    padding: functions.rem(40 28);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(28);
+    align-items: center;
+    margin-bottom: functions.rem(-56);
+    z-index: 1;
+    @include responsive.bp('tablet') { grid-template-columns: 1.3fr .7fr; padding: functions.rem(48 56); gap: functions.rem(40); }
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: functions.rem(120); top: functions.rem(-60);
+      width: functions.rem(300); height: functions.rem(300);
+      border-radius: 50%;
+      background: rgba(vars.$white, 0.04);
+      pointer-events: none;
+    }
+  }
+
+  &__body {
+    position: relative; z-index: 1;
+    h2 { color: vars.$white!important; }
+    p { color: rgba(vars.$white, 0.7); margin-top: functions.rem(12); max-width: 26em; }
+  }
+
+  &__actions {
+    display: flex; flex-direction: column; gap: functions.rem(13); margin-top: functions.rem(24);
+    .button { width: 100%; justify-content: center; }
+    @include responsive.bp('tablet') {
+      flex-direction: row; flex-wrap: wrap;
+      .button { width: auto; }
+    }
+  }
+
+  &__widget {
+    position: relative; z-index: 1;
+    justify-self: stretch;
+    .bark-card { width: 100%; }
+    @include responsive.bp('tablet') {
+      justify-self: end;
+      .bark-card { width: functions.rem(248); }
+    }
+  }
+}
+
+// Bark reviews badge (matches design)
+.bark-card {
+  display: block;
+  width: functions.rem(248);
+  max-width: 100%;
+  text-decoration: none;
+
+  &__panel {
+    background: vars.$white;
+    border-radius: functions.rem(14) functions.rem(14) 0 0;
+    padding: functions.rem(20 22 16);
+    text-align: center;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: functions.rem(7);
+    font-family: vars.$serif;
+    font-weight: 800;
+    font-size: functions.rem(26);
+    letter-spacing: -0.02em;
+    color: vars.$navy;
+  }
+  &__tri {
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: functions.rem(7) 0 functions.rem(7) functions.rem(11);
+    border-color: transparent transparent transparent vars.$navy;
+  }
+
+  &__stars { color: vars.$gold; font-size: functions.rem(20); letter-spacing: functions.rem(3); margin-top: functions.rem(8); }
+
+  &__meta {
+    background: rgba(vars.$white, 0.06);
+    border-radius: 0 0 functions.rem(14) functions.rem(14);
+    padding: functions.rem(14 22 16);
+    text-align: center;
+  }
+  &__name { color: vars.$white; font-family: vars.$serif; font-weight: 700; font-size: functions.rem(15); }
+  &__link { display: inline-block; color: vars.$accent; font-family: vars.$sans; font-weight: 700; font-size: functions.rem(13.5); margin-top: functions.rem(4); }
+
+  &:hover &__link { color: vars.$white; }
+}
+
+.site-footer {
+  // A hair darker than the CTA card above it, so the two are only just
+  // distinguishable. Derived from $navy rather than hardcoded, which is how the
+  // previous value drifted when the brand navy changed.
+  background: color.scale(vars.$navy, $lightness: -10%);
+  color: rgba(vars.$white, 0.72);
+  padding: functions.rem(112) 0 functions.rem(30);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(34);
+    @include responsive.bp('mobile') { grid-template-columns: 1.4fr 1fr 1fr 1.1fr; }
+  }
+
+  &__brand img { height: functions.rem(58); width: auto; }
+
+  &__about p {
+    color: rgba(vars.$white, 0.7);
+    font-size: functions.rem(14.5);
+    line-height: 1.6;
+    margin: functions.rem(18) 0 0;
+    max-width: 24em;
+  }
+
+  &__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: functions.rem(16);
+    margin-top: functions.rem(20);
+    a { font-family: vars.$sans; font-weight: 600; font-size: functions.rem(13.5); color: rgba(vars.$white, 0.6); &:hover { color: vars.$white; } }
+  }
+
+  &__col {
+    .site-footer__col-title {
+      font-family: vars.$sans;
+      font-weight: 700;
+      font-size: functions.rem(12);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: vars.$white;
+      margin: 0 0 functions.rem(16);
+    }
+    a, .site-footer__loc {
+      display: block;
+      color: rgba(vars.$white, 0.6);
+      font-family: vars.$sans;
+      font-size: functions.rem(14.5);
+      margin-bottom: functions.rem(13);
+    }
+    a:hover { color: vars.$white; }
+    a.is-accent { color: vars.$accent; font-weight: 700; &:hover { color: vars.$white; } }
+  }
+
+  &__menu a { display: block; }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: functions.rem(10);
+    margin-top: functions.rem(48);
+    padding-top: functions.rem(24);
+    border-top: functions.rem(1) solid rgba(vars.$white, 0.12);
+    color: rgba(vars.$white, 0.5);
+    font-family: vars.$sans;
+    font-size: functions.rem(13);
+  }
+}

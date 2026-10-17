@@ -1,0 +1,102 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.hero {
+  overflow: hidden;
+  padding-top: functions.rem(40);
+  @include responsive.bp('tablet') { padding-top: functions.rem(60); }
+
+  body.is-home & { padding-top: functions.rem(24); @include responsive.bp('tablet') { padding-top: functions.rem(40); } }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(40);
+    align-items: center;
+    padding-bottom: functions.rem(56);
+    @include responsive.bp('tablet') { grid-template-columns: 1.05fr .95fr; gap: functions.rem(50); padding-bottom: functions.rem(76); }
+  }
+
+  &__content { display: flex; flex-direction: column; align-items: flex-start; gap: functions.rem(22); }
+
+  &__heading {
+    font-size: functions.fluid(38, 56);
+    .accent { color: vars.$accent-dark; }
+  }
+
+  &__sub { max-width: 31em; margin: 0; }
+
+  &__buttons { display: flex; flex-wrap: wrap; gap: functions.rem(13); margin-top: functions.rem(8); }
+
+  &__ticks {
+    display: flex; flex-wrap: wrap; gap: functions.rem(22);
+    margin-top: functions.rem(8);
+    color: vars.$muted; font-size: functions.rem(13.5); font-weight: 600;
+    span { display: flex; align-items: center; gap: functions.rem(7); }
+    i { width: functions.rem(8); height: functions.rem(8); border-radius: 50%; background: vars.$accent; }
+  }
+
+  &__media {
+    position: relative;
+    // Stacked layout (below the 2-column tablet breakpoint): stop the tall 4/5
+    // portrait frame filling the full width and towering on tablet/portrait.
+    @include responsive.bp-down('tablet') {
+      max-width: functions.rem(440);
+      margin-inline: auto;
+    }
+  }
+
+  &__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: vars.$r-xl;
+    overflow: hidden;
+    background: vars.$navy;
+    box-shadow: vars.$shadow-hero;
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+
+  &__card {
+    position: absolute;
+    background: vars.$white;
+    border-radius: vars.$r;
+    padding: functions.rem(14 18);
+    box-shadow: vars.$shadow-card;
+
+    &--stat {
+      top: functions.rem(22); left: functions.rem(-18);
+      animation: jrFloat 5s ease-in-out infinite;
+      .n { font-family: vars.$serif; font-weight: 700; font-size: functions.rem(26); color: vars.$navy; }
+      .l { font-size: functions.rem(12); color: vars.$muted; font-weight: 600; }
+    }
+
+    // Social-proof alternative to the numeric stat card: sits in the same spot
+    // but lays out like the badge, because a sentence does not fit the big-number
+    // treatment that --stat uses.
+    &--trust {
+      top: functions.rem(22); left: functions.rem(-18);
+      display: flex; align-items: center; gap: functions.rem(11);
+      max-width: functions.rem(215);
+      animation: jrFloat 5s ease-in-out infinite;
+      .ico { flex: none; width: functions.rem(38); height: functions.rem(38); border-radius: functions.rem(11); background: vars.$accent-tint; color: vars.$accent-dark; display: flex; align-items: center; justify-content: center; font-size: functions.rem(15); }
+      .t { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(14); color: vars.$navy; line-height: 1.25; }
+    }
+
+    &--badge {
+      bottom: functions.rem(24); right: functions.rem(-18);
+      display: flex; align-items: center; gap: functions.rem(11);
+      max-width: functions.rem(220);
+      animation: jrFloat 6s ease-in-out infinite .5s;
+      .ico { flex: none; width: functions.rem(38); height: functions.rem(38); border-radius: functions.rem(11); background: vars.$accent-tint; color: vars.$accent-dark; display: flex; align-items: center; justify-content: center; font-size: functions.rem(18); }
+      .t { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(14); color: vars.$navy; line-height: 1.25; }
+    }
+
+    @include responsive.bp-down('s-mobile') {
+      &--stat,
+      &--trust { left: functions.rem(8); }
+      &--badge { right: functions.rem(8); }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+/*
+ * Partner area additions shipped with the plugin: the price list tab, and the
+ * Single Owner package / property sections. Everything else in the partner area is
+ * styled by the theme (app/scss/affiliate/); these build on its .aff-card etc.
+ * Colours are the theme's brand tokens.
+ */
+
+/* Package + property (Holiday Let — Single Owner) */
+.aff-package__list,
+.aff-property__list { list-style: none; margin: 12px 0 0; padding: 0; }
+.aff-package__list li { position: relative; padding: 6px 0 6px 24px; border-bottom: 1px solid #e9ebf0; }
+.aff-package__list li:last-child { border-bottom: 0; }
+.aff-package__list li::before { content: "✓"; position: absolute; left: 0; top: 6px; color: #0d8380; font-weight: 700; }
+.aff-card--package,
+.aff-card--property { margin-bottom: 20px; }
+
+.aff-property__list li {
+	display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
+	padding: 10px 0; border-bottom: 1px solid #e9ebf0;
+}
+.aff-property__list li:last-child { border-bottom: 0; }
+.aff-property__date { min-width: 96px; font-weight: 600; color: #0b1b2e; }
+.aff-property__type { flex: 1 1 200px; min-width: 0; color: #3a3f57; }
+
+/* Price list tab */
+.aff-pl__head {
+	display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;
+	gap: 16px 24px; margin-bottom: 24px;
+}
+.aff-pl__account { margin: 4px 0 6px; }
+.aff-pl__rate { margin: 0; color: #54596f; }
+.aff-pl__note { margin: 8px 0 0; color: #06403f; background: #eafaf9; border: 1px solid #b6ebe8; border-radius: 6px; padding: 8px 12px; }
+.aff-pl__actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.aff-pl__date { font-size: 13px; color: #6b7088; }
+.aff-pl__intro { color: #54596f; max-width: 70ch; }
+
+.aff-pl__section { margin: 0 0 28px; }
+.aff-pl__section h3 { margin: 0 0 10px; padding-bottom: 8px; border-bottom: 2px solid #13b5b1; }
+
+.aff-pl__table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.aff-pl__table th {
+	text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase;
+	letter-spacing: .04em; color: #6b7088; padding: 8px 10px; border-bottom: 1px solid #e9ebf0;
+}
+.aff-pl__table td { padding: 10px; border-bottom: 1px solid #eef0f4; vertical-align: top; }
+.aff-pl__table tbody tr:nth-child(even) td { background: #f7f8fa; }
+.aff-pl__item { display: block; font-weight: 600; color: #0b1b2e; }
+.aff-pl__detail { display: block; font-size: 13px; color: #6b7088; margin-top: 2px; }
+.aff-pl__price, .aff-pl__was { text-align: right !important; white-space: nowrap; }
+td.aff-pl__price { font-weight: 700; color: #0b1b2e; }
+td.aff-pl__was { color: #999999; text-decoration: line-through; }
+
+.aff-pl__terms { margin: 8px 0 24px; padding: 14px 16px 14px 32px; background: #f7f8fa; border-left: 3px solid #13b5b1; color: #54596f; font-size: 14px; }
+.aff-pl__terms li { margin: 0 0 4px; }
+
+@media (max-width: 600px) {
+	.aff-pl__actions { align-items: flex-start; }
+	.aff-pl__table { font-size: 14px; }
+	.aff-pl__table th, .aff-pl__table td { padding: 8px 6px; }
+}
+
+/* School site map (affiliate-site-map.php + assets/site-map.js)
+   Map full width on top, building cards in a grid below: the account content column
+   is too narrow for a side-by-side layout on most screens. */
+.sm__intro { color: #54596f; margin: 0 0 14px; }
+.sm__map { height: 340px; border-radius: 14px; overflow: hidden; border: 1px solid #e9ebf0; background: #eef0f4; z-index: 0; }
+@media (min-width: 700px) { .sm__map { height: 460px; } }
+.sm__nomap { padding: 24px; color: #6b7088; margin: 0; }
+
+.sm-pin { background: none; border: 0; }
+.sm-pin span {
+	display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%;
+	background: #143458; color: #fff; font: 700 13px/1 "Plus Jakarta Sans", system-ui, sans-serif;
+	border: 3px solid #fff; box-shadow: 0 2px 6px rgba(11, 27, 46, .35); transition: transform .15s ease, background .15s ease;
+}
+.sm-pin--idle span { background: #6b7088; }
+.sm-pin.is-active span { background: #13b5b1; color: #06403f; transform: scale(1.18); }
+
+.sm__list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 760px) { .sm__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sm-b { background: #fff; border: 1px solid #e9ebf0; border-radius: 12px; min-width: 0; scroll-margin-top: 90px; transition: border-color .15s ease, box-shadow .15s ease; }
+.sm-b.is-active { border-color: #13b5b1; box-shadow: 0 0 0 1px #13b5b1; }
+.sm-b__head {
+	width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "pin name" "pin when";
+	gap: 2px 12px; align-items: center; text-align: left; background: none; border: 0; padding: 14px 16px; cursor: pointer; font: inherit; color: inherit;
+}
+.sm-b__pin {
+	grid-area: pin; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+	background: #143458; color: #fff; font-weight: 700; font-size: 13px;
+}
+.sm-b.is-active .sm-b__pin { background: #13b5b1; color: #06403f; }
+.sm-b__name { grid-area: name; font-weight: 700; color: #0b1b2e; overflow-wrap: anywhere; }
+.sm-b__when { grid-area: when; font-size: 13px; color: #6b7088; }
+.sm-b__body { padding: 0 16px 16px; font-size: 14px; overflow-wrap: anywhere; }
+.sm-b__label { display: block; margin: 12px 0 4px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6b7088; }
+.sm-b__freq .sm-b__label { margin-top: 0; }
+.sm-b__lines, .sm-b__cleans { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.sm-b__lines li { font-weight: 600; color: #143458; }
+.sm-b__rate { margin: 4px 0 0; color: #0d8380; font-weight: 600; font-size: 13px; }
+.sm-b__notes { margin: 10px 0 0; padding: 8px 10px; background: #f7f8fa; border-radius: 8px; color: #54596f; }
+.sm-b__muted { color: #6b7088; }
+.sm-b__req { margin-top: 14px; white-space: normal; text-align: center; max-width: 100%; }
+.sm__other { margin-top: 18px; }
+/* The open card spans the row, so the grid never leaves a gap beside it; its details
+   sit in three columns there (how often | coming up | recently cleaned). */
+.sm-b:has(> .sm-b__head[aria-expanded="true"]) { grid-column: 1 / -1; }
+@media (min-width: 760px) {
+	.sm-b__body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 28px; padding-left: 58px; }
+	.sm-b__col > .sm-b__label:first-child, .sm-b__col > .sm-b__freq:first-child .sm-b__label { margin-top: 0; }
+}
+.sm-b__cleans li { line-height: 1.45; }
+.sm-b__body[hidden] { display: none !important; }
+/* Its own class, not .button: WooCommerce's account styles give .button a fixed height. */
+.sm-b__req {
+	display: inline-flex; align-items: center; justify-content: center; margin-top: 14px; max-width: 100%;
+	padding: 9px 14px; border: 1.5px solid #d6dae2; border-radius: 12px; background: #fff; color: #143458;
+	font: 700 14px/1.3 "Plus Jakarta Sans", system-ui, sans-serif; text-decoration: none; text-align: center; white-space: normal;
+	transition: border-color .15s ease, background .15s ease;
+}
+.sm-b__req:hover, .sm-b__req:focus-visible { border-color: #13b5b1; background: #eafaf9; color: #06403f; }
+
+/* School home: building tiles (affiliate-dashboard.php 'buildings') */
+.aff-card--buildings { margin-bottom: 20px; }
+.bld__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.bld__all { font-weight: 700; font-size: 14px; color: #0d8380; text-decoration: none; }
+.bld__all:hover { text-decoration: underline; }
+.bld { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.bld__tile {
+	display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "pin name" "pin freq" "pin next";
+	gap: 2px 12px; align-items: start; align-content: start; height: 100%; box-sizing: border-box; padding: 14px; border: 1px solid #e9ebf0; border-radius: 12px;
+	background: #fff; color: inherit; text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.bld__tile:hover, .bld__tile:focus-visible { border-color: #13b5b1; box-shadow: 0 0 0 1px #13b5b1; }
+.bld__pin { grid-area: pin; width: 28px; height: 28px; border-radius: 50%; background: #143458; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12.5px; }
+.bld__name { grid-area: name; font-weight: 700; color: #0b1b2e; line-height: 1.3; }
+.bld__freq { grid-area: freq; font-size: 13.5px; color: #143458; font-weight: 600; }
+.bld__next { grid-area: next; font-size: 13px; color: #6b7088; }
+
+/* Partner calendar: Month / Week / Day (affiliate-calendar.php) */
+.aff-cal__views { display: inline-flex; border: 1px solid #d6dae2; border-radius: 10px; overflow: hidden; margin-right: 6px; }
+.aff-cal__view { padding: 7px 12px; font-size: 13px; font-weight: 700; color: #143458; text-decoration: none; background: #fff; }
+.aff-cal__view + .aff-cal__view { border-left: 1px solid #d6dae2; }
+.aff-cal__view.is-current { background: #143458; color: #fff; }
+.aff-cal__view:not(.is-current):hover { background: #eafaf9; }
+a.aff-cal__daynum { text-decoration: none; color: inherit; }
+a.aff-cal__daynum:hover .aff-cal__n { color: #0d8380; text-decoration: underline; }
+.aff-cal__more { display: inline-block; margin-top: 4px; font-size: 12.5px; font-weight: 700; color: #0d8380; text-decoration: none; }
+.aff-cal__more:hover { text-decoration: underline; }
+.aff-cal--week .aff-cal__day { height: auto; min-height: 220px; vertical-align: top; }
+.aff-cal__agenda { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+.aff-cal__agenda .aff-cal__ev {
+	display: grid !important; grid-template-columns: 120px minmax(0, 1fr) auto; grid-template-areas: "time type st" "time addr st";
+	gap: 2px 16px; align-items: center; padding: 14px 16px !important; font-size: 15px !important; line-height: 1.35; white-space: normal !important;
+	background: #fff !important; border: 1px solid #e9ebf0; border-left-width: 4px; border-radius: 12px; text-decoration: none;
+}
+.aff-cal__agenda .aff-cal__ev:hover { border-color: #13b5b1; }
+.aff-cal__agenda .aff-cal__time { grid-area: time; font-size: 16px; font-weight: 800; color: #0b1b2e; }
+.aff-cal__agenda .aff-cal__type { grid-area: type; font-weight: 700; color: #0b1b2e; font-size: 15px !important; overflow: visible !important; }
+.aff-cal__agenda .aff-cal__addr { grid-area: addr; display: block !important; color: #6b7088; font-size: 14px !important; white-space: normal !important; overflow: visible !important; }
+.aff-cal__agenda .aff-cal__st {
+	grid-area: st; display: inline-block !important; position: static !important; width: auto !important; height: auto !important; clip: auto !important; margin: 0 !important;
+	padding: 4px 10px; border-radius: 999px; background: #eafaf9; color: #06403f; font-size: 12px; font-weight: 700;
+}
+.aff-cal__agenda .aff-cal__ev--completed .aff-cal__st { background: #e7f5ee; color: #0c5f5c; }
+.aff-cal__agenda .aff-cal__ev--cancelled .aff-cal__st { background: #fdf3ef; color: #b32d2e; }
+.aff-cal__agenda .aff-cal__ev--pending .aff-cal__st, .aff-cal__agenda .aff-cal__ev--requested .aff-cal__st { background: #fff4e0; color: #9a6300; }
+@media (max-width: 600px) {
+	.aff-cal__agenda .aff-cal__ev { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "time st" "type type" "addr addr"; }
+}
+

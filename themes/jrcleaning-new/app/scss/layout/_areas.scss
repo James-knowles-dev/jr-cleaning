@@ -1,0 +1,170 @@
+@use "../mixins/buttons";
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// Areas coverage page (follows design)
+.areas {
+  &__head { padding-top: functions.rem(40); @include responsive.bp('tablet') { padding-top: functions.rem(60); } }
+  &__title { font-size: functions.fluid(36, 46); max-width: 15em; margin-top: functions.rem(12); }
+  &__intro { margin-top: functions.rem(18); max-width: 36em; }
+
+  // postcode checker band (sits after the town list)
+  &__check {
+    scroll-margin-top: functions.rem(100);
+    &-band {
+      background: vars.$cloud;
+      border-radius: vars.$r-xl;
+      padding: functions.rem(44) functions.rem(24);
+      @include responsive.bp('tablet') { padding: functions.rem(60) functions.rem(40); }
+    }
+    .coverage__head {
+      margin-bottom: 0;
+      h2 { font-size: functions.fluid(24, 30); color: vars.$navy; }
+    }
+    .coverage__card { margin-top: functions.rem(24); }
+  }
+
+  // county grid
+  // auto-fit rather than a fixed column count: the list of counties is editable,
+  // so a fourth (the Cotswolds) must flow in without the cards getting too narrow
+  // for their town pills.
+  &__counties {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(18);
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+    @include responsive.bp('tablet') {
+      grid-template-columns: repeat(auto-fit, minmax(functions.rem(240), 1fr));
+    }
+  }
+
+  // coverage note split
+  &__note {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(40);
+    align-items: center;
+    @include responsive.bp('tablet') { grid-template-columns: 1.1fr .9fr; gap: functions.rem(50); }
+  }
+
+  // No featured image set: single column, and keep the copy to a readable measure
+  // rather than letting it run the full container width.
+  &__note--no-media {
+    @include responsive.bp('tablet') { grid-template-columns: minmax(0, 1fr); }
+    .areas__note-content { max-width: functions.rem(640); }
+  }
+
+  // NB: the navy here is the colour *behind* the photo, not a design element. If it
+  // shows as a flat block, the page has no featured image.
+  &__note-media {
+    border-radius: vars.$r-xl;
+    aspect-ratio: 16 / 10;
+    background: vars.$navy center/cover no-repeat;
+  }
+  &__note-content {
+    h2 { font-size: functions.fluid(26, 30); margin-bottom: functions.rem(14); }
+    p { color: vars.$soft; font-size: functions.rem(16.5); line-height: 1.65; margin-bottom: functions.rem(22); }
+  }
+  &__note-buttons { display: flex; flex-wrap: wrap; gap: functions.rem(12); }
+}
+
+.county-card {
+  background: vars.$paper;
+  border: functions.rem(1) solid #eceef2;
+  border-radius: vars.$r-lg;
+  padding: functions.rem(30);
+
+  &__head { margin-bottom: functions.rem(18); }
+  h3 { font-size: functions.rem(19); }
+  &__towns { display: flex; flex-wrap: wrap; gap: functions.rem(8); }
+}
+
+.town-pill {
+  background: vars.$white;
+  border: functions.rem(1) solid #e6e9ef;
+  border-radius: vars.$r-pill;
+  padding: functions.rem(7 13);
+  font-family: vars.$sans;
+  font-size: functions.rem(13.5);
+  font-weight: 600;
+  color: vars.$navy;
+}
+
+// ---- coverage map, inside the "local enough to care" panel ----
+// Sits in the same 16:10 slot the featured image would use, so the section has a
+// left-hand visual whether or not anyone ever sets a photo.
+.areas__note-media--map {
+  position: relative;
+  overflow: hidden;
+  background: vars.$navy;   // shows only while the iframe loads
+  line-height: 0;
+
+  // Google My Maps draws its own title bar; push it out of frame so the panel
+  // shows just the map. The iframe is oversized to compensate.
+  $map-header: functions.rem(64);
+
+  .jr-map-embed {
+    position: absolute;
+    inset: (-$map-header) 0 0 0;
+    width: 100%;
+    height: calc(100% + #{$map-header});
+    border: 0;
+    display: block;
+  }
+}
+
+// ============================ COVERAGE CHECKER ============================
+.coverage {
+  padding: functions.rem(28) 0 functions.rem(90);
+  @include responsive.bp('tablet') { padding: functions.rem(40) 0 functions.rem(110); }
+
+  &__head { max-width: functions.rem(620); margin: 0 auto; text-align: center;
+    p { color: vars.$soft; margin-top: functions.rem(16); max-width: 30em; margin-left: auto; margin-right: auto; } }
+
+  &__card {
+    max-width: functions.rem(560);
+    margin: functions.rem(34) auto 0;
+    background: vars.$white;
+    border: functions.rem(1) solid #e6e9ef;
+    border-radius: vars.$r-xl;
+    padding: functions.rem(32);
+    box-shadow: vars.$shadow-soft;
+  }
+
+  &__label { font-family: vars.$sans; font-weight: 700; font-size: functions.rem(14); color: vars.$navy; }
+  &__row { display: flex; gap: functions.rem(10); margin-top: functions.rem(11); flex-wrap: wrap; @include responsive.bp('s-mobile') { flex-wrap: nowrap; } }
+
+  &__input {
+    flex: 1; min-width: 0;
+    padding: functions.rem(15 16);
+    border-radius: functions.rem(13);
+    border: functions.rem(1.5) solid #e6e9ef;
+    font-family: vars.$sans; font-weight: 600; font-size: functions.rem(16);
+    letter-spacing: .04em; text-transform: uppercase; color: vars.$navy; outline: none;
+    &:focus { border-color: vars.$accent-dark; }
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+    &::placeholder { color: vars.$placeholder; text-transform: none; letter-spacing: normal; }
+  }
+
+  &__btn { @include buttons.btn-primary; white-space: nowrap; width: 100%; @include responsive.bp('s-mobile') { width: max-content; } }
+
+  &__result {
+    margin-top: functions.rem(22);
+    border-radius: vars.$r;
+    padding: functions.rem(22);
+    animation: jrUp .35s ease both;
+    display: none;
+    &.is-visible { display: block; }
+    h2, .coverage__result-title { margin: 0; font-size: functions.rem(20); font-family: vars.$serif; font-weight: 700; }
+    p { color: vars.$ink; margin: functions.rem(12) 0 functions.rem(16); }
+    .button { margin-top: functions.rem(4); display: inline-flex; }
+    &--yes { background: vars.$accent-tint; border: functions.rem(1) solid vars.$accent-border; h2 { color: vars.$success; } }
+    &--no { background: vars.$error-tint; border: functions.rem(1) solid vars.$error-border; h2 { color: #a8432a; } }
+    &--invalid { background: vars.$error-tint; border: functions.rem(1) solid vars.$error-border; h2 { color: vars.$error; } }
+  }
+
+  &__seeall { text-align: center; margin-top: functions.rem(20); a { color: vars.$accent-dark; font-weight: 700; &:hover { color: vars.$navy; } } }
+  &__note { margin: functions.rem(16) 0 0; font-size: functions.rem(13); color: vars.$muted; font-family: vars.$sans; line-height: 1.5; }
+}
+

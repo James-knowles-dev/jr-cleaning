@@ -1,0 +1,103 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.services {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(18);
+    margin-top: functions.rem(42);
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+    @include responsive.bp('tablet') { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  // Mobile / small tablet: turn the stack into a swipeable, snapping carousel
+  // with the next card peeking so it reads as a slider. Bleeds to the screen edges.
+  @include responsive.bp-down('mobile') {
+    &__grid {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: 82%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: vars.$gutter;
+      margin-inline: calc(vars.$gutter * -1);
+      padding-inline: vars.$gutter;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
+    }
+    &__card {
+      scroll-snap-align: start;
+      // Neutralise the hover lift — it sticks awkwardly after a tap on touch.
+      &:hover { transform: none; box-shadow: none; }
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: functions.rem(8);
+    background: vars.$paper;
+    border: functions.rem(1) solid #eceef2;
+    border-radius: vars.$r-lg;
+    padding: functions.rem(26);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+
+    h3 { font-size: functions.rem(18); }
+    p { color: vars.$muted; font-size: functions.rem(14.5); line-height: 1.55; }
+
+    &:hover {
+      transform: translateY(functions.rem(-4));
+      background: vars.$white;
+      box-shadow: 0 functions.rem(20) functions.rem(40) functions.rem(-22) rgba(vars.$navy, 0.4);
+    }
+
+    &--cta {
+      background: vars.$navy;
+      justify-content: space-between;
+      h3 { color: vars.$white; }
+      p { color: #aeb3c7; }
+      &:hover { background: vars.$navy-700; }
+    }
+  }
+
+  &__ico {
+    width: functions.rem(48);
+    height: functions.rem(48);
+    border-radius: vars.$r;
+    background: vars.$navy;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: functions.rem(10);
+    img { width: functions.rem(22); height: functions.rem(22); object-fit: contain; }
+
+    &--plus { background: vars.$accent; color: vars.$accent-ink; font-family: vars.$sans; font-weight: 800; font-size: functions.rem(22); }
+  }
+}
+
+// Shared carousel dot indicators (services grid + "explore other services").
+// Only visible while a mobile carousel is active.
+.slider-dots { display: none; }
+@include responsive.bp-down('mobile') {
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: functions.rem(8);
+    margin-top: functions.rem(20);
+  }
+}
+.slider-dot {
+  width: functions.rem(8);
+  height: functions.rem(8);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #cfd4de;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+  &.is-active { background: vars.$accent; transform: scale(1.4); }
+}

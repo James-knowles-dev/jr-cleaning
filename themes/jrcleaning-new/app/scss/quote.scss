@@ -1,0 +1,17 @@
+// J R Cleaning (Friendly) — quote wizard stylesheet
+// =============================================================================
+//
+// Loaded ON TOP OF main.css, and only on the Quote Wizard template (page-quote.php —
+// see jrc_needs_quote() in functions/enqueue.php).
+//
+// This layers ON TOP OF forms.css, it does not replace it. What lives here is only what
+// is specific to the wizard — the stepper, the service cards, the property chips, all
+// scoped inside `.quote`. The inputs, labels and validation styling the form shares with
+// every other form on the site stay in layout/_gravity-forms.scss, so page-quote.php is
+// listed in BOTH jrc_needs_forms() and jrc_needs_quote().
+//
+// Foundation only — no CSS is emitted by these; main.css has already loaded the base.
+@use 'mixins/index';
+@use 'vars';
+
+@use 'layout/quote';

@@ -1,0 +1,130 @@
+@use "../mixins/cards";
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// Inner hero (breadcrumb + title) on light
+.inner-hero {
+  padding: functions.rem(32) 0 functions.rem(8);
+  @include responsive.bp('tablet') { padding: functions.rem(40) 0 functions.rem(12); }
+
+  &__crumbs {
+    font-family: vars.$sans;
+    font-size: functions.rem(13.5);
+    font-weight: 600;
+    color: vars.$muted;
+    a { color: vars.$muted; &:hover { color: vars.$navy; } }
+    .sep { color: #c2c6d2; margin: 0 functions.rem(6); }
+    margin-bottom: functions.rem(14);
+    span[aria-current] { color: vars.$navy; }
+  }
+
+  &__eyebrow { display: block; margin-bottom: functions.rem(10); }
+  &__title { font-size: functions.fluid(34, 48); }
+}
+
+// Blog / post archive
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: functions.rem(22);
+  margin: functions.rem(40) 0;
+  @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+  @include responsive.bp('tablet') { grid-template-columns: repeat(3, 1fr); }
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  background: vars.$white;
+  border: functions.rem(1) solid vars.$line;
+  border-radius: vars.$r-lg;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+  &:hover { @include cards.card-lift($alpha: .35); }
+
+  &__media { aspect-ratio: 16 / 10; background: vars.$paper; img { width: 100%; height: 100%; object-fit: cover; } }
+  &__body { padding: functions.rem(22); display: flex; flex-direction: column; gap: functions.rem(10); flex: 1; }
+  &__meta { font-family: vars.$sans; font-size: functions.rem(12.5); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: vars.$accent-dark; }
+  // h2, not h3: the card title is the next level down from the archive's own h1, and
+  // nothing sits between them. Size is set here rather than inherited from the h2
+  // scale in base/_typography.scss, which is tuned for section headings.
+  h2 { font-size: functions.rem(20); }
+  p { font-size: functions.rem(14.5); line-height: 1.55; }
+  &__more { margin-top: auto; font-family: vars.$sans; font-weight: 700; color: vars.$navy; }
+
+  &--cta {
+    background: vars.$navy;
+    border-color: vars.$navy;
+    .post-card__body { justify-content: center; gap: functions.rem(8); }
+    h2 { color: vars.$white; }
+    p { color: rgba(vars.$white, 0.7); }
+    .post-card__more { color: vars.$accent; }
+    &:hover { box-shadow: 0 functions.rem(20) functions.rem(40) functions.rem(-22) rgba(vars.$navy, .5); }
+  }
+}
+
+.single-post-body, .case-study-body {
+  max-width: functions.rem(760);
+  margin: functions.rem(40) auto;
+  padding: 0 vars.$gutter;
+
+  // The lead image at the top of an article. Previously two `style` attributes in
+  // single.php and single-case_studies.php; article rhythm belongs with the article.
+  // first-child covers the post template, where the figure opens the body and needs
+  // no top margin — the case study has the client/date line above it and does.
+  > .image-block__figure {
+    margin: functions.rem(24) 0 functions.rem(32);
+    &:first-child { margin-top: 0; }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: functions.rem(8);
+  margin: functions.rem(50) 0;
+  .page-numbers {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: functions.rem(42); height: functions.rem(42); padding: functions.rem(0 12);
+    border-radius: functions.rem(12); border: functions.rem(1) solid vars.$line;
+    font-family: vars.$sans; font-weight: 700; color: vars.$navy;
+    &.current { background: vars.$navy; color: vars.$white; border-color: vars.$navy; }
+    &:hover { border-color: vars.$navy; }
+  }
+}
+
+// =============================================================================
+// Search
+// =============================================================================
+
+.search-summary {
+  margin: functions.rem(36) 0 functions.rem(28);
+
+  .lead { margin: 0 0 functions.rem(18); }
+}
+
+.search-form {
+  display: flex;
+  gap: functions.rem(10);
+  flex-wrap: wrap;
+  max-width: functions.rem(560);
+}
+
+.search-form__field {
+  flex: 1 1 functions.rem(240);
+  min-width: 0;
+  padding: functions.rem(14 18);
+  border: functions.rem(1.5) solid vars.$line;
+  border-radius: vars.$r;
+  background: vars.$white;
+  font-family: vars.$sans;
+  font-size: functions.rem(15.5);
+  color: vars.$ink;
+
+  &::placeholder { color: vars.$placeholder; }
+  &:focus { border-color: vars.$accent-dark; }
+  &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+}
+
+.search-form__submit { flex: 0 0 auto; }

@@ -1,0 +1,30 @@
+@use "../mixins/functions";
+@use "../vars";
+
+.image-block {
+  &__figure {
+    margin: 0;
+    img { width: 100%; border-radius: vars.$r-xl; }
+    figcaption { margin-top: functions.rem(12); color: vars.$muted; font-size: functions.rem(14); text-align: center; }
+  }
+
+  &--full {
+    .image-block__figure img { border-radius: 0; }
+    figcaption { padding: 0 vars.$gutter; }
+  }
+}
+
+// Service-page image block. Portrait photos get a capped, centred width — at full
+// container width a 4:5 image renders taller than the viewport and swamps the page.
+.svc-image {
+  &--portrait .image-block__figure {
+    max-width: functions.rem(520);
+    margin-inline: auto;
+  }
+
+  .image-block__figure figcaption {
+    max-width: functions.rem(560);
+    margin-inline: auto;
+    line-height: 1.5;
+  }
+}

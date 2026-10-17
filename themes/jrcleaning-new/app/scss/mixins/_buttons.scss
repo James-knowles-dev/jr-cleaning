@@ -1,0 +1,39 @@
+@use "../vars";
+@use "functions";
+
+// Button system
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: functions.rem(8);
+  font-family: vars.$serif;
+  font-weight: 700;
+  font-size: functions.rem(16);
+  line-height: 1;
+  padding: functions.rem(15 24);
+  border-radius: vars.$r;
+  border: functions.rem(1.5) solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+  white-space: nowrap;
+
+  &:hover { transform: translateY(functions.rem(-2)); }
+}
+
+@mixin btn-primary { @include btn-base; background: vars.$accent; color: vars.$accent-ink; &:hover { background: vars.$accent; } }
+@mixin btn-navy    { @include btn-base; background: vars.$navy; color: vars.$white; &:hover { background: vars.$accent; color: vars.$accent-ink; } }
+@mixin btn-white   { @include btn-base; background: vars.$white; color: vars.$navy; &:hover { background: vars.$accent; color: vars.$accent-ink; } }
+@mixin btn-outline { @include btn-base; background: vars.$white; color: vars.$navy; border-color: #d6dae2; &:hover { border-color: vars.$navy; } }
+@mixin btn-ghost   { @include btn-base; background: rgba(vars.$white, .08); color: vars.$white; border-color: rgba(vars.$white, .2); &:hover { background: rgba(vars.$white, .14); } }
+
+// Eyebrow label
+@mixin eyebrow {
+  font-family: vars.$serif;
+  font-weight: 700;
+  font-size: functions.rem(13);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: vars.$accent-dark;
+}

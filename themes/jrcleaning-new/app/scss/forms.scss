@@ -1,0 +1,16 @@
+// J R Cleaning (Friendly) — Gravity Forms stylesheet
+// =============================================================================
+//
+// Loaded ON TOP OF main.css, and only where a Gravity Form actually renders (see
+// jrc_needs_forms() in functions/enqueue.php): the contact, quote and partner
+// registration templates, and any page whose ACF blocks include contact_form or
+// contact_details.
+//
+// Split out because these are overrides for a plugin's markup. Most pages on the site
+// never render a form, and a blog post has no use for 160 lines of .gform_wrapper.
+//
+// Foundation only — no CSS is emitted by these; main.css has already loaded the base.
+@use 'mixins/index';
+@use 'vars';
+
+@use 'layout/gravity-forms';

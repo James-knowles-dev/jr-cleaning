@@ -1,0 +1,58 @@
+// J R Cleaning (Friendly) — main stylesheet
+// =============================================================================
+
+// Foundation
+@use 'mixins/index';
+@use 'vars';
+
+// Base
+@use 'base/fonts'; // self-hosted @font-face — must come before anything using them
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/layout';
+
+// Layout chrome
+@use 'layout/header';
+@use 'layout/footer';
+@use 'layout/blog';
+@use 'layout/case-studies';
+@use 'layout/service-archive';
+@use 'layout/service-content';
+@use 'layout/contact';
+@use 'layout/products';
+@use 'layout/error';
+
+// Blocks
+@use 'blocks/hero';
+@use 'blocks/trust-strip';
+@use 'blocks/services';
+@use 'blocks/split';
+@use 'blocks/testimonials';
+@use 'blocks/cta';
+@use 'blocks/text-block';
+@use 'blocks/image-block';
+@use 'blocks/contact-details';
+@use 'blocks/contact-form';
+@use 'blocks/links';
+
+// -----------------------------------------------------------------------------
+// WHAT IS DELIBERATELY NOT HERE
+// -----------------------------------------------------------------------------
+//
+// This file is what EVERY page needs: the base, the chrome, and the marketing blocks
+// the flexible-content editor can put on any page. Anything used by one template, or by
+// one logged-in area, compiles to its own bundle and is enqueued only where it applies
+// (see functions/enqueue.php):
+//
+//   layout/woocommerce, affiliate/*   -> app.css       shop + My Account
+//   layout/partners, partner-account,
+//   layout/tiers                      -> partners.css  the four partner templates
+//   layout/gravity-forms              -> forms.css     pages that render a form
+//   layout/areas                      -> areas.css     page-areas.php
+//   layout/quote                      -> quote.css     page-quote.php
+//
+// layout/_features.scss used to hold the coverage checker, the quote wizard and the
+// partner feature list in one file, which meant all three shipped to every page to
+// serve three unrelated templates. It has been split into the three partials above.
+//
+// See app.scss, partners.scss, forms.scss, areas.scss and quote.scss.

@@ -1,0 +1,153 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Related links block — internal linking module, plus the shared button row used
+// by every service content block.
+// =============================================================================
+
+// Button row. Shared by the links block and all svc-* blocks, so a block can carry a
+// CTA without each partial inventing its own spacing.
+.svc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: functions.rem(12);
+  margin-top: functions.rem(24);
+
+  &:empty { display: none; }
+}
+
+.jrc-links {
+  &__head {
+    max-width: functions.rem(680);
+    margin-bottom: functions.rem(26);
+
+    h2 {
+      font-family: vars.$serif;
+      font-weight: 800;
+      color: vars.$navy;
+      margin: 0 0 functions.rem(10);
+    }
+
+    p {
+      font-family: vars.$sans;
+      color: vars.$soft;
+      margin: 0;
+    }
+  }
+
+  // ---- card layout ----
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(16);
+
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+    @include responsive.bp('tablet')   { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  &__card {
+    background: vars.$paper;
+    border: functions.rem(1) solid vars.$line;
+    border-radius: vars.$r-lg;
+    padding: functions.rem(22 24);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+
+    &:hover {
+      border-color: vars.$accent-border;
+      transform: translateY(functions.rem(-2));
+      box-shadow: vars.$shadow-soft;
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: functions.rem(12);
+    font-family: vars.$serif;
+    font-weight: 700;
+    font-size: functions.rem(17);
+    color: vars.$navy;
+    text-decoration: none;
+
+    &:hover { color: vars.$accent-dark; }
+
+    &:focus-visible {
+      outline: functions.rem(2) solid vars.$accent-dark;
+      outline-offset: functions.rem(3);
+      border-radius: functions.rem(4);
+    }
+  }
+
+  &__arrow {
+    color: vars.$accent-dark;
+    flex: none;
+    transition: transform .18s ease;
+  }
+
+  &__card:hover &__arrow { transform: translateX(functions.rem(3)); }
+
+  &__desc {
+    font-family: vars.$sans;
+    font-size: functions.rem(14.5);
+    line-height: 1.5;
+    color: vars.$muted;
+    margin: functions.rem(8) 0 0;
+  }
+
+  // ---- simple list layout ----
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: functions.rem(10);
+
+    @include responsive.bp('s-mobile') { grid-template-columns: 1fr 1fr; }
+
+    li {
+      position: relative;
+      padding-left: functions.rem(22);
+      font-family: vars.$sans;
+      font-size: functions.rem(15.5);
+      line-height: 1.5;
+
+      // Teal chevron, matching the tick motif used elsewhere on service pages.
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: functions.rem(8);
+        width: functions.rem(6);
+        height: functions.rem(6);
+        border-right: functions.rem(2) solid vars.$accent;
+        border-bottom: functions.rem(2) solid vars.$accent;
+        transform: rotate(-45deg);
+      }
+    }
+
+    a {
+      font-weight: 700;
+      color: vars.$navy;
+      text-decoration: none;
+
+      &:hover { color: vars.$accent-dark; text-decoration: underline; }
+
+      &:focus-visible {
+        outline: functions.rem(2) solid vars.$accent-dark;
+        outline-offset: functions.rem(2);
+      }
+    }
+
+    .jrc-links__desc {
+      display: block;
+      margin-top: functions.rem(2);
+      font-size: functions.rem(14);
+    }
+  }
+}

@@ -1,0 +1,147 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Report library
+// =============================================================================
+.aff-reports {
+  &__intro {
+    font-family: vars.$sans;
+    color: vars.$soft;
+    max-width: functions.rem(620);
+    margin: functions.rem(6 0 20);
+
+    strong { color: vars.$accent-dark; }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: functions.rem(10);
+  }
+
+  &__item {
+    display: grid;
+    // icon | details | action
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: functions.rem(16);
+    padding: functions.rem(14 18);
+    background: vars.$white;
+    border: functions.rem(1) solid vars.$line;
+    border-radius: vars.$r;
+    transition: border-color .15s ease, box-shadow .15s ease;
+
+    &:hover {
+      border-color: vars.$accent-border;
+      box-shadow: vars.$shadow-soft;
+    }
+
+    // An unread report earns a tinted ground and a teal spine, so a partner can see
+    // what's new without reading a single word.
+    &.is-new {
+      background: vars.$accent-tint;
+      border-color: vars.$accent-border;
+      box-shadow: inset functions.rem(3) 0 0 vars.$accent;
+    }
+  }
+
+  // A document chip rather than the literal text "PDF" sitting in the sentence.
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: functions.rem(42);
+    height: functions.rem(42);
+    flex: none;
+    border-radius: functions.rem(9);
+    background: vars.$navy;
+    color: vars.$white;
+    font-family: vars.$sans;
+    font-size: functions.rem(10);
+    font-weight: 800;
+    letter-spacing: .06em;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: functions.rem(2);
+    min-width: 0;                       // lets the address ellipsis actually work
+  }
+
+  &__title {
+    font-family: vars.$serif;
+    font-weight: 800;
+    font-size: functions.rem(16.5);
+    color: vars.$navy;
+    display: flex;
+    align-items: center;
+    gap: functions.rem(8);
+    flex-wrap: wrap;
+  }
+
+  &__new {
+    font-family: vars.$sans;
+    font-size: functions.rem(10.5);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: functions.rem(2 8);
+    border-radius: vars.$r-pill;
+    background: vars.$accent;
+    color: vars.$accent-ink;
+  }
+
+  &__addr {
+    font-family: vars.$sans;
+    font-size: functions.rem(14.5);
+    color: vars.$ink;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__date {
+    font-family: vars.$sans;
+    font-size: functions.rem(13);
+    color: vars.$muted;
+  }
+
+  &__dl {
+    flex: none;
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  &__empty {
+    font-family: vars.$sans;
+    color: vars.$muted;
+    max-width: functions.rem(560);
+    margin: 0;
+  }
+
+  // ---- narrow screens ----
+  // The action drops beneath the details rather than squeezing the address into a
+  // couple of characters.
+  @media (max-width: 40rem) {
+    &__item {
+      grid-template-columns: auto 1fr;
+      gap: functions.rem(6) functions.rem(14);
+      padding: functions.rem(14);
+    }
+
+    &__dl {
+      grid-column: 1 / -1;
+      width: 100%;
+      justify-content: center;
+      margin-top: functions.rem(6);
+    }
+
+    &__addr { white-space: normal; }
+  }
+}
+

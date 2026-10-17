@@ -1,0 +1,31 @@
+@use "sass:map";
+// Breakpoints
+$breakpoints: (
+  's-mobile': 540px,
+  'mobile':   768px,
+  's-tablet': 992px,
+  'tablet':   1024px,
+  'desktop':  1200px,
+);
+
+@mixin bp($name) {
+  @if map.has-key($breakpoints, $name) {
+    @media (min-width: map.get($breakpoints, $name)) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$name}";
+  }
+}
+
+// Max-width counterpart (one pixel below the named breakpoint) for the rare
+// top-down override. Prefer bp() (mobile-first) wherever possible.
+@mixin bp-down($name) {
+  @if map.has-key($breakpoints, $name) {
+    @media (max-width: map.get($breakpoints, $name) - 1px) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$name}";
+  }
+}

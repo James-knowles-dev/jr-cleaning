@@ -1,0 +1,86 @@
+@use "../mixins/buttons";
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.primary-container,
+.wrap {
+  width: 100%;
+  max-width: vars.$wrap;
+  margin: 0 auto;
+  padding-left: vars.$gutter;
+  padding-right: vars.$gutter;
+}
+
+main.content { display: block; }
+
+// Section rhythm. Use padding-block (vertical only) so the shorthand never zeroes
+// the horizontal padding when an element is BOTH .primary-container and .section.
+.section { padding-block: functions.rem(56); @include responsive.bp('tablet') { padding-block: functions.rem(84); } }
+.section--tight { padding-block: functions.rem(40); @include responsive.bp('tablet') { padding-block: functions.rem(56); } }
+.section--paper { background: vars.$paper; }
+.section--navy { background: vars.$navy; }
+
+.section-head {
+  max-width: functions.rem(640);
+
+  .eyebrow { margin-bottom: functions.rem(12); display: block; }
+  h2 { margin: 0; }
+  p { margin-top: functions.rem(14); color: vars.$soft; font-size: functions.fluid(16, 17); }
+
+  &.is-center { margin: 0 auto; text-align: center; p { margin-left: auto; margin-right: auto; } }
+}
+
+// Buttons (utility classes for ACF-driven button styles)
+.button { @include buttons.btn-base; }
+.button--primary { @include buttons.btn-primary; }
+.button--navy { @include buttons.btn-navy; }
+.button--white { @include buttons.btn-white; }
+.button--outline { @include buttons.btn-outline; }
+.button--ghost { @include buttons.btn-ghost; }
+
+// Size modifier, not a style: composes with any of the above. Used where a button sits
+// beside body copy rather than acting as the main call to action — a filter submit, an
+// export link, the toolbars in the partner area.
+.button--sm {
+  padding: functions.rem(10 16);
+  font-size: functions.rem(14);
+  border-radius: vars.$r-sm;
+}
+
+// Pills / tags
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: functions.rem(9);
+  background: vars.$white;
+  border: functions.rem(1) solid vars.$line;
+  padding: functions.rem(7 15);
+  border-radius: vars.$r-pill;
+  font-family: vars.$sans;
+  font-weight: 600;
+  font-size: functions.rem(13);
+  color: vars.$navy;
+
+  .stars { color: vars.$gold; letter-spacing: 1px; }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: functions.rem(8);
+  background: vars.$accent-tint;
+  color: vars.$accent-dark;
+  border: functions.rem(1) solid vars.$accent-border;
+  padding: functions.rem(7 15);
+  border-radius: vars.$r-pill;
+  font-family: vars.$sans;
+  font-weight: 700;
+  font-size: functions.rem(13);
+}
+
+.stars-row { color: vars.$gold; letter-spacing: 2px; font-size: functions.rem(15); }
+
+// Animations
+@keyframes jrFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(functions.rem(-9)); } }
+@keyframes jrUp { from { opacity: 0; transform: translateY(functions.rem(16)); } to { opacity: 1; transform: none; } }

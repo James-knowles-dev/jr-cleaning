@@ -1,0 +1,163 @@
+@use "../mixins/functions";
+@use "../vars";
+
+// =============================================================================
+// Gravity Forms — styled to match the Friendly design (overrides Orbital theme)
+// =============================================================================
+.gform_wrapper {
+  // "indicates required fields"
+  .gform_required_legend { color: vars.$muted; font-size: functions.rem(13); font-family: vars.$sans; margin-bottom: functions.rem(18); }
+
+  // field rhythm
+  .gform_fields { grid-row-gap: functions.rem(20) !important; }
+  .gfield { margin-bottom: 0; }
+
+  // labels
+  .gfield_label,
+  legend.gfield_label {
+    font-family: vars.$serif;
+    font-weight: 700;
+    font-size: functions.rem(14.5);
+    color: vars.$navy;
+    margin-bottom: functions.rem(8);
+    padding: 0;
+  }
+
+  // sub-labels (First / Last, Enter Email / Confirm Email)
+  .ginput_complex label,
+  .gfield_label--type-sub,
+  .gform-field-label--type-sub {
+    color: vars.$muted;
+    font-weight: 600;
+    font-size: functions.rem(13);
+    font-family: vars.$sans;
+    margin-top: functions.rem(6);
+  }
+
+  // required asterisk
+  .gfield_required { color: vars.$error; }
+
+  // inputs
+  input[type=text],
+  input[type=email],
+  input[type=tel],
+  input[type=url],
+  input[type=number],
+  input[type=password],
+  input[type=search],
+  textarea,
+  select {
+    width: 100%;
+    // 7px vertical, not 13px. Gravity Forms' framework CSS constrains the control
+    // height, so with box-sizing: border-box the generous padding squeezed the inner
+    // content box below the 21px line box (15px * 1.4) and Chrome clipped the tops of
+    // the glyphs — a value like "Evesham" showed only its lower half. Trimming the
+    // vertical padding gives the line box room without changing the control height.
+    padding: functions.rem(7 17) !important;
+
+    // Let the padding define the height instead of GF's fixed 38px. At a 16px root the
+    // result is the same 38px, but it can no longer starve the content box: our padding
+    // and font-size are rem-based while GF's height is hard px, so a visitor browsing at
+    // a larger default font size got the clipping back (WCAG 1.4.4, resize text).
+    height: auto !important;
+    border: functions.rem(1.5) solid #e6e9ef !important;
+    border-radius: functions.rem(13) !important;
+    font-family: vars.$sans !important;
+    font-size: functions.rem(15) !important;
+    line-height: 1.4 !important;
+    color: vars.$navy !important;
+    background: vars.$white !important;
+    box-shadow: none !important;
+    transition: border-color .15s ease;
+
+    // Keyboard users need a visible focus indicator (WCAG 2.4.7). The old rule
+    // killed the outline and replaced it with a 12%-opacity glow, which is far
+    // below the 3:1 non-text contrast threshold — effectively invisible on the
+    // site's main conversion form. $accent-dark hits 4.59:1 against white.
+    &:focus { border-color: vars.$accent-dark !important; }
+
+    &:focus-visible {
+      border-color: vars.$accent-dark !important;
+      outline: functions.rem(2) solid vars.$accent-dark !important;
+      outline-offset: functions.rem(2) !important;
+      box-shadow: none !important;
+    }
+    &::placeholder { color: vars.$placeholder; opacity: 1; }
+  }
+
+  textarea { min-height: functions.rem(140); resize: vertical; }
+
+  select { appearance: none; background-image: none; }
+
+  // descriptions + character counter
+  .gfield_description,
+  .charleft,
+  .ginput_counter,
+  .gform_validation_error_count { color: vars.$muted; font-size: functions.rem(13); font-family: vars.$sans; }
+
+  // validation
+  .gfield_error input,
+  .gfield_error textarea,
+  .gfield_error select { border-color: vars.$error !important; }
+  .gfield_validation_message,
+  .validation_message { color: vars.$error !important; font-size: functions.rem(13); font-family: vars.$sans; background: transparent !important; border: none !important; padding: functions.rem(6 0 0) !important; }
+  .gform_validation_errors {
+    background: vars.$error-tint !important;
+    border: functions.rem(1) solid vars.$error-border !important;
+    border-radius: vars.$r !important;
+    box-shadow: none !important;
+    h2, .gform_submission_error { color: vars.$error !important; font-family: vars.$serif; }
+  }
+
+  // confirmation message
+  .gform_confirmation_message {
+    background: vars.$accent-tint;
+    border: functions.rem(1) solid vars.$accent-border;
+    border-radius: vars.$r-lg;
+    padding: functions.rem(22 24);
+    color: vars.$success;
+    font-family: vars.$sans;
+  }
+}
+
+// Footer should never constrain the button width (Orbital makes it a flex row).
+.gform_wrapper .gform_footer,
+.gform_wrapper .gform_page_footer { display: block !important; margin-top: functions.rem(8) !important; }
+
+// submit / next / previous buttons → Friendly primary (teal)
+// Wrapper class doubled (.gform_wrapper.gform_wrapper) to out-specify Orbital's
+// `.gform-theme--framework …` rules without leaning on !important everywhere.
+.gform_wrapper.gform_wrapper .gform_footer input[type=submit],
+.gform_wrapper.gform_wrapper .gform_footer button,
+.gform_wrapper.gform_wrapper .gform_page_footer input[type=submit],
+.gform_wrapper.gform_wrapper .gform_page_footer button,
+.gform_wrapper.gform_wrapper input.gform_button,
+.gform_wrapper.gform_wrapper button.gform_button,
+.gform_wrapper.gform_wrapper .gform-theme-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  margin-top: functions.rem(22) !important;
+  background: vars.$accent !important;
+  color: vars.$accent-ink !important;
+  border: none !important;
+  border-radius: vars.$r !important;
+  font-family: vars.$serif !important;
+  font-weight: 700 !important;
+  font-size: functions.rem(15) !important;
+  padding: functions.rem(15 26) !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  transition: transform .15s ease, background .15s ease;
+
+  &:hover { transform: translateY(functions.rem(-1)); background: vars.$accent !important; color: vars.$accent-ink !important; }
+}
+
+// "previous" button on multi-page forms → outline
+.gform_wrapper.gform_wrapper .gform_page_footer .gform_previous_button {
+  background: vars.$white !important;
+  color: vars.$navy !important;
+  border: functions.rem(1.5) solid #d6dae2 !important;
+  &:hover { border-color: vars.$navy !important; background: vars.$white !important; color: vars.$navy !important; }
+}

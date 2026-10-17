@@ -1,0 +1,38 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Toolbars above a list or table
+// =============================================================================
+// Count on the left, the action that applies to the whole list on the right — and
+// stacked on a phone, where they would otherwise crush each other.
+.aff-reports__bar,
+.aff-jobs__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: functions.rem(12);
+  margin: functions.rem(0 0 14);
+
+  p { margin: 0; }
+}
+
+.aff-reports__ziphint {
+  font-family: vars.$sans;
+  font-size: functions.rem(13);
+  color: vars.$muted;
+}
+
+// =============================================================================
+// Tier provenance
+// =============================================================================
+.aff-tier__since {
+  display: block;
+  margin-top: functions.rem(8);
+  font-family: vars.$sans;
+  font-size: functions.rem(13);
+  color: rgba(vars.$white, .7);
+}
+

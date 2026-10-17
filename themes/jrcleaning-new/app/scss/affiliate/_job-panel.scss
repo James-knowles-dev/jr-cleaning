@@ -1,0 +1,160 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+// =============================================================================
+// Job detail panel
+//
+// Opened by :target, so it works with JavaScript off — the anchor sets the hash and
+// CSS does the rest. affiliate.js then adds Esc-to-close and focus handling.
+// =============================================================================
+.aff-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: functions.rem(20);
+
+  &:target { display: flex; }
+
+  &__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(vars.$navy-900, .55);
+    // Older Safari ignores this; the flat colour above still darkens the page.
+    backdrop-filter: blur(functions.rem(2));
+  }
+
+  &__box {
+    position: relative;
+    width: 100%;
+    max-width: functions.rem(520);
+    max-height: 85vh;
+    overflow-y: auto;
+    background: vars.$white;
+    border-radius: vars.$r-lg;
+    box-shadow: vars.$shadow-hero;
+    padding: functions.rem(28 30 26);
+
+    @media (max-width: 30rem) { padding: functions.rem(22 20 20); }
+  }
+
+  &__close {
+    position: absolute;
+    top: functions.rem(12);
+    right: functions.rem(14);
+    width: functions.rem(34);
+    height: functions.rem(34);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: vars.$r-pill;
+    font-size: functions.rem(22);
+    line-height: 1;
+    color: vars.$muted;
+    text-decoration: none;
+
+    &:hover { background: vars.$paper; color: vars.$navy; }
+    &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(2); }
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    font-family: vars.$sans;
+    font-size: functions.rem(11.5);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    padding: functions.rem(4 10);
+    border-radius: vars.$r-pill;
+    background: vars.$cloud;
+    color: vars.$muted;
+    margin-bottom: functions.rem(12);
+
+    &--booked    { background: vars.$accent-tint; color: vars.$accent-ink; }
+    &--completed { background: rgba(vars.$success, .12); color: vars.$success; }
+    &--pending   { background: rgba(vars.$gold, .16); color: #7a5901; }
+    &--cancelled { background: vars.$error-tint; color: vars.$error; }
+  }
+
+  &__title {
+    font-family: vars.$serif;
+    font-weight: 800;
+    font-size: functions.rem(24);
+    color: vars.$navy;
+    margin: 0 0 functions.rem(18);
+    padding-right: functions.rem(36);   // clear of the close button
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: functions.rem(96) 1fr;
+    gap: functions.rem(8) functions.rem(16);
+    margin: 0 0 functions.rem(20);
+    font-family: vars.$sans;
+    font-size: functions.rem(15);
+
+    dt { color: vars.$muted; font-weight: 600; }
+    dd { margin: 0; color: vars.$navy; font-weight: 600; }
+
+    @media (max-width: 26rem) {
+      grid-template-columns: 1fr;
+      gap: functions.rem(2);
+      dt { margin-top: functions.rem(8); }
+    }
+  }
+
+  &__scope {
+    background: vars.$paper;
+    border-radius: vars.$r;
+    padding: functions.rem(16 18);
+    margin-bottom: functions.rem(20);
+
+    h4 {
+      font-family: vars.$sans;
+      font-size: functions.rem(11.5);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: vars.$muted;
+      margin: 0 0 functions.rem(8);
+    }
+
+    p {
+      font-family: vars.$sans;
+      font-size: functions.rem(15);
+      line-height: 1.6;
+      color: vars.$ink;
+      margin: 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: functions.rem(10);
+    align-items: center;
+  }
+
+  &__noreport {
+    font-family: vars.$sans;
+    font-size: functions.rem(14);
+    color: vars.$muted;
+  }
+}
+
+// The event is now a link; keep it looking like a calendar entry, not body copy.
+.aff-cal__ev {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover { background: vars.$accent-tint; }
+  &:focus-visible { outline: functions.rem(2) solid vars.$accent-dark; outline-offset: functions.rem(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aff-modal, .aff-modal__box { transition: none !important; animation: none !important; }
+}
+

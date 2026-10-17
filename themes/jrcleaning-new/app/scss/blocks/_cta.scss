@@ -1,0 +1,39 @@
+@use "../mixins/functions";
+@use "../mixins/responsive";
+@use "../vars";
+
+.cta {
+  &__card {
+    position: relative;
+    overflow: hidden;
+    background: vars.$navy;
+    border-radius: vars.$r-xl;
+    padding: functions.rem(40 28);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: functions.rem(24);
+    align-items: center;
+    @include responsive.bp('tablet') { grid-template-columns: 1.2fr .8fr; padding: functions.rem(56); gap: functions.rem(40); }
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: functions.rem(-80); top: functions.rem(-80);
+      width: functions.rem(280); height: functions.rem(280);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(vars.$accent, 0.35), transparent 70%);
+      pointer-events: none;
+    }
+  }
+
+  &__body { position: relative; z-index: 1;
+    h2 { color: vars.$white; max-width: 16em; }
+    p { color: #aeb3c7; margin-top: functions.rem(12); max-width: 30em; }
+  }
+
+  &__actions {
+    position: relative; z-index: 1;
+    display: grid; gap: functions.rem(12);
+    .button { width: 100%; }
+  }
+}

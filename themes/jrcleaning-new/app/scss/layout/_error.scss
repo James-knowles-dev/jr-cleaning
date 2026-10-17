@@ -1,0 +1,14 @@
+@use "../mixins/functions";
+@use "../vars";
+
+.error-404 {
+  text-align: center;
+  max-width: functions.rem(560);
+  margin: 0 auto;
+  padding: functions.rem(80) vars.$gutter functions.rem(110);
+
+  &__code { font-family: vars.$serif; font-weight: 800; font-size: functions.rem(96); color: vars.$accent; line-height: 1; }
+  h1 { margin: functions.rem(8) 0 functions.rem(12); }
+  p { color: vars.$soft; margin-bottom: functions.rem(28); }
+  .button { display: inline-flex; }
+}

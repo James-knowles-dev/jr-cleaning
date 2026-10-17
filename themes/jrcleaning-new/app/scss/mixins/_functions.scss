@@ -1,0 +1,27 @@
+@use "sass:list";
+@use "sass:meta";
+@use "sass:math";
+
+// px -> rem (accepts single value or space-separated list)
+@function rem($value) {
+  @if meta.type-of($value) == 'list' {
+    $out: ();
+    @each $v in $value {
+      @if meta.type-of($v) == 'number' {
+        $out: list.append($out, #{math.div($v, 16)}rem);
+      } @else {
+        $out: list.append($out, $v);
+      }
+    }
+    @return $out;
+  } @else {
+    @return #{math.div($value, 16)}rem;
+  }
+}
+
+// Fluid type: clamp between min/max px across the viewport.
+@function fluid($min, $max, $vwMin: 480, $vwMax: 1200) {
+  $slope: math.div($max - $min, $vwMax - $vwMin);
+  $base: $min - $slope * $vwMin;
+  @return clamp(#{rem($min)}, #{math.div($base, 16)}rem + #{$slope * 100}vw, #{rem($max)});
+}
