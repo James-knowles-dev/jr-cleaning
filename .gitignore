@@ -1,5 +1,7 @@
 node_modules/
 .sass-cache/
-*.map
+# CSS sourcemaps from the theme build only. NOT a bare *.map: dompdf's font encoding
+# maps (plugins/jrc-partners/lib/.../php-font-lib/maps/*.map) are runtime files.
+themes/**/*.css.map
 .DS_Store
 Thumbs.db
